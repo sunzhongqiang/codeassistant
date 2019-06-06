@@ -7,7 +7,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-restricted-imports': [
-      'error',
+      'warn',
       {
         paths: [
           {

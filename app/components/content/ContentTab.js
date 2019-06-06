@@ -4,9 +4,7 @@ import TabelColumn from './TableColumn';
 const { TabPane } = Tabs;
 
 export default class ContentTab extends Component {
-  callback(key) {
-    console.log(key);
-  }
+  callback(key) {}
 
   render() {
     return (

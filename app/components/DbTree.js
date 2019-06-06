@@ -12,10 +12,6 @@ export default class DbTree extends Component {
     database: []
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     eventbus.on(EventType.DATABASE_CONFIG_SAVE, this.reRenderTree.bind(this));
   }
@@ -38,23 +34,18 @@ export default class DbTree extends Component {
     let key = keys[0];
     let data = key.split('->');
     const length = data.length;
-    console.log('data.length', length);
     let type = data[0];
     let database = data[1];
     let table = data[3];
 
-    console.log('item', database);
-
     const mysqldb = new MySqlDriver();
     if (length == 2) {
-      console.log('显示数据库的表');
       mysqldb.query(
         'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
         [database],
         this.showTable.bind(this, database)
       );
     } else {
-      console.log('显示表字段', database, table);
       mysqldb.query(
         'Select TABLE_NAME,COLUMN_NAME ,DATA_TYPE,COLUMN_KEY,EXTRA,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA= ? and TABLE_NAME = ? ',
         [database, table],
@@ -82,7 +73,6 @@ export default class DbTree extends Component {
   render() {
     let treeNode = [];
     for (let item of this.state.database) {
-      console.log('render item', item);
       if (item['RowData']) {
         let rowData = [];
         for (let table of item['RowData']) {

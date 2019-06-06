@@ -36,7 +36,6 @@ export default class MySqlDriver {
 
   query(sql, data, func) {
     let db = mysql.createConnection(this.dbConfig);
-    console.log('config', this.dbConfig);
     db.connect();
     if (func) {
       db.query(sql, data, this.processResult.bind(this, func));

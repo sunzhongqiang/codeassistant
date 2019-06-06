@@ -34,17 +34,37 @@ export default class DbTree extends Component {
     });
   }
 
-  loadTable(keys, event) {
-    console.log('keys', keys);
+  treeAction(keys, event) {
     let key = keys[0];
-    console.log('key', key);
+    let data = key.split('->');
+    const length = data.length;
+    console.log('data.length', length);
+    let type = data[0];
+    let database = data[1];
+    let table = data[3];
+
+    console.log('item', database);
 
     const mysqldb = new MySqlDriver();
-    mysqldb.query(
-      'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
-      [key],
-      this.showTable.bind(this, key)
-    );
+    if (length == 2) {
+      console.log('显示数据库的表');
+      mysqldb.query(
+        'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
+        [database],
+        this.showTable.bind(this, database)
+      );
+    } else {
+      console.log('显示表字段', database, table);
+      mysqldb.query(
+        'Select TABLE_NAME,COLUMN_NAME ,DATA_TYPE,COLUMN_KEY,EXTRA,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA= ? and TABLE_NAME = ? ',
+        [database, table],
+        this.showColumn.bind(this)
+      );
+    }
+  }
+
+  showColumn(data) {
+    eventbus.fire(EventType.TABLE_DATA_LOAD, data);
   }
 
   showTable(key, data) {
@@ -68,25 +88,36 @@ export default class DbTree extends Component {
         for (let table of item['RowData']) {
           rowData.push(
             <TreeNode
-              key={'table-' + table['TABLE_NAME']}
+              key={
+                'database->' +
+                item['SCHEMA_NAME'] +
+                '->table->' +
+                table['TABLE_NAME']
+              }
               title={table['TABLE_NAME']}
               isLeaf
             />
           );
         }
         treeNode.push(
-          <TreeNode key={item['SCHEMA_NAME']} title={item['SCHEMA_NAME']}>
+          <TreeNode
+            key={'database->' + item['SCHEMA_NAME']}
+            title={item['SCHEMA_NAME']}
+          >
             {rowData}
           </TreeNode>
         );
       } else {
         treeNode.push(
-          <TreeNode key={item['SCHEMA_NAME']} title={item['SCHEMA_NAME']} />
+          <TreeNode
+            key={'database->' + item['SCHEMA_NAME']}
+            title={item['SCHEMA_NAME']}
+          />
         );
       }
     }
     return (
-      <DirectoryTree onSelect={this.loadTable.bind(this)} defaultExpandAll>
+      <DirectoryTree onSelect={this.treeAction.bind(this)} defaultExpandAll>
         {treeNode}
       </DirectoryTree>
     );

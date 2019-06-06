@@ -2,12 +2,12 @@ module.exports = {
   extends: ['react-app', 'plugin:prettier/recommended'],
   plugins: ['react-hooks'],
   rules: {
-    'prettier/prettier': 'warn',
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'prettier/prettier': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'no-console': ['off', { allow: ['warn', 'error'] }],
     'no-restricted-imports': [
-      'warn',
+      'off',
       {
         paths: [
           {

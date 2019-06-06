@@ -4,7 +4,7 @@ import TopButtonGroup from '../components/TopButtonGroup';
 import DbTree from '../components/DbTree';
 import ContentTab from '../components/content/ContentTab';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 export default class HomePage extends Component {
   state = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tree, Modal, Input } from 'antd';
+import { Tree } from 'antd';
 import eventbus from '../eventbus/EventBus';
 import EventType from '../eventbus/EventTyp';
 import MySqlDriver from '../service/mysqlDriver';
@@ -34,12 +34,11 @@ export default class DbTree extends Component {
     let key = keys[0];
     let data = key.split('->');
     const length = data.length;
-    let type = data[0];
     let database = data[1];
     let table = data[3];
 
     const mysqldb = new MySqlDriver();
-    if (length == 2) {
+    if (length === 2) {
       mysqldb.query(
         'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
         [database],
@@ -61,7 +60,7 @@ export default class DbTree extends Component {
   showTable(key, data) {
     let database = this.state.database;
     for (let item of database) {
-      if (item['SCHEMA_NAME'] == key) {
+      if (item['SCHEMA_NAME'] === key) {
         item['RowData'] = data;
       }
     }

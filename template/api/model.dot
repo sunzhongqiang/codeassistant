@@ -1,0 +1,22 @@
+package ${model.packageName}.${model.modulePackage}.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
+/**
+* ${model.model}: ${model.comment} 数据领域模型
+* ${date}
+*@author ${model.author}
+*@version 1.0
+*/
+@Entity
+@Table(name="${model.tableName}")
+public class ${model.model} {
+{{for var column in it { }}
+  @Column(name="${field.columnName}",columnDefinition="COMMENT '${field.comment}'")
+  private {{=column.DATA_TYPE}} {{=column.COLUMN_NAME}};
+{{ } }}

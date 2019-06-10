@@ -147,6 +147,18 @@ eval("module.exports = devtron;\n\n//# sourceURL=webpack://renderer/external_%22
 
 /***/ }),
 
+/***/ "dot":
+/*!**********************!*\
+  !*** external "dot" ***!
+  \**********************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = dot;\n\n//# sourceURL=webpack://renderer/external_%22dot%22?");
+
+/***/ }),
+
 /***/ "electron-debug":
 /*!*********************************!*\
   !*** external "electron-debug" ***!
@@ -228,6 +240,18 @@ eval("module.exports = react;\n\n//# sourceURL=webpack://renderer/external_%22re
 /***/ (function(module, exports) {
 
 eval("module.exports = react-dom;\n\n//# sourceURL=webpack://renderer/external_%22react-dom%22?");
+
+/***/ }),
+
+/***/ "react-highlight":
+/*!**********************************!*\
+  !*** external "react-highlight" ***!
+  \**********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = react-highlight;\n\n//# sourceURL=webpack://renderer/external_%22react-highlight%22?");
 
 /***/ }),
 

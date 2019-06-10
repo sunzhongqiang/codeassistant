@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { Layout } from 'antd';
-import TopButtonGroup from '../components/TopButtonGroup';
-import DbTree from '../components/DbTree';
-import ContentTab from '../components/content/ContentTab';
+import React, { Component } from 'react'
+import { Layout } from 'antd'
+import TopButtonGroup from '../components/TopButtonGroup'
+import DbTree from '../components/DbTree'
+import TabelColumn from '../components/content/TableColumn'
+import ContentTab from '../components/content/ContentTab'
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout
 
 export default class HomePage extends Component {
   state = {
     showDbSettingDailog: false
-  };
+  }
 
-  render() {
+  render () {
     return (
       <div>
         <Layout>
@@ -20,8 +21,9 @@ export default class HomePage extends Component {
           </Header>
           <Layout>
             <Sider
+              width={200}
               style={{
-                background: '#999',
+                background: '#eee',
                 overflow: 'auto',
                 height: '100vh',
                 position: 'fixed',
@@ -30,14 +32,13 @@ export default class HomePage extends Component {
             >
               <DbTree />
             </Sider>
-            <Layout style={{ marginLeft: 200 }}>
-              <Content>
-                <ContentTab />
-              </Content>
-            </Layout>
+
+            <Content style={{ marginLeft: 200 }}>
+              <ContentTab />
+            </Content>
           </Layout>
         </Layout>
       </div>
-    );
+    )
   }
 }

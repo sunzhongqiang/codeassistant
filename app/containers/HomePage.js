@@ -31,40 +31,37 @@ export default class HomePage extends Component {
             style={{
               background: '#666',
               position: 'fixed',
-              top: 0,
-              height: 60,
+              zIndex: 1,
               width: '100vw'
             }}
           >
             <TopButtonGroup />
           </Header>
-          <Layout style={{ marginTop: 60 }}>
-            <Sider
-              width={200}
-              style={{
-                background: '#eee',
-                overflow: 'auto',
-                height: '100vh',
-                position: 'fixed',
-                left: 0
-              }}
-            >
-              <DbTree />
-            </Sider>
 
-            <Content
-              style={{
-                height: '100vh',
-                marginLeft: 210,
-                background: '#fff',
-                position: 'fixed',
-                top: 70,
-                overflow: 'scroll'
-              }}
-            >
-              <ContentTab />
-            </Content>
-          </Layout>
+          <Content
+            style={{
+              marginLeft: 210,
+              marginTop: 64,
+              background: '#fff',
+              overflow: 'scroll'
+            }}
+          >
+            <Layout>
+              <Sider
+                width={200}
+                style={{
+                  background: '#eee',
+                  overflow: 'auto',
+                  height: '100vh',
+                  position: 'fixed',
+                  left: 0
+                }}
+              >
+                <DbTree />
+              </Sider>
+            </Layout>
+            <ContentTab />
+          </Content>
         </Layout>
       </div>
     )

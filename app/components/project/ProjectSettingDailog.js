@@ -28,7 +28,6 @@ export default class ProjectSettingDailog extends Component {
   }
 
   changeConfig (name, e) {
-    this.dbConfig[name] = e.target.value
     localStorage.setItem(name, e.target.value)
   }
 

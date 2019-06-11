@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Layout } from 'antd'
 import TopButtonGroup from '../components/TopButtonGroup'
 import DbTree from '../components/DbTree'
-import TabelColumn from '../components/content/TableColumn'
 import ContentTab from '../components/content/ContentTab'
+import eventbus from '../eventbus/EventBus'
+import EventType from '../eventbus/EventTyp'
+import CodeGengerator from '../components/template/CodeGenerator'
 
 const { Header, Sider, Content } = Layout
 
@@ -12,14 +14,31 @@ export default class HomePage extends Component {
     showDbSettingDailog: false
   }
 
+  constructor () {
+    super()
+    eventbus.on(EventType.VARIABLE_CHANGE, this.showVariableChange.bind(this))
+  }
+
+  showVariableChange () {
+    CodeGengerator.generatorTemplateVariable()
+  }
+
   render () {
     return (
       <div>
         <Layout>
-          <Header style={{ background: '#fff' }}>
+          <Header
+            style={{
+              background: '#666',
+              position: 'fixed',
+              top: 0,
+              height: 60,
+              width: '100vw'
+            }}
+          >
             <TopButtonGroup />
           </Header>
-          <Layout>
+          <Layout style={{ marginTop: 60 }}>
             <Sider
               width={200}
               style={{
@@ -33,7 +52,16 @@ export default class HomePage extends Component {
               <DbTree />
             </Sider>
 
-            <Content style={{ marginLeft: 200 }}>
+            <Content
+              style={{
+                height: '100vh',
+                marginLeft: 210,
+                background: '#fff',
+                position: 'fixed',
+                top: 70,
+                overflow: 'scroll'
+              }}
+            >
               <ContentTab />
             </Content>
           </Layout>

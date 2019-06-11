@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Table } from 'antd';
-import eventbus from '../../eventbus/EventBus';
-import EventType from '../../eventbus/EventTyp';
+import React, { Component } from 'react'
+import { Table } from 'antd'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
 
 const columns = [
   {
@@ -19,8 +19,7 @@ const columns = [
     dataIndex: 'COLUMN_KEY',
     key: 'COLUMN_KEY',
     render: (text, record) => {
-      console.log(text, record);
-      return text + ' ' + record['EXTRA'];
+      return text + ' ' + record['EXTRA']
     }
   },
   {
@@ -28,24 +27,24 @@ const columns = [
     dataIndex: 'COLUMN_COMMENT',
     key: 'COLUMN_COMMENT'
   }
-];
+]
 
 export default class ContentTab extends Component {
   state = {
     data: []
-  };
-
-  componentDidMount() {
-    eventbus.on(EventType.TABLE_DATA_LOAD, this.showData.bind(this));
   }
 
-  showData(data) {
+  componentDidMount () {
+    eventbus.on(EventType.TABLE_DATA_LOAD, this.showData.bind(this))
+  }
+
+  showData (data) {
     this.setState({
       data: data
-    });
+    })
   }
 
-  render() {
+  render () {
     return (
       <Table
         bordered
@@ -55,6 +54,6 @@ export default class ContentTab extends Component {
         pagination={false}
         size={'small'}
       />
-    );
+    )
   }
 }

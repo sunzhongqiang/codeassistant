@@ -1,0 +1,8 @@
+#数据库连接配置
+host:{{=it.host}}
+port:{{=it.port}}
+user:{{=it.user}}
+password:{{=it.password}}
+#项目配置
+groupId:{{=it.groupId}}
+artifactId:{{=it.artifactId}}

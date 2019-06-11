@@ -1,9 +1,9 @@
 import doT from 'dot'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import AppConfig from '../../utils/AppConfig'
+
 const fs = require('fs')
-const path = require('path')
-const process = require('process')
 
 doT.templateSettings = {
   evaluate: /\{\{([\s\S]+?)\}\}/g,
@@ -19,15 +19,49 @@ doT.templateSettings = {
   selfcontained: false
 }
 
-const sep = path.sep
-const templatePath = process.cwd() + sep + 'template' + sep + 'api'
-
 export default class CodeGengerator {
-  static generatorModelCode (template, data) {
-    console.log('gengerator data', data, template)
-    let modelTemplateFile = templatePath + sep + 'model.dot'
-    fs.readFile(modelTemplateFile, 'utf8', function (error, data) {
-      eventbus.fire(EventType.CODE_DATA_CHANGE, data)
+  static generatorModelCode (template, keyValue) {
+    let modelTemplateFile = AppConfig.MODEL_TEMPLATE
+
+    if (!keyValue) {
+      keyValue = {}
+    }
+
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i)
+      keyValue[key] = localStorage.getItem(key)
+    }
+
+    fs.readFile(modelTemplateFile, 'utf8', function (error, codeTemplate) {
+      let template = doT.template(codeTemplate)
+      let code = template(keyValue)
+      eventbus.fire(EventType.CODE_DATA_CHANGE, code)
+    })
+  }
+
+  static generatorTemplateVariable () {
+    let keyValue = {}
+
+    // loal中的变量
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i)
+      keyValue[key] = localStorage.getItem(key)
+    }
+
+    // session中的变量
+    for (let i = 0; i < sessionStorage.length; i++) {
+      let key = sessionStorage.key(i)
+      keyValue[key] = sessionStorage.getItem(key)
+    }
+
+    let variableTemplate = AppConfig.VARIABLE_TEMPLATE
+
+    fs.readFile(variableTemplate, 'utf8', function (error, templateText) {
+      console.log('templateText', templateText)
+      let template = doT.template(templateText)
+      let code = template(keyValue)
+      console.log('generatorTemplateVariable', code, keyValue)
+      eventbus.fire(EventType.VARIABLE_CODE_CHANGE, code)
     })
   }
 }

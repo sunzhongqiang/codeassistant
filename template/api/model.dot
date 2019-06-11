@@ -1,4 +1,4 @@
-package ${model.packageName}.${model.modulePackage}.model;
+package {{=it.groupId}}.{{=it.artifactId}}.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,6 @@ import javax.persistence.Column;
 @Entity
 @Table(name="${model.tableName}")
 public class ${model.model} {
-{{for var column in it { }}
-  @Column(name="${field.columnName}",columnDefinition="COMMENT '${field.comment}'")
-  private {{=column.DATA_TYPE}} {{=column.COLUMN_NAME}};
-{{ } }}
+  
+}
+

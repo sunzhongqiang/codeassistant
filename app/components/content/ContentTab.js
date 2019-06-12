@@ -16,10 +16,15 @@ export default class ContentTab extends Component {
   componentDidMount () {
     eventbus.on(EventType.TABLE_DATA_LOAD, this.updateCode.bind(this))
     eventbus.on(EventType.CODE_DATA_CHANGE, this.showCodeChange.bind(this))
+    eventbus.on(EventType.VARIABLE_CHANGE, this.updateVariable.bind(this))
     eventbus.on(
       EventType.VARIABLE_CODE_CHANGE,
       this.showVariableChange.bind(this)
     )
+  }
+
+  updateVariable () {
+    CodeGengerator.generatorTemplateVariable()
   }
 
   updateCode (data) {

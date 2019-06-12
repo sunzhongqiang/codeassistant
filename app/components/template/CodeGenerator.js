@@ -1,7 +1,10 @@
 import doT from 'dot'
+import { message } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import AppConfig from '../../utils/AppConfig'
+import AppData from '../../utils/AppData'
+import DateUtils from '../../utils/DateUtils'
+import { from } from 'rxjs'
 
 const fs = require('fs')
 
@@ -20,26 +23,21 @@ doT.templateSettings = {
 }
 
 export default class CodeGengerator {
-  static generatorModelCode (template, keyValue) {
-    let modelTemplateFile = AppConfig.MODEL_TEMPLATE
-
-    if (!keyValue) {
-      keyValue = {}
-    }
+  static generatorModelCode () {
+    let keyValue = {}
 
     for (let i = 0; i < localStorage.length; i++) {
       let key = localStorage.key(i)
       keyValue[key] = localStorage.getItem(key)
     }
 
-    fs.readFile(modelTemplateFile, 'utf8', function (error, codeTemplate) {
-      let template = doT.template(codeTemplate)
-      let code = template(keyValue)
-      eventbus.fire(EventType.CODE_DATA_CHANGE, code)
-    })
+    keyValue['fields'] = AppData.currentFields
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+
+    this.generatorCode(AppData.MODEL_TEMPLATE, keyValue)
   }
 
-  static generatorTemplateVariable () {
+  static generatorTemplateVariable (fieldValue) {
     let keyValue = {}
 
     // loal中的变量
@@ -54,14 +52,24 @@ export default class CodeGengerator {
       keyValue[key] = sessionStorage.getItem(key)
     }
 
-    let variableTemplate = AppConfig.VARIABLE_TEMPLATE
+    keyValue['fields'] = AppData.currentFields
 
-    fs.readFile(variableTemplate, 'utf8', function (error, templateText) {
-      console.log('templateText', templateText)
-      let template = doT.template(templateText)
+    this.generatorTemplateVariable(AppData.VARIABLE_TEMPLATE, keyValue)
+  }
+
+  static generatorCode (templateFile, keyValue) {
+    if (!keyValue) {
+      keyValue = {}
+    }
+
+    fs.readFile(templateFile, 'utf8', function (error, codeTemplate) {
+      if (error) {
+        message.error(error)
+        return
+      }
+      let template = doT.template(codeTemplate)
       let code = template(keyValue)
-      console.log('generatorTemplateVariable', code, keyValue)
-      eventbus.fire(EventType.VARIABLE_CODE_CHANGE, code)
+      eventbus.fire(EventType.CODE_DATA_CHANGE, code)
     })
   }
 }

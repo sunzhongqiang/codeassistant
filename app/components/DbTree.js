@@ -3,7 +3,8 @@ import { Tree } from 'antd'
 import eventbus from '../eventbus/EventBus'
 import EventType from '../eventbus/EventTyp'
 import MySqlDriver from '../service/mysqlDriver'
-import CodeUtils from './template/CodeUtils'
+import CodeUtils from '../utils/CodeUtils'
+import AppData from '../utils/AppData'
 
 const { TreeNode } = Tree
 const DirectoryTree = Tree.DirectoryTree
@@ -59,13 +60,7 @@ export default class DbTree extends Component {
   }
 
   showColumn (data) {
-    for (const column of data) {
-      console.log('column', column)
-      localStorage.setItem(
-        'field.' + column['COLUMN_NAME'],
-        column['COLUMN_NAME']
-      )
-    }
+    AppData.currentFields = data
     eventbus.fire(EventType.TABLE_DATA_LOAD, data)
   }
 

@@ -8,14 +8,19 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 /**
-* ${model.model}: ${model.comment} 数据领域模型
-* ${date}
+* {{=it.model}}: {{=it.model}} 数据领域模型
+* {{=it.date}}
 *@author ${model.author}
 *@version 1.0
 */
 @Entity
-@Table(name="${model.tableName}")
-public class ${model.model} {
+@Table(name="{{=it.table}}")
+public class {{=it.model}} {
+
+{{for (field of it.fields){ }}
+  {{=field['COLUMN_NAME']}}
+{{  } }}
+
   
 }
 

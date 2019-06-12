@@ -65,6 +65,9 @@
       "app/main.prod.js.map",
       "package.json"
     ],
+    "extraResources": [
+      "./template/**"
+    ],
     "dmg": {
       "contents": [
         {
@@ -265,6 +268,7 @@
     "devtron": "^1.4.0",
     "dot": "^1.1.2",
     "electron-debug": "^2.0.0",
+    "electron-devtools-installer": "^2.2.4",
     "electron-log": "^2.2.17",
     "electron-updater": "^3.2.3",
     "history": "^4.7.2",

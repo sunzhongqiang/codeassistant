@@ -1,5 +1,3 @@
-import { string } from 'postcss-selector-parser'
-
 export default class CodeUtils {
   static table2Model (tableName) {
     return this.preSql(tableName)

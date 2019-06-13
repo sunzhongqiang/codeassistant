@@ -1,3 +1,6 @@
+#当前系统变量
+processcwd:{{=it.processcwd}}
+
 #数据库连接配置
 host:{{=it.host}}
 port:{{=it.port}}
@@ -12,6 +15,7 @@ version:{{=it.version}}
 database:{{=it.database}}
 table:{{=it.table}}
 model:{{=it.model}}
+
 {{for (field of it.fields){ }}
-  {{=field['COLUMN_NAME']}}
-{{  } }}
+  field:{{=field['COLUMN_NAME']}}
+{{}}}

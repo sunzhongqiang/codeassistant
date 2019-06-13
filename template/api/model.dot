@@ -19,7 +19,7 @@ public class {{=it.model}} {
 
 {{for (field of it.fields){ }}
   {{=field['COLUMN_NAME']}}
-{{  } }}
+{{}}}
 
   
 }

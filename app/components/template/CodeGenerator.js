@@ -34,10 +34,14 @@ export default class CodeGengerator {
     keyValue['fields'] = AppData.currentFields
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
-    this.generatorCode(AppData.MODEL_TEMPLATE, keyValue)
+    this.generatorCode(
+      AppData.MODEL_TEMPLATE,
+      keyValue,
+      EventType.CODE_DATA_CHANGE
+    )
   }
 
-  static generatorTemplateVariable (fieldValue) {
+  static generatorTemplateVariable () {
     let keyValue = {}
 
     // loal中的变量
@@ -54,10 +58,18 @@ export default class CodeGengerator {
 
     keyValue['fields'] = AppData.currentFields
 
-    this.generatorTemplateVariable(AppData.VARIABLE_TEMPLATE, keyValue)
+    keyValue['processcwd'] = AppData.PROCESSCWD
+
+    console.log('keyvalue', keyValue)
+
+    this.generatorCode(
+      AppData.VARIABLE_TEMPLATE,
+      keyValue,
+      EventType.VARIABLE_CODE_CHANGE
+    )
   }
 
-  static generatorCode (templateFile, keyValue) {
+  static generatorCode (templateFile, keyValue, noticeEvent) {
     if (!keyValue) {
       keyValue = {}
     }
@@ -69,7 +81,7 @@ export default class CodeGengerator {
       }
       let template = doT.template(codeTemplate)
       let code = template(keyValue)
-      eventbus.fire(EventType.CODE_DATA_CHANGE, code)
+      eventbus.fire(noticeEvent, code)
     })
   }
 }

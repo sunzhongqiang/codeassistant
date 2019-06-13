@@ -4,7 +4,7 @@ import eventbus from '../eventbus/EventBus'
 import EventType from '../eventbus/EventTyp'
 import MySqlDriver from '../service/mysqlDriver'
 import CodeUtils from '../utils/CodeUtils'
-import AppData from '../utils/AppData'
+import AppData from '../constants/AppData'
 
 const { TreeNode } = Tree
 const DirectoryTree = Tree.DirectoryTree

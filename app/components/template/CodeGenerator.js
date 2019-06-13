@@ -2,7 +2,7 @@ import doT from 'dot'
 import { message } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import AppData from '../../utils/AppData'
+import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
 import { from } from 'rxjs'
 

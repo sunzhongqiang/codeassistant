@@ -10,6 +10,10 @@ export default class CodeUtils {
     return this.firstLetterLowerCase(preSql)
   }
 
+  static firstLetterUpperFiledName (tableName) {
+    return this.preSql(tableName)
+  }
+
   static firstLetterUpperCase (name) {
     if (name.length > 1) {
       return name

@@ -24,9 +24,15 @@ const AppData = {
       for (const tableField of tableFields) {
         let modelField = {}
         modelField['name'] = CodeUtils.column2Field(tableField['COLUMN_NAME'])
+
+        modelField[
+          'firstLetterUpperName'
+        ] = CodeUtils.firstLetterUpperFiledName(tableField['COLUMN_NAME'])
+
         modelField['type'] = CodeUtils.tableType2ModelType(
           tableField['DATA_TYPE']
         )
+
         modelField['comment'] = tableField['COLUMN_COMMENT']
         modelFields.push(modelField)
       }

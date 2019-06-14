@@ -1,28 +1,12 @@
-import doT from 'dot'
-import { message } from 'antd'
-import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
-import { from } from 'rxjs'
-
-const fs = require('fs')
-
-doT.templateSettings = {
-  evaluate: /\{\{([\s\S]+?)\}\}/g,
-  interpolate: /\{\{=([\s\S]+?)\}\}/g,
-  encode: /\{\{!([\s\S]+?)\}\}/g,
-  use: /\{\{#([\s\S]+?)\}\}/g,
-  define: /\{\{##\s*([\w\.$]+)\s*(\:|=)([\s\S]+?)#\}\}/g,
-  conditional: /\{\{\?(\?)?\s*([\s\S]*?)\s*\}\}/g,
-  iterate: /\{\{~\s*(?:\}\}|([\s\S]+?)\s*\:\s*([\w$]+)\s*(?:\:\s*([\w$]+))?\s*\}\})/g,
-  varname: 'it',
-  strip: false,
-  append: true,
-  selfcontained: false
-}
+import TemplateEngin from './TemplateEngin'
 
 export default class CodeGengerator {
+  /**
+   * 生成java model 的代码
+   */
   static generatorModelCode () {
     let keyValue = {}
 
@@ -34,14 +18,16 @@ export default class CodeGengerator {
     keyValue['fields'] = AppData.getModelFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
-    console.log('model keyValue', keyValue)
-    this.generatorCode(
+    TemplateEngin.generatorCode(
       AppData.MODEL_TEMPLATE,
       keyValue,
       EventType.CODE_DATA_CHANGE
     )
   }
 
+  /**
+   * 生成系统变量的模版
+   */
   static generatorTemplateVariable () {
     let keyValue = {}
 
@@ -61,28 +47,10 @@ export default class CodeGengerator {
 
     keyValue['processcwd'] = AppData.PROCESSCWD
 
-    console.log('keyvalue', keyValue)
-
-    this.generatorCode(
+    TemplateEngin.generatorCode(
       AppData.VARIABLE_TEMPLATE,
       keyValue,
       EventType.VARIABLE_CODE_CHANGE
     )
-  }
-
-  static generatorCode (templateFile, keyValue, noticeEvent) {
-    if (!keyValue) {
-      keyValue = {}
-    }
-
-    fs.readFile(templateFile, 'utf8', function (error, codeTemplate) {
-      if (error) {
-        message.error(error)
-        return
-      }
-      let template = doT.template(codeTemplate)
-      let code = template(keyValue)
-      eventbus.fire(noticeEvent, code)
-    })
   }
 }

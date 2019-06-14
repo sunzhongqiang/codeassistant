@@ -63,6 +63,6 @@ typings/
 
 # need ignore
 
-main.prod.js.map
-renderer.prod.js
-renderer.prod.js.map
+app/main.prod.js.map
+app/dist/renderer.prod.js
+app/dist/renderer.prod.js.map

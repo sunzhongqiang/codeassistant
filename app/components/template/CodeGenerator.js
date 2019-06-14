@@ -31,9 +31,10 @@ export default class CodeGengerator {
       keyValue[key] = localStorage.getItem(key)
     }
 
-    keyValue['fields'] = AppData.currentFields
+    keyValue['fields'] = AppData.getModelFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
+    console.log('model keyValue', keyValue)
     this.generatorCode(
       AppData.MODEL_TEMPLATE,
       keyValue,

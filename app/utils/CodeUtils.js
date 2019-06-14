@@ -1,3 +1,5 @@
+import FieldTypeUtils from './FieldTypeUtils'
+
 export default class CodeUtils {
   static table2Model (tableName) {
     return this.preSql(tableName)
@@ -17,7 +19,7 @@ export default class CodeUtils {
     }
   }
 
-  static firstLetterLowerCase () {
+  static firstLetterLowerCase (name) {
     if (name.length > 1) {
       return name
         .substring(0, 1)
@@ -34,5 +36,13 @@ export default class CodeUtils {
       result.push(this.firstLetterUpperCase(name))
     }
     return result.join('')
+  }
+
+  static tableType2ModelType (datatype) {
+    let modelType = 'String'
+    if (datatype) {
+      modelType = FieldTypeUtils.getModelTypeFromDataType(datatype)
+    }
+    return modelType
   }
 }

@@ -10,7 +10,7 @@ import javax.persistence.Column;
 /**
 * {{=it.model}}: {{=it.model}} 数据领域模型
 * {{=it.date}}
-*@author ${model.author}
+*@author 
 *@version 1.0
 */
 @Entity
@@ -19,7 +19,7 @@ public class {{=it.model}} {
 
 {{for (field of it.fields){ }}
   /**
-  *{{=field['comment']}}.
+  * {{=field['comment']}}.
   */
   private {{=field['type']}} {{=field['name']}}
 {{}}}

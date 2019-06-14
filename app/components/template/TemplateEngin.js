@@ -29,5 +29,6 @@ export default class TemplateEngin {
     let template = doT.template(templateContent)
     let code = template(keyValue)
     eventbus.fire(noticeEvent, code)
+    return code
   }
 }

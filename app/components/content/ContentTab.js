@@ -6,6 +6,7 @@ import EventType from '../../eventbus/EventTyp'
 import CodeGengerator from '../template/CodeGenerator'
 import TableColumn from './TableColumn'
 import Usage from './Usage'
+import CodeTab from '../code/CodeTab'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -42,18 +43,16 @@ export default class ContentTab extends Component {
 
   render () {
     return (
-      <Tabs onChange={this.callback} type='card'>
+      <Tabs onChange={this.callback} type='card' style={{ height: '100%' }}>
         <TabPane tab='使用说明' key='usage'>
           <Usage />
         </TabPane>
         <TabPane tab='字段信息' key='1'>
           <TableColumn />
         </TabPane>
-        <TabPane tab='当前变量' key='2'>
-          <CodePreview code={this.state.keyValue} />
-        </TabPane>
-        <TabPane tab='Model代码' key='3'>
-          <CodePreview code={this.state.modelCode} />
+
+        <TabPane tab='代码' key='3'>
+          <CodeTab />
         </TabPane>
       </Tabs>
     )

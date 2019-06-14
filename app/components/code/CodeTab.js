@@ -41,7 +41,6 @@ export default class CodeTab extends Component {
     return (
       <Tabs
         onChange={this.callback}
-        type='card'
         tabPosition='right'
         onChange={this.showCode.bind(this)}
       >

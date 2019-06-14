@@ -47,6 +47,13 @@ export default class CodeGengerator {
 
     keyValue['processcwd'] = AppData.PROCESSCWD
 
+    console.log('keyvalue', keyValue)
+
+    console.log('__dirname', __dirname)
+
+    console.log('AppData.VARIABLE_TEMPLATE', AppData.VARIABLE_TEMPLATE)
+
+    console.log('AppData.appPath', AppData.appPath)
     TemplateEngin.generatorCode(
       AppData.VARIABLE_TEMPLATE,
       keyValue,

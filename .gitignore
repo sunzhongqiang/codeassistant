@@ -60,3 +60,9 @@ typings/
 
 # next.js build output
 .next
+
+# need ignore
+
+main.prod.js.map
+renderer.prod.js
+renderer.prod.js.map

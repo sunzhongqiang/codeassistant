@@ -2,6 +2,8 @@ import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
 import TemplateEngin from './TemplateEngin'
+import modelTemplateContent from '../../template/api/model'
+import variableTemplateContent from '../../template/variable'
 
 export default class CodeGengerator {
   /**
@@ -18,8 +20,8 @@ export default class CodeGengerator {
     keyValue['fields'] = AppData.getModelFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
-    TemplateEngin.generatorCode(
-      AppData.MODEL_TEMPLATE,
+    TemplateEngin.generatorCodeByContent(
+      modelTemplateContent,
       keyValue,
       EventType.CODE_DATA_CHANGE
     )
@@ -47,15 +49,8 @@ export default class CodeGengerator {
 
     keyValue['processcwd'] = AppData.PROCESSCWD
 
-    console.log('keyvalue', keyValue)
-
-    console.log('__dirname', __dirname)
-
-    console.log('AppData.VARIABLE_TEMPLATE', AppData.VARIABLE_TEMPLATE)
-
-    console.log('AppData.appPath', AppData.appPath)
-    TemplateEngin.generatorCode(
-      AppData.VARIABLE_TEMPLATE,
+    TemplateEngin.generatorCodeByContent(
+      variableTemplateContent,
       keyValue,
       EventType.VARIABLE_CODE_CHANGE
     )

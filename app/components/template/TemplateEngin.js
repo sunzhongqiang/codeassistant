@@ -1,7 +1,5 @@
 import doT from 'dot'
-import { message } from 'antd'
 import eventbus from '../../eventbus/EventBus'
-const fs = require('fs')
 
 doT.templateSettings = {
   evaluate: /\{\{([\s\S]+?)\}\}/g,
@@ -18,19 +16,18 @@ doT.templateSettings = {
 }
 
 export default class TemplateEngin {
-  static generatorCode (templateFile, keyValue, noticeEvent) {
+  /**
+   * 生成代码对核心方法
+   * @param {*} templateContent
+   * @param {*} keyValue
+   * @param {*} noticeEvent
+   */
+  static generatorCodeByContent (templateContent, keyValue, noticeEvent) {
     if (!keyValue) {
       keyValue = {}
     }
-
-    fs.readFile(templateFile, 'utf8', function (error, codeTemplate) {
-      if (error) {
-        message.error(error)
-        return
-      }
-      let template = doT.template(codeTemplate)
-      let code = template(keyValue)
-      eventbus.fire(noticeEvent, code)
-    })
+    let template = doT.template(templateContent)
+    let code = template(keyValue)
+    eventbus.fire(noticeEvent, code)
   }
 }

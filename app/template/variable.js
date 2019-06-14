@@ -1,5 +1,4 @@
-#当前系统变量
-processcwd:{{=it.processcwd}}
+const variableTemplateContent = `#当前系统变量
 
 #数据库连接配置
 host:{{=it.host}}
@@ -15,3 +14,6 @@ version:{{=it.version}}
 database:{{=it.database}}
 table:{{=it.table}}
 model:{{=it.model}}
+`
+
+export default variableTemplateContent

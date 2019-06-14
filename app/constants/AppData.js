@@ -1,20 +1,5 @@
 import CodeUtils from '../utils/CodeUtils'
-
-const path = require('path')
-const process = require('process')
-
-const SEP = path.sep
-const PROCESSCWD = process.cwd()
-const TEMPLATE_PATH = __dirname + SEP + 'template'
-const VARIABLE_TEMPLATE = TEMPLATE_PATH + SEP + 'variable.dot'
-const MODEL_TEMPLATE = TEMPLATE_PATH + SEP + 'api' + SEP + 'model.dot'
-
 const AppData = {
-  TEMPLATE_PATH: TEMPLATE_PATH,
-  SEP: SEP,
-  MODEL_TEMPLATE: MODEL_TEMPLATE,
-  VARIABLE_TEMPLATE: VARIABLE_TEMPLATE,
-  PROCESSCWD: PROCESSCWD,
   currentFields: [],
   getModelFields: function () {
     let tableFields = this.currentFields

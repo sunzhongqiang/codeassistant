@@ -1,4 +1,4 @@
-package {{=it.groupId}}.{{=it.artifactId}}.model;
+const modelTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,4 +42,6 @@ public class {{=it.model}} {
   }
 {{}}}
 }
+`
 
+export default modelTemplateContent

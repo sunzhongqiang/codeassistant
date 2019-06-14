@@ -62,7 +62,7 @@ typings/
 .next
 
 # need ignore
-
+app/main.prod.js
 app/main.prod.js.map
 app/dist/renderer.prod.js
 app/dist/renderer.prod.js.map

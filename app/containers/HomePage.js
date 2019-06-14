@@ -32,7 +32,7 @@ export default class HomePage extends Component {
 
           <Content
             style={{
-              marginLeft: 210,
+              marginLeft: 260,
               marginTop: 64,
               background: '#fff',
               overflow: 'scroll'
@@ -40,7 +40,7 @@ export default class HomePage extends Component {
           >
             <Layout>
               <Sider
-                width={200}
+                width={250}
                 style={{
                   background: '#eee',
                   overflow: 'auto',

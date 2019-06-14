@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Tabs } from 'antd'
 import CodePreview from '../template/CodePreview'
 import CodeGengerator from '../template/CodeGenerator'
+import CodeSaveWidget from './CodeSaveWidget'
 const { TabPane } = Tabs
 
 export default class CodeTab extends Component {
@@ -48,9 +49,11 @@ export default class CodeTab extends Component {
           <CodePreview code={this.state.variableCode} />
         </TabPane>
         <TabPane tab='model code' key='model'>
+          <CodeSaveWidget />
           <CodePreview code={this.state.modelCode} />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
+          <CodeSaveWidget />
           <CodePreview code={this.state.modelCode} />
         </TabPane>
       </Tabs>

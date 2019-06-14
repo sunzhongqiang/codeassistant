@@ -9,6 +9,7 @@ password:{{=it.password}}
 groupId:{{=it.groupId}}
 artifactId:{{=it.artifactId}}
 version:{{=it.version}}
+author:{{=it.author}}
 
 #当前工作变量
 database:{{=it.database}}

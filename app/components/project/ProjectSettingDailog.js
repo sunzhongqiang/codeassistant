@@ -11,6 +11,7 @@ export default class ProjectSettingDailog extends Component {
     localStorage.setItem('groupId', 'com.linshang')
     localStorage.setItem('artifactId', 'app')
     localStorage.setItem('version', '1.0.0')
+    localStorage.setItem('author', 'code assistant')
   }
 
   componentDidMount () {
@@ -67,6 +68,14 @@ export default class ProjectSettingDailog extends Component {
           placeholder='version'
           onChange={this.changeConfig.bind(this, 'version')}
           defaultValue='1.0.0'
+          allowClear
+        />
+        <Input
+          name='author'
+          style={{ margin: 10 }}
+          placeholder='author'
+          onChange={this.changeConfig.bind(this, 'author')}
+          defaultValue='code assistant'
           allowClear
         />
       </Modal>

@@ -10,8 +10,8 @@ import javax.persistence.Column;
 /**
 * {{=it.model}}: {{=it.model}} 数据领域模型
 * {{=it.date}}
-*@author 
-*@version 1.0
+*@author : {{=it.author}}
+*@version {{=it.version}}
 */
 @Entity
 @Table(name="{{=it.table}}")

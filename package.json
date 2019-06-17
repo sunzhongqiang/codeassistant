@@ -264,6 +264,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
     "antd": "^3.16.6",
+    "copy-to-clipboard": "^3.2.0",
     "customize-cra": "^0.2.12",
     "devtron": "^1.4.0",
     "dot": "^1.1.2",

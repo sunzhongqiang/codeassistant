@@ -1,21 +1,50 @@
 import React, { Component } from 'react'
-import { Form, Input, Button } from 'antd'
+import { Button, message } from 'antd'
+import copy from 'copy-to-clipboard'
 
 export default class CodeSaveWidget extends Component {
+  state = {
+    projectPath: ''
+  }
+
+  componentDidMount () {
+    let projectPath = localStorage.getItem('projectPath')
+    this.setState({
+      projectPath: projectPath
+    })
+  }
+
+  copyCode () {
+    let result = copy(this.props.code)
+    if (result) {
+      message.success('代码复制成功')
+    }
+  }
+
   render () {
     return (
-      <Form layout='inline' style={{ width: '100%' }}>
-        <Form.Item
-          label='路径：'
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 20 }}
-        >
-          <Input placeholder='input placeholder' />
-        </Form.Item>
-        <Form.Item>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: 10,
+          justifyContent: 'space-between',
+          background: '#eaeaea'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>保存路径：</div>
+          <div style={{ marginLeft: 4 }}>
+            {this.state.projectPath + this.props.path}
+          </div>
+        </div>
+        <div>
+          <Button style={{ margin: 8 }} onClick={this.copyCode.bind(this)}>
+            复制代码
+          </Button>
           <Button>保存</Button>
-        </Form.Item>
-      </Form>
+        </div>
+      </div>
     )
   }
 }

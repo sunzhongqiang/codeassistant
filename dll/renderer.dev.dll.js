@@ -123,6 +123,18 @@ eval("module.exports = antd;\n\n//# sourceURL=webpack://renderer/external_%22ant
 
 /***/ }),
 
+/***/ "copy-to-clipboard":
+/*!************************************!*\
+  !*** external "copy-to-clipboard" ***!
+  \************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = copy-to-clipboard;\n\n//# sourceURL=webpack://renderer/external_%22copy-to-clipboard%22?");
+
+/***/ }),
+
 /***/ "customize-cra":
 /*!********************************!*\
   !*** external "customize-cra" ***!
@@ -168,6 +180,18 @@ eval("module.exports = dot;\n\n//# sourceURL=webpack://renderer/external_%22dot%
 /***/ (function(module, exports) {
 
 eval("module.exports = electron-debug;\n\n//# sourceURL=webpack://renderer/external_%22electron-debug%22?");
+
+/***/ }),
+
+/***/ "electron-devtools-installer":
+/*!**********************************************!*\
+  !*** external "electron-devtools-installer" ***!
+  \**********************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = electron-devtools-installer;\n\n//# sourceURL=webpack://renderer/external_%22electron-devtools-installer%22?");
 
 /***/ }),
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from '../template/CodePreview'
-import CodeGengerator from '../template/CodeGenerator'
-import CodeSaveWidget from './CodeSaveWidget'
+import CodePreview from './CodePreview'
+import CodeGengerator from './CodeGenerator'
+
 const { TabPane } = Tabs
 
 export default class CodeTab extends Component {
@@ -46,15 +46,13 @@ export default class CodeTab extends Component {
         onChange={this.showCode.bind(this)}
       >
         <TabPane tab='当前变量' key='variable'>
-          <CodePreview code={this.state.variableCode} />
+          <CodePreview code={this.state.variableCode} path='variable/' />
         </TabPane>
         <TabPane tab='model code' key='model'>
-          <CodeSaveWidget />
-          <CodePreview code={this.state.modelCode} />
+          <CodePreview code={this.state.modelCode} path='model/' />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
-          <CodeSaveWidget />
-          <CodePreview code={this.state.modelCode} />
+          <CodePreview code={this.state.modelCode} path='dto/' />
         </TabPane>
       </Tabs>
     )

@@ -8,6 +8,7 @@ export default class ProjectSettingDailog extends Component {
 
   constructor () {
     super()
+    localStorage.setItem('projectPath', '/codeassistant/')
     localStorage.setItem('groupId', 'com.linshang')
     localStorage.setItem('artifactId', 'app')
     localStorage.setItem('version', '1.0.0')
@@ -46,6 +47,14 @@ export default class ProjectSettingDailog extends Component {
         onCancel={this.closeDailog.bind(this)}
         onOk={this.saveConfig.bind(this)}
       >
+        <Input
+          name='host'
+          style={{ margin: 10 }}
+          placeholder='projectPath'
+          onChange={this.changeConfig.bind(this, 'projectPath')}
+          defaultValue={'/codeassistant/'}
+          allowClear
+        />
         <Input
           name='host'
           style={{ margin: 10 }}

@@ -1,4 +1,5 @@
 import CodeUtils from '../utils/CodeUtils'
+
 const AppData = {
   currentFields: [],
   getModelFields: function () {

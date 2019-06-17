@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Input } from 'antd'
-import eventbus from '../eventbus/EventBus'
-import EventType from '../eventbus/EventTyp'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
 
 export default class DbSetting extends Component {
   constructor () {

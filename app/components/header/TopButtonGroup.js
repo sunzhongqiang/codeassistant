@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
-import DbSetting from './DbSetting'
-import eventbus from '../eventbus/EventBus'
-import EventType from '../eventbus/EventTyp'
-import ProjectSettingDailog from './project/ProjectSettingDailog'
+import DbSetting from '../database/DbSetting'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
+import ProjectSettingDailog from '../project/ProjectSettingDailog'
 
 export default class TopButtonGroup extends Component {
   constructor (props) {

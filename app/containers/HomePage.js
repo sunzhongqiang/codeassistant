@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd'
-import TopButtonGroup from '../components/TopButtonGroup'
-import DbTree from '../components/DbTree'
+import TopButtonGroup from '../components/header/TopButtonGroup'
+import DbTree from '../components/database/DbTree'
 import ContentTab from '../components/content/ContentTab'
 
 const { Header, Sider, Content } = Layout

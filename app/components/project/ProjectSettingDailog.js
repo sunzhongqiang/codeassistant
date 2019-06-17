@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Modal, Input } from 'antd'
+import { Modal, Input, Button } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+const dialog = require('electron').remote.dialog
 
 export default class ProjectSettingDailog extends Component {
   state = { visible: false }
@@ -39,22 +40,29 @@ export default class ProjectSettingDailog extends Component {
     eventbus.fire(EventType.VARIABLE_CHANGE)
   }
 
+  selectWorkDirectory () {
+    dialog.showOpenDialog(
+      {
+        title: '选择项目的工作目录）',
+        properties: ['openDirectory']
+      },
+      filePaths => {
+        localStorage.setItem('projectPath', filePaths[0])
+        this.setState({
+          projectPath: filePaths[0]
+        })
+      }
+    )
+  }
+
   render () {
     return (
       <Modal
-        title='数据库链接'
+        title='项目设置'
         visible={this.state.visible}
         onCancel={this.closeDailog.bind(this)}
         onOk={this.saveConfig.bind(this)}
       >
-        <Input
-          name='host'
-          style={{ margin: 10 }}
-          placeholder='projectPath'
-          onChange={this.changeConfig.bind(this, 'projectPath')}
-          defaultValue={'/codeassistant/'}
-          allowClear
-        />
         <Input
           name='host'
           style={{ margin: 10 }}
@@ -87,6 +95,12 @@ export default class ProjectSettingDailog extends Component {
           defaultValue='code assistant'
           allowClear
         />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          项目地址：{this.state.projectPath}
+          <Button onClick={this.selectWorkDirectory.bind(this)}>
+            选择工作目录
+          </Button>
+        </div>
       </Modal>
     )
   }

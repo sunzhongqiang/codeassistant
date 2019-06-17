@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Button, message } from 'antd'
+import { Button, message, Input } from 'antd'
 import copy from 'copy-to-clipboard'
+import FileSystemUtils from '../../utils/FileSystemUtils'
+const dialog = require('electron').remote.dialog
 
 export default class CodeSaveWidget extends Component {
   state = {
@@ -19,6 +21,21 @@ export default class CodeSaveWidget extends Component {
     if (result) {
       message.success('代码复制成功')
     }
+  }
+
+  openFile () {
+    dialog.showSaveDialog(
+      {
+        title: '文件另存为'
+      },
+      filename => {
+        // filename:用户选择的文件路径的数组
+        console.log(filename)
+      }
+    )
+  }
+  openDailog () {
+    dialog.showErrorBox('title', 'content')
   }
 
   render () {
@@ -42,7 +59,8 @@ export default class CodeSaveWidget extends Component {
           <Button style={{ margin: 8 }} onClick={this.copyCode.bind(this)}>
             复制代码
           </Button>
-          <Button>保存</Button>
+          <Button onClick={this.openFile.bind(this)}>保存</Button>
+          <Button onClick={this.openDailog.bind(this)}>Dailog</Button>
         </div>
       </div>
     )

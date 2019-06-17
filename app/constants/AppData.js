@@ -1,6 +1,7 @@
 import CodeUtils from '../utils/CodeUtils'
 
 const AppData = {
+  projectPath: '',
   currentFields: [],
   getModelFields: function () {
     let tableFields = this.currentFields

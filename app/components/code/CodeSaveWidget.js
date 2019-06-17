@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, message, Input } from 'antd'
 import copy from 'copy-to-clipboard'
-import FileSystemUtils from '../../utils/FileSystemUtils'
 const dialog = require('electron').remote.dialog
 
 export default class CodeSaveWidget extends Component {
@@ -34,9 +33,6 @@ export default class CodeSaveWidget extends Component {
       }
     )
   }
-  openDailog () {
-    dialog.showErrorBox('title', 'content')
-  }
 
   render () {
     return (
@@ -60,7 +56,6 @@ export default class CodeSaveWidget extends Component {
             复制代码
           </Button>
           <Button onClick={this.openFile.bind(this)}>保存</Button>
-          <Button onClick={this.openDailog.bind(this)}>Dailog</Button>
         </div>
       </div>
     )

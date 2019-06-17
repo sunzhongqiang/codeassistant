@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Input, Button } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import AppData from '../../constants/AppData'
 const dialog = require('electron').remote.dialog
 
 export default class ProjectSettingDailog extends Component {
@@ -9,7 +10,6 @@ export default class ProjectSettingDailog extends Component {
 
   constructor () {
     super()
-    localStorage.setItem('projectPath', '/codeassistant/')
     localStorage.setItem('groupId', 'com.linshang')
     localStorage.setItem('artifactId', 'app')
     localStorage.setItem('version', '1.0.0')
@@ -18,6 +18,9 @@ export default class ProjectSettingDailog extends Component {
 
   componentDidMount () {
     eventbus.on(EventType.PROJECT_SETTING_SHOW, this.showDailog.bind(this))
+    this.setState({
+      projectPath: localStorage.getItem('projectPath')
+    })
   }
 
   showDailog (visible) {
@@ -47,9 +50,11 @@ export default class ProjectSettingDailog extends Component {
         properties: ['openDirectory']
       },
       filePaths => {
-        localStorage.setItem('projectPath', filePaths[0])
+        let projectPath = filePaths[0]
+        localStorage.setItem('projectPath', projectPath)
+        AppData.projectPath = projectPath
         this.setState({
-          projectPath: filePaths[0]
+          projectPath: projectPath
         })
       }
     )

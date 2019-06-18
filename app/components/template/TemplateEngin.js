@@ -1,5 +1,4 @@
 import doT from 'dot'
-import eventbus from '../../eventbus/EventBus'
 
 doT.templateSettings = {
   evaluate: /\{\{([\s\S]+?)\}\}/g,
@@ -22,13 +21,12 @@ export default class TemplateEngin {
    * @param {*} keyValue
    * @param {*} noticeEvent
    */
-  static generatorCodeByContent (templateContent, keyValue, noticeEvent) {
+  static generatorCodeByContent (templateContent, keyValue) {
     if (!keyValue) {
       keyValue = {}
     }
     let template = doT.template(templateContent)
     let code = template(keyValue)
-    eventbus.fire(noticeEvent, code)
     return code
   }
 }

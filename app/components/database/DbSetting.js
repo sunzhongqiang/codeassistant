@@ -7,44 +7,57 @@ import AppData from '../../constants/AppData'
 class DbSettingForm extends Component {
   changeDbConfig (name, e) {
     let value = e.target.value
-    AppData.setDatabaseConfig('name', value)
+    AppData.setDatabaseConfig(name, value)
   }
 
   render () {
+    const { getFieldDecorator } = this.props.form
     return (
       <Form>
-        <Input
-          name='host'
-          style={{ margin: 10 }}
-          placeholder='数据库链接地址'
-          onChange={this.changeDbConfig.bind(this, 'host')}
-          defaultValue={'192.168.2.122'}
-          allowClear
-        />
-        <Input
-          name='port'
-          style={{ margin: 10 }}
-          placeholder='数据库端口号'
-          onChange={this.changeDbConfig.bind(this, 'port')}
-          defaultValue={3306}
-          allowClear
-        />
-        <Input
-          name='user'
-          style={{ margin: 10 }}
-          placeholder='user'
-          onChange={this.changeDbConfig.bind(this, 'user')}
-          allowClear
-          defaultValue='root'
-        />
-        <Input
-          name='password'
-          style={{ margin: 10 }}
-          placeholder='password'
-          onChange={this.changeDbConfig.bind(this, 'password')}
-          allowClear
-          defaultValue={'root'}
-        />
+        {getFieldDecorator('host', {
+          initialValue: AppData.getDatabaseConfig('host')
+        })(
+          <Input
+            name='host'
+            style={{ margin: 10 }}
+            placeholder='数据库链接地址'
+            onChange={this.changeDbConfig.bind(this, 'host')}
+            allowClear
+          />
+        )}
+        {getFieldDecorator('port', {
+          initialValue: AppData.getDatabaseConfig('port')
+        })(
+          <Input
+            name='port'
+            style={{ margin: 10 }}
+            placeholder='数据库端口号'
+            onChange={this.changeDbConfig.bind(this, 'port')}
+            allowClear
+          />
+        )}
+        {getFieldDecorator('user', {
+          initialValue: AppData.getDatabaseConfig('user')
+        })(
+          <Input
+            name='user'
+            style={{ margin: 10 }}
+            placeholder='user'
+            onChange={this.changeDbConfig.bind(this, 'user')}
+            allowClear
+          />
+        )}
+        {getFieldDecorator('password', {
+          initialValue: AppData.getDatabaseConfig('password')
+        })(
+          <Input
+            name='password'
+            style={{ margin: 10 }}
+            placeholder='password'
+            onChange={this.changeDbConfig.bind(this, 'password')}
+            allowClear
+          />
+        )}
       </Form>
     )
   }
@@ -79,10 +92,7 @@ class DbSetting extends Component {
 
   saveConfig () {
     eventbus.fire(EventType.DATABASE_CONFIG_CHANGE)
-
-    this.setState({
-      visible: false
-    })
+    this.closeDbSetting()
   }
 
   render () {

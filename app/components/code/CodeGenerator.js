@@ -13,26 +13,18 @@ export default class CodeGengerator {
   static generatorTemplateVariable () {
     let keyValue = {}
 
-    // loal中的变量
-    for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i)
-      keyValue[key] = localStorage.getItem(key)
-    }
-
-    // session中的变量
-    for (let i = 0; i < sessionStorage.length; i++) {
-      let key = sessionStorage.key(i)
-      keyValue[key] = sessionStorage.getItem(key)
-    }
-
-    keyValue['fields'] = AppData.currentFields
-
-    keyValue['processcwd'] = AppData.PROCESSCWD
+    keyValue['host'] = AppData.getDatabaseConfig('host')
+    keyValue['port'] = AppData.getDatabaseConfig('port')
+    keyValue['user'] = AppData.getDatabaseConfig('user')
+    keyValue['password'] = AppData.getDatabaseConfig('password')
+    keyValue['database'] = AppData.getDatabase()
+    keyValue['table'] = AppData.getTableName()
+    keyValue['fields'] = AppData.getColumnFields()
+    keyValue['model'] = AppData.getJavaName()
 
     return TemplateEngin.generatorCodeByContent(
       variableTemplateContent,
-      keyValue,
-      EventType.VARIABLE_CODE_CHANGE
+      keyValue
     )
   }
 
@@ -47,14 +39,10 @@ export default class CodeGengerator {
       keyValue[key] = localStorage.getItem(key)
     }
 
-    keyValue['fields'] = AppData.getModelFields()
+    keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
-    return TemplateEngin.generatorCodeByContent(
-      modelTemplateContent,
-      keyValue,
-      EventType.CODE_DATA_CHANGE
-    )
+    return TemplateEngin.generatorCodeByContent(modelTemplateContent, keyValue)
   }
 
   /**
@@ -68,13 +56,9 @@ export default class CodeGengerator {
       keyValue[key] = localStorage.getItem(key)
     }
 
-    keyValue['fields'] = AppData.getModelFields()
+    keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
-    return TemplateEngin.generatorCodeByContent(
-      dtoTemplateContent,
-      keyValue,
-      EventType.CODE_DATA_CHANGE
-    )
+    return TemplateEngin.generatorCodeByContent(dtoTemplateContent, keyValue)
   }
 }

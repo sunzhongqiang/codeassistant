@@ -5,7 +5,7 @@ function setDatabaseConfig (name, value) {
 }
 
 function getDatabaseConfig (name) {
-  localStorage.getItem('database.config.' + name)
+  return localStorage.getItem('database.config.' + name)
 }
 
 function getAllDatabaseConfig () {
@@ -22,7 +22,7 @@ function setProjectConfig (name, value) {
 }
 
 function getProjectConfig (name) {
-  localStorage.getItem('project.config.' + name)
+  return localStorage.getItem('project.config.' + name)
 }
 
 function getAllProjectConfig () {
@@ -39,8 +39,8 @@ function getDatabase () {
   return localStorage.getItem('database.database')
 }
 
-function setDatabase () {
-  localStorage.setItem('database.database')
+function setDatabase (database) {
+  localStorage.setItem('database.database', database)
 }
 
 function getTableName () {
@@ -93,30 +93,25 @@ function getJavaFields () {
 }
 
 const AppData = {
-  databaseConfig: getAllDatabaseConfig(),
+  getAllDatabaseConfig: getAllDatabaseConfig,
   setDatabaseConfig: setDatabaseConfig,
   getDatabaseConfig: getDatabaseConfig,
 
-  projectConfig: getAllProjectConfig(),
+  getAllProjectConfig: getAllProjectConfig,
   setProjectConfig: setProjectConfig,
   getProjectConfig: getProjectConfig,
 
-  database: getDatabase(),
   getDatabase: getDatabase,
   setDatabase: setDatabase,
 
-  tableName: getTableName(),
   getTableName: getTableName,
   setTableName: setTableName,
 
-  columnFields: [],
   getColumnFields: getColumnFields,
   setColumnFields: setColumnFields,
 
-  javaName: getJavaName(),
   getJavaName: getJavaName,
 
-  javaFields: [],
   getJavaFields: getJavaFields
 }
 

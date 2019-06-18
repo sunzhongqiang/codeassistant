@@ -15,7 +15,7 @@ export default class DbTree extends Component {
   }
 
   componentDidMount () {
-    eventbus.on(EventType.DATABASE_CONFIG_SAVE, this.reRenderTree.bind(this))
+    eventbus.on(EventType.DATABASE_CONFIG_CHANGE, this.reRenderTree.bind(this))
   }
 
   reRenderTree () {
@@ -32,7 +32,7 @@ export default class DbTree extends Component {
     })
   }
 
-  treeAction (keys, event) {
+  treeAction (keys) {
     let key = keys[0]
     let data = key.split('->')
     const length = data.length
@@ -41,39 +41,47 @@ export default class DbTree extends Component {
 
     const mysqldb = new MySqlDriver()
     if (length === 2) {
-      localStorage.setItem('database', database)
+      AppData.setDatabase(database)
       mysqldb.query(
         'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
         [database],
         this.showTable.bind(this, database)
       )
     } else {
-      localStorage.setItem('table', table)
-      localStorage.setItem('model', CodeUtils.table2Model(table))
+      AppData.setTableName(table)
       mysqldb.query(
         'Select TABLE_NAME,COLUMN_NAME ,DATA_TYPE,COLUMN_KEY,EXTRA,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA= ? and TABLE_NAME = ? ',
         [database, table],
         this.showColumn.bind(this)
       )
     }
-    eventbus.fire(EventType.VARIABLE_CHANGE)
   }
 
   showColumn (data) {
-    AppData.currentFields = data
-    eventbus.fire(EventType.TABLE_DATA_CHANGE, data)
+    AppData.setColumnFields(data)
+    eventbus.fire(EventType.TABLE_DATA_CHANGE)
   }
 
-  showTable (key, data) {
+  /**
+   * 将表展示在对应的数据库中
+   * @param {数据库} database
+   * @param {获得的数据库表} tables
+   */
+  showTable (openDatabase, tables) {
     let database = this.state.database
     for (let item of database) {
-      if (item['SCHEMA_NAME'] === key) {
-        item['RowData'] = data
+      if (item['SCHEMA_NAME'] === openDatabase) {
+        item['RowData'] = tables
       }
     }
-    this.setState({
-      database: database
-    })
+    this.setState(
+      {
+        database: database
+      },
+      () => {
+        eventbus.fire(EventType.DATABASE_NAME_CHANGE)
+      }
+    )
   }
 
   render () {

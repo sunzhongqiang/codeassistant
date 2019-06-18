@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Table } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import AppData from '../../constants/AppData'
 
 const columns = [
   {
@@ -40,7 +41,7 @@ export default class ContentTab extends Component {
 
   showData (data) {
     this.setState({
-      data: data
+      data: AppData.getColumnFields()
     })
   }
 

@@ -1,5 +1,4 @@
-const variableTemplateContent = `#当前系统变量
-
+const variableTemplateContent = `
 #数据库连接配置
 host:{{=it.host}}
 port:{{=it.port}}

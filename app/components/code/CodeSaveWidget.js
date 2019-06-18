@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Button, message } from 'antd'
 import copy from 'copy-to-clipboard'
 import AppData from '../../constants/AppData'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
 const dialog = require('electron').remote.dialog
 
 export default class CodeSaveWidget extends Component {
@@ -11,6 +13,7 @@ export default class CodeSaveWidget extends Component {
 
   componentDidMount () {
     this.initValue()
+    eventbus.on(EventType.PROJECT_CONFIG_CHANGE, this.initValue.bind(this))
   }
 
   initValue () {

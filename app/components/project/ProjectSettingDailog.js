@@ -38,7 +38,6 @@ export default class ProjectSettingDailog extends Component {
   saveConfig () {
     eventbus.fire(EventType.PROJECT_SETTING_SHOW, false)
     eventbus.fire(EventType.PROJECT_CONFIG_CHANGE)
-    eventbus.fire(EventType.VARIABLE_CHANGE)
   }
 
   selectWorkDirectory () {

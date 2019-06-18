@@ -16,9 +16,11 @@ export default class CodeTab extends Component {
   componentDidMount () {
     let code = CodeGengerator.generatorTemplateVariable()
     this.setState({
-      variableCode: code
+      variableCode: code,
+      filename: AppData.getJavaName() + '.txt'
     })
     eventbus.on(EventType.TABLE_DATA_CHANGE, this.refreshCode.bind(this))
+    eventbus.on(EventType.PROJECT_CONFIG_CHANGE, this.refreshCode.bind(this))
   }
 
   showCode (key) {
@@ -51,6 +53,7 @@ export default class CodeTab extends Component {
   }
 
   refreshCode () {
+    console.log('event fire')
     this.showCode(this.state.currentKey)
   }
 

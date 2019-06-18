@@ -69,10 +69,18 @@ export default class CodeTab extends Component {
           />
         </TabPane>
         <TabPane tab='model code' key='model'>
-          <CodePreview code={this.state.modelCode} path='/model/' />
+          <CodePreview
+            code={this.state.modelCode}
+            path='/model/'
+            filename={this.state.filename}
+          />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
-          <CodePreview code={this.state.modelCode} path='/dto/' />
+          <CodePreview
+            code={this.state.modelCode}
+            path='/dto/'
+            filename={this.state.filename}
+          />
         </TabPane>
       </Tabs>
     )

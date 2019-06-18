@@ -1,59 +1,18 @@
 import React, { Component } from 'react'
-import { Modal, Input } from 'antd'
+import { Modal, Form, Input } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import AppData from '../../constants/AppData'
 
-export default class DbSetting extends Component {
-  constructor () {
-    super()
-    sessionStorage.setItem('host', '192.168.2.122')
-    sessionStorage.setItem('port', 3306)
-    sessionStorage.setItem('user', 'root')
-    sessionStorage.setItem('password', 'root')
-  }
-
-  state = {}
-
-  componentDidMount () {
-    eventbus.on(EventType.DATABASE_SETTING_SHOW, this.showDailog.bind(this))
-  }
-
-  dbConfig = {
-    host: '192.168.2.122',
-    port: 3306,
-    user: 'root',
-    password: 'root'
-  }
-
-  closeDbSetting () {
-    eventbus.fire(EventType.DATABASE_SETTING_SHOW, false)
-  }
-
-  showDailog (visible) {
-    this.setState({
-      visible: visible
-    })
-  }
-
+class DbSettingForm extends Component {
   changeDbConfig (name, e) {
-    this.dbConfig[name] = e.target.value
-    sessionStorage.setItem(name, e.target.value)
-  }
-
-  saveConfig () {
-    eventbus.fire(EventType.DATABASE_SETTING_SHOW, false)
-    eventbus.fire(EventType.DATABASE_CONFIG_SAVE)
-    eventbus.fire(EventType.VARIABLE_CHANGE)
+    let value = e.target.value
+    AppData.setDatabaseConfig('name', value)
   }
 
   render () {
     return (
-      <Modal
-        title='数据库链接'
-        visible={this.state.visible}
-        onCancel={this.closeDbSetting.bind(this)}
-        onOk={this.saveConfig.bind(this)}
-      >
+      <Form>
         <Input
           name='host'
           style={{ margin: 10 }}
@@ -86,7 +45,58 @@ export default class DbSetting extends Component {
           allowClear
           defaultValue={'root'}
         />
+      </Form>
+    )
+  }
+}
+
+DbSettingForm = Form.create({})(DbSettingForm)
+
+class DbSetting extends Component {
+  constructor () {
+    super()
+  }
+
+  state = {
+    visible: false
+  }
+
+  componentDidMount () {
+    eventbus.on(EventType.DATABASE_SETTING_SHOW, this.switchDailog.bind(this))
+  }
+
+  closeDbSetting () {
+    this.setState({
+      visible: false
+    })
+  }
+
+  switchDailog (visible) {
+    this.setState({
+      visible: visible
+    })
+  }
+
+  saveConfig () {
+    eventbus.fire(EventType.DATABASE_CONFIG_CHANGE)
+
+    this.setState({
+      visible: false
+    })
+  }
+
+  render () {
+    return (
+      <Modal
+        title='数据库链接'
+        visible={this.state.visible}
+        onCancel={this.closeDbSetting.bind(this)}
+        onOk={this.saveConfig.bind(this)}
+      >
+        <DbSettingForm />
       </Modal>
     )
   }
 }
+
+export default DbSetting

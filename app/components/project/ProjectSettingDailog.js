@@ -10,17 +10,10 @@ export default class ProjectSettingDailog extends Component {
 
   constructor () {
     super()
-    localStorage.setItem('groupId', 'com.linshang')
-    localStorage.setItem('artifactId', 'app')
-    localStorage.setItem('version', '1.0.0')
-    localStorage.setItem('author', 'code assistant')
   }
 
   componentDidMount () {
     eventbus.on(EventType.PROJECT_SETTING_SHOW, this.showDailog.bind(this))
-    this.setState({
-      projectPath: localStorage.getItem('projectPath')
-    })
   }
 
   showDailog (visible) {
@@ -34,12 +27,13 @@ export default class ProjectSettingDailog extends Component {
   }
 
   changeConfig (name, e) {
-    localStorage.setItem(name, e.target.value)
+    let value = e.target.value
+    AppData.setProjectConfig(name, value)
   }
 
   saveConfig () {
     eventbus.fire(EventType.PROJECT_SETTING_SHOW, false)
-    eventbus.fire(EventType.PROJECT_SETTING_SAVE)
+    eventbus.fire(EventType.PROJECT_CONFIG_CHANGE)
     eventbus.fire(EventType.VARIABLE_CHANGE)
   }
 
@@ -51,8 +45,7 @@ export default class ProjectSettingDailog extends Component {
       },
       filePaths => {
         let projectPath = filePaths[0]
-        localStorage.setItem('projectPath', projectPath)
-        AppData.projectPath = projectPath
+        AppData.setProjectConfig('projectPath', projectPath)
         this.setState({
           projectPath: projectPath
         })

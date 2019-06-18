@@ -1,30 +1,123 @@
 import CodeUtils from '../utils/CodeUtils'
 
-const AppData = {
-  projectPath: '',
-  currentFields: [],
-  getModelFields: function () {
-    let tableFields = this.currentFields
-    let modelFields = []
-    if (tableFields && Array.isArray(tableFields)) {
-      for (const tableField of tableFields) {
-        let modelField = {}
-        modelField['name'] = CodeUtils.column2Field(tableField['COLUMN_NAME'])
+function setDatabaseConfig (name, value) {
+  localStorage.setItem('database.config.' + name, value)
+}
 
-        modelField[
-          'firstLetterUpperName'
-        ] = CodeUtils.firstLetterUpperFiledName(tableField['COLUMN_NAME'])
+function getDatabaseConfig (name) {
+  localStorage.getItem('database.config.' + name)
+}
 
-        modelField['type'] = CodeUtils.tableType2ModelType(
-          tableField['DATA_TYPE']
-        )
+function getAllDatabaseConfig () {
+  let databaseConfig = {}
+  databaseConfig['host'] = getDatabaseConfig('host')
+  databaseConfig['port'] = getDatabaseConfig('port')
+  databaseConfig['user'] = getDatabaseConfig('user')
+  databaseConfig['password'] = getDatabaseConfig('password')
+  return databaseConfig
+}
 
-        modelField['comment'] = tableField['COLUMN_COMMENT']
-        modelFields.push(modelField)
-      }
-    }
-    return modelFields
+function setProjectConfig (name, value) {
+  localStorage.setItem('project.config.' + name, value)
+}
+
+function getProjectConfig (name) {
+  localStorage.getItem('project.config.' + name)
+}
+
+function getAllProjectConfig () {
+  let projectConfig = {}
+  projectConfig['projectPath'] = getProjectConfig('projectPath')
+  projectConfig['groupId'] = getProjectConfig('groupId')
+  projectConfig['artifactId'] = getProjectConfig('artifactId')
+  projectConfig['version'] = getProjectConfig('version')
+  projectConfig['author'] = getProjectConfig('author')
+  return projectConfig
+}
+
+function getDatabase () {
+  return localStorage.getItem('database.database')
+}
+
+function setDatabase () {
+  localStorage.setItem('database.database')
+}
+
+function getTableName () {
+  return localStorage.getItem('table')
+}
+
+function setTableName (tablename) {
+  localStorage.setItem('table', tablename)
+}
+
+function getColumnFields () {
+  let columnFields = localStorage.getItem('table.column')
+  return JSON.parse(columnFields)
+}
+
+function setColumnFields (columnFields) {
+  let json = JSON.stringify(columnFields)
+  localStorage.setItem('table.column', json)
+}
+
+function getJavaName () {
+  let tableName = getTableName()
+  if (tableName) {
+    return CodeUtils.table2Model(tableName)
   }
+  return null
+}
+
+function getJavaFields () {
+  let tableFields = getColumnFields()
+  let modelFields = []
+  if (tableFields && Array.isArray(tableFields)) {
+    for (const tableField of tableFields) {
+      let modelField = {}
+      modelField['name'] = CodeUtils.column2Field(tableField['COLUMN_NAME'])
+
+      modelField['firstLetterUpperName'] = CodeUtils.firstLetterUpperFiledName(
+        tableField['COLUMN_NAME']
+      )
+
+      modelField['type'] = CodeUtils.tableType2ModelType(
+        tableField['DATA_TYPE']
+      )
+
+      modelField['comment'] = tableField['COLUMN_COMMENT']
+      modelFields.push(modelField)
+    }
+  }
+  return modelFields
+}
+
+const AppData = {
+  databaseConfig: getAllDatabaseConfig(),
+  setDatabaseConfig: setDatabaseConfig,
+  getDatabaseConfig: getDatabaseConfig,
+
+  projectConfig: getAllProjectConfig(),
+  setProjectConfig: setProjectConfig,
+  getProjectConfig: getProjectConfig,
+
+  database: getDatabase(),
+  getDatabase: getDatabase,
+  setDatabase: setDatabase,
+
+  tableName: getTableName(),
+  getTableName: getTableName,
+  setTableName: setTableName,
+
+  columnFields: [],
+  getColumnFields: getColumnFields,
+  setColumnFields: setColumnFields,
+
+  javaName: getJavaName(),
+  getJavaName: getJavaName,
+
+  javaFields: [],
+  getJavaFields: getJavaFields
 }
 
 export default AppData

@@ -61,7 +61,7 @@ export default class DbTree extends Component {
 
   showColumn (data) {
     AppData.currentFields = data
-    eventbus.fire(EventType.TABLE_DATA_LOAD, data)
+    eventbus.fire(EventType.TABLE_DATA_CHANGE, data)
   }
 
   showTable (key, data) {

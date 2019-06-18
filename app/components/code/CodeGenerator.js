@@ -34,11 +34,8 @@ export default class CodeGengerator {
   static generatorModelCode () {
     let keyValue = {}
 
-    for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i)
-      keyValue[key] = localStorage.getItem(key)
-    }
-
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
@@ -51,11 +48,8 @@ export default class CodeGengerator {
   static generatorDtoCode () {
     let keyValue = {}
 
-    for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i)
-      keyValue[key] = localStorage.getItem(key)
-    }
-
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 

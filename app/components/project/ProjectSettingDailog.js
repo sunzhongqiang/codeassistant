@@ -15,7 +15,6 @@ export default class ProjectSettingDailog extends Component {
   componentDidMount () {
     eventbus.on(EventType.PROJECT_SETTING_SHOW, this.switchDailog.bind(this))
     let projectConfig = AppData.getAllProjectConfig()
-    console.log('projectConfig', projectConfig)
     this.setState({ ...projectConfig })
   }
 

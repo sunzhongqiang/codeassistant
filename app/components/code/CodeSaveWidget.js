@@ -27,7 +27,7 @@ export default class CodeSaveWidget extends Component {
     }
   }
 
-  openFile () {
+  saveFile () {
     dialog.showSaveDialog(
       {
         title: '文件另存为'
@@ -53,14 +53,14 @@ export default class CodeSaveWidget extends Component {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div>保存路径：</div>
           <div style={{ marginLeft: 4 }}>
-            {this.state.projectPath + this.props.path}
+            {this.state.projectPath + this.props.path + this.props.filename}
           </div>
         </div>
         <div>
           <Button style={{ margin: 8 }} onClick={this.copyCode.bind(this)}>
             复制代码
           </Button>
-          <Button onClick={this.openFile.bind(this)}>保存</Button>
+          <Button onClick={this.saveFile.bind(this)}>保存</Button>
         </div>
       </div>
     )

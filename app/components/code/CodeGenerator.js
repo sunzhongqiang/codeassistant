@@ -22,6 +22,10 @@ export default class CodeGengerator {
     keyValue['fields'] = AppData.getColumnFields()
     keyValue['model'] = AppData.getJavaName()
     keyValue['projectPath'] = AppData.getProjectConfig('path')
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
 
     return TemplateEngin.generatorCodeByContent(
       variableTemplateContent,
@@ -37,7 +41,8 @@ export default class CodeGengerator {
 
     keyValue['groupId'] = AppData.getProjectConfig('groupId')
     keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
-    keyValue['version'] = AppData.getAllProjectConfig('version')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = AppData.getJavaName()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
@@ -54,7 +59,8 @@ export default class CodeGengerator {
 
     keyValue['groupId'] = AppData.getProjectConfig('groupId')
     keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
-    keyValue['version'] = AppData.getAllProjectConfig('version')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = AppData.getJavaName()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()

@@ -8,7 +8,7 @@ export default class CodePreview extends Component {
         <CodeSaveWidget
           code={this.props.code}
           path={this.props.path}
-          name={this.props.name}
+          filename={this.props.filename}
         />
         <Highlight languages={['java']} className='java'>
           {this.props.code}

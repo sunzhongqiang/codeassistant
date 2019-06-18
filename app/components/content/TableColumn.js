@@ -37,6 +37,7 @@ export default class ContentTab extends Component {
 
   componentDidMount () {
     eventbus.on(EventType.TABLE_DATA_CHANGE, this.showData.bind(this))
+    this.showData(AppData.getColumnFields())
   }
 
   showData (data) {

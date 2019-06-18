@@ -4,6 +4,7 @@ import CodePreview from './CodePreview'
 import CodeGengerator from './CodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import AppData from '../../constants/AppData'
 
 const { TabPane } = Tabs
 
@@ -25,7 +26,8 @@ export default class CodeTab extends Component {
       let code = CodeGengerator.generatorTemplateVariable()
       this.setState({
         variableCode: code,
-        currentKey: key
+        currentKey: key,
+        filename: AppData.getJavaName() + '.txt'
       })
     }
 
@@ -33,7 +35,8 @@ export default class CodeTab extends Component {
       let code = CodeGengerator.generatorModelCode()
       this.setState({
         modelCode: code,
-        currentKey: key
+        currentKey: key,
+        filename: AppData.getJavaName() + '.java'
       })
     }
 
@@ -41,7 +44,8 @@ export default class CodeTab extends Component {
       let code = CodeGengerator.generatorDtoCode()
       this.setState({
         modelCode: code,
-        currentKey: key
+        currentKey: key,
+        filename: AppData.getJavaName() + 'Dto.java'
       })
     }
   }
@@ -58,7 +62,11 @@ export default class CodeTab extends Component {
         onChange={this.showCode.bind(this)}
       >
         <TabPane tab='当前变量' key='variable'>
-          <CodePreview code={this.state.variableCode} path='/variable/' />
+          <CodePreview
+            code={this.state.variableCode}
+            path='/variable/'
+            filename={this.state.filename}
+          />
         </TabPane>
         <TabPane tab='model code' key='model'>
           <CodePreview code={this.state.modelCode} path='/model/' />

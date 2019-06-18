@@ -27,7 +27,7 @@ function getProjectConfig (name) {
 
 function getAllProjectConfig () {
   let projectConfig = {}
-  projectConfig['projectPath'] = getProjectConfig('projectPath')
+  projectConfig['path'] = getProjectConfig('path')
   projectConfig['groupId'] = getProjectConfig('groupId')
   projectConfig['artifactId'] = getProjectConfig('artifactId')
   projectConfig['version'] = getProjectConfig('version')

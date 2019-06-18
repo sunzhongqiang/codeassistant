@@ -13,17 +13,22 @@ export default class ProjectSettingDailog extends Component {
   }
 
   componentDidMount () {
-    eventbus.on(EventType.PROJECT_SETTING_SHOW, this.showDailog.bind(this))
-  }
-
-  showDailog (visible) {
-    this.setState({
-      visible: visible
-    })
+    eventbus.on(EventType.PROJECT_SETTING_SHOW, this.switchDailog.bind(this))
+    let projectConfig = AppData.getAllProjectConfig()
+    console.log('projectConfig', projectConfig)
+    this.setState({ ...projectConfig })
   }
 
   closeDailog () {
-    eventbus.fire(EventType.PROJECT_SETTING_SHOW, false)
+    this.setState({
+      visible: false
+    })
+  }
+
+  switchDailog (visible) {
+    this.setState({
+      visible: visible
+    })
   }
 
   changeConfig (name, e) {
@@ -45,9 +50,9 @@ export default class ProjectSettingDailog extends Component {
       },
       filePaths => {
         let projectPath = filePaths[0]
-        AppData.setProjectConfig('projectPath', projectPath)
+        AppData.setProjectConfig('path', projectPath)
         this.setState({
-          projectPath: projectPath
+          path: projectPath
         })
       }
     )
@@ -61,12 +66,25 @@ export default class ProjectSettingDailog extends Component {
         onCancel={this.closeDailog.bind(this)}
         onOk={this.saveConfig.bind(this)}
       >
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px',
+            justifyContent: 'space-between'
+          }}
+        >
+          <span>项目地址：{this.state.path}</span>
+          <Button onClick={this.selectWorkDirectory.bind(this)}>
+            选择工作目录
+          </Button>
+        </div>
         <Input
           name='host'
           style={{ margin: 10 }}
           placeholder='groupId'
           onChange={this.changeConfig.bind(this, 'groupId')}
-          defaultValue={'com.linshang'}
+          defaultValue={this.state.groupId}
           allowClear
         />
         <Input
@@ -74,7 +92,7 @@ export default class ProjectSettingDailog extends Component {
           style={{ margin: 10 }}
           placeholder='artifactId'
           onChange={this.changeConfig.bind(this, 'artifactId')}
-          defaultValue={'app'}
+          defaultValue={this.state.artifactId}
           allowClear
         />
         <Input
@@ -82,7 +100,7 @@ export default class ProjectSettingDailog extends Component {
           style={{ margin: 10 }}
           placeholder='version'
           onChange={this.changeConfig.bind(this, 'version')}
-          defaultValue='1.0.0'
+          defaultValue={this.state.version}
           allowClear
         />
         <Input
@@ -90,15 +108,9 @@ export default class ProjectSettingDailog extends Component {
           style={{ margin: 10 }}
           placeholder='author'
           onChange={this.changeConfig.bind(this, 'author')}
-          defaultValue='code assistant'
+          defaultValue={this.state.author}
           allowClear
         />
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          项目地址：{this.state.projectPath}
-          <Button onClick={this.selectWorkDirectory.bind(this)}>
-            选择工作目录
-          </Button>
-        </div>
       </Modal>
     )
   }

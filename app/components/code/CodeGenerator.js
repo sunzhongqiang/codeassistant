@@ -21,6 +21,7 @@ export default class CodeGengerator {
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getColumnFields()
     keyValue['model'] = AppData.getJavaName()
+    keyValue['projectPath'] = AppData.getProjectConfig('path')
 
     return TemplateEngin.generatorCodeByContent(
       variableTemplateContent,
@@ -34,6 +35,9 @@ export default class CodeGengerator {
   static generatorModelCode () {
     let keyValue = {}
 
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getAllProjectConfig('version')
     keyValue['model'] = AppData.getJavaName()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
@@ -48,6 +52,9 @@ export default class CodeGengerator {
   static generatorDtoCode () {
     let keyValue = {}
 
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getAllProjectConfig('version')
     keyValue['model'] = AppData.getJavaName()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()

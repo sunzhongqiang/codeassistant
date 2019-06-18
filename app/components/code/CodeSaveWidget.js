@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Button, message, Input } from 'antd'
+import { Button, message } from 'antd'
 import copy from 'copy-to-clipboard'
+import AppData from '../../constants/AppData'
 const dialog = require('electron').remote.dialog
 
 export default class CodeSaveWidget extends Component {
@@ -9,7 +10,11 @@ export default class CodeSaveWidget extends Component {
   }
 
   componentDidMount () {
-    let projectPath = localStorage.getItem('projectPath')
+    this.initValue()
+  }
+
+  initValue () {
+    let projectPath = AppData.getProjectConfig('path')
     this.setState({
       projectPath: projectPath
     })

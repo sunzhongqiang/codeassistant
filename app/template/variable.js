@@ -5,7 +5,7 @@ port:{{=it.port}}
 user:{{=it.user}}
 password:{{=it.password}}
 #项目配置
-groupId:{{=it.projectPath}}
+projectPath:{{=it.projectPath}}
 groupId:{{=it.groupId}}
 artifactId:{{=it.artifactId}}
 version:{{=it.version}}

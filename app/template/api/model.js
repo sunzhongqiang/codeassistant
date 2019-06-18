@@ -21,6 +21,10 @@ public class {{=it.model}} {
   /**
   * {{=field['comment']}}.
   */
+  {{if(field['isPK']){ }}@Id{{ } }}
+  {{if(field['increment']){ }}@GeneratedValue(strategy = GenerationType.IDENTITY){{ } }}
+  {{if(field['type']=='Date'){ }}@Temporal(TemporalType.TIMESTAMP){{ } }}
+  @Column(name="{{=field['column']}}",columnDefinition="COMMENT '{{=field['comment']}}'")
   private {{=field['type']}} {{=field['name']}}
 {{}}}
 

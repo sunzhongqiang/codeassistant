@@ -75,6 +75,10 @@ function getJavaFields () {
   if (tableFields && Array.isArray(tableFields)) {
     for (const tableField of tableFields) {
       let modelField = {}
+      modelField['column'] = tableField['COLUMN_NAME']
+      modelField['isPK'] = tableField['COLUMN_KEY'] == 'PRI'
+      modelField['increment'] = tableField['EXTRA'] == 'auto_increment'
+
       modelField['name'] = CodeUtils.column2Field(tableField['COLUMN_NAME'])
 
       modelField['firstLetterUpperName'] = CodeUtils.firstLetterUpperFiledName(

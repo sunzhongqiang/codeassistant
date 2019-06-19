@@ -3,6 +3,7 @@ import { Modal, Input, Button } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
+import PathUtils from '../../utils/PathUtils'
 const dialog = require('electron').remote.dialog
 
 export default class ProjectSettingDailog extends Component {
@@ -14,8 +15,26 @@ export default class ProjectSettingDailog extends Component {
 
   componentDidMount () {
     eventbus.on(EventType.PROJECT_SETTING_SHOW, this.switchDailog.bind(this))
+    this.initValue()
+  }
+
+  initValue () {
     let projectConfig = AppData.getAllProjectConfig()
-    this.setState({ ...projectConfig })
+    let modelPath = PathUtils.getPackagePath('model')
+    let dtoPath = PathUtils.getPackagePath('dto')
+    let servicePath = PathUtils.getPackagePath('service')
+    let serviceImplPath = PathUtils.getPackagePath('service.impl')
+    let daoPath = PathUtils.getPackagePath('dao')
+    let daoImplPath = PathUtils.getPackagePath('dao.impl')
+    this.setState({
+      modelPath: modelPath,
+      dtoPath,
+      servicePath,
+      serviceImplPath,
+      daoPath,
+      daoImplPath,
+      ...projectConfig
+    })
   }
 
   closeDailog () {
@@ -33,6 +52,7 @@ export default class ProjectSettingDailog extends Component {
   changeConfig (name, e) {
     let value = e.target.value
     AppData.setProjectConfig(name, value)
+    this.initValue()
   }
 
   saveConfig () {
@@ -49,9 +69,7 @@ export default class ProjectSettingDailog extends Component {
       filePaths => {
         let projectPath = filePaths[0]
         AppData.setProjectConfig('path', projectPath)
-        this.setState({
-          path: projectPath
-        })
+        this.initValue()
       }
     )
   }
@@ -60,10 +78,24 @@ export default class ProjectSettingDailog extends Component {
     return (
       <Modal
         title='项目设置'
+        width={800}
         visible={this.state.visible}
         onCancel={this.closeDailog.bind(this)}
         onOk={this.saveConfig.bind(this)}
       >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <span>项目地址：{this.state.path}</span>
+          <Button onClick={this.selectWorkDirectory.bind(this)}>
+            选择工作目录
+          </Button>
+        </div>
         <div
           style={{
             display: 'flex',
@@ -72,13 +104,10 @@ export default class ProjectSettingDailog extends Component {
             justifyContent: 'space-between'
           }}
         >
-          <span>项目地址：{this.state.path}</span>
-          <Button onClick={this.selectWorkDirectory.bind(this)}>
-            选择工作目录
-          </Button>
+          <span>源码路径：/src/main/java</span>
         </div>
         <Input
-          name='host'
+          name='groupId'
           style={{ margin: 10 }}
           placeholder='groupId'
           onChange={this.changeConfig.bind(this, 'groupId')}
@@ -109,6 +138,66 @@ export default class ProjectSettingDailog extends Component {
           defaultValue={this.state.author}
           allowClear
         />
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>model路径：</div>
+          <div>{this.state.modelPath}</div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>dto路径：</div>
+          <div>{this.state.dtoPath}</div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>service路径：</div>
+          <div>{this.state.servicePath}</div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>serviceImpl路径：</div>
+          <div>{this.state.serviceImplPath}</div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>dao路径：</div>
+          <div>{this.state.daoPath}</div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            marginTop: '10px',
+            marginLeft: '10px'
+          }}
+        >
+          <div style={{ width: 150 }}>daoImpl路径：</div>
+          <div>{this.state.daoImplPath}</div>
+        </div>
       </Modal>
     )
   }

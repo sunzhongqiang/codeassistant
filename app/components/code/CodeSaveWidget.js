@@ -15,10 +15,10 @@ export default class CodeSaveWidget extends Component {
   componentDidMount () {
     this.initValue()
     eventbus.on(EventType.PROJECT_CONFIG_CHANGE, this.initValue.bind(this))
+    eventbus.on(EventType.TABLE_DATA_CHANGE, this.initValue.bind(this))
   }
 
   initValue () {
-    console.log(this.props)
     let projectPath = AppData.getProjectConfig('path')
     this.setState({
       file: projectPath + this.props.path + this.props.filename
@@ -39,19 +39,25 @@ export default class CodeSaveWidget extends Component {
         title: '文件已经存在',
         content: '否发要覆盖已经存在的文件',
         onOk () {
-          let path = AppData.getProjectConfig('path') + self.props.path
-          if (!fs.existsSync(path)) {
-            fs.mkdirSync(AppData.getProjectConfig('path') + self.props.path)
-          }
-          let result = fs.writeFileSync(self.state.file, self.props.code)
-          if (!result) {
-            message.success('代码保存成功：' + self.state.file)
-          }
+          self.directSave()
         },
         onCancel () {
           message.info('取消了代码生成，没有进行任何的操作！')
         }
       })
+    } else {
+      this.directSave()
+    }
+  }
+
+  directSave () {
+    let path = AppData.getProjectConfig('path') + this.props.path
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(AppData.getProjectConfig('path') + this.props.path)
+    }
+    let result = fs.writeFileSync(this.state.file, this.props.code)
+    if (!result) {
+      message.success('代码保存成功：' + this.state.file)
     }
   }
 

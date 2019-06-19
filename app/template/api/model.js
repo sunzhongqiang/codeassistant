@@ -17,18 +17,16 @@ import javax.persistence.Column;
 @Table(name="{{=it.table}}")
 public class {{=it.model}} {
 
-{{for (field of it.fields){ }}
+{{~it.fields: field:index}}
   /**
   * {{=field['comment']}}.
   */
-  {{if(field['isPK']){ }}@Id{{ } }}
-  {{if(field['increment']){ }}@GeneratedValue(strategy = GenerationType.IDENTITY){{ } }}
-  {{if(field['type']=='Date'){ }}@Temporal(TemporalType.TIMESTAMP){{ } }}
+  {{? field['isPK'] }}@Id{{? field['increment']}}
+  @GeneratedValue(strategy = GenerationType.IDENTITY){{?}}{{?}}{{? field['type']=='Date' }}@Temporal(TemporalType.TIMESTAMP){{?}}
   @Column(name="{{=field['column']}}",columnDefinition="COMMENT '{{=field['comment']}}'")
-  private {{=field['type']}} {{=field['name']}}
-{{}}}
+  private {{=field['type']}} {{=field['name']}}{{~}}
 
-{{for (field of it.fields){ }}
+{{~it.fields: field:index}}
   /**
   * 获得{{=field['comment']}}.
   * @return {{=field['name']}} {{=field['comment']}}
@@ -44,7 +42,7 @@ public class {{=it.model}} {
   public void set{{=field['firstLetterUpperName']}}({{=field['type']}} {{=field['name']}}){
     this.{{=field['name']}} = {{=field['name']}};
   }
-{{}}}
+{{~}}
 }
 `
 

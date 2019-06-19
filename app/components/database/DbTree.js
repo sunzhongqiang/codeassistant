@@ -59,7 +59,6 @@ export default class DbTree extends Component {
 
   showColumn (data) {
     AppData.setColumnFields(data)
-    eventbus.fire(EventType.TABLE_DATA_CHANGE)
   }
 
   /**

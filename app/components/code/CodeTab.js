@@ -50,10 +50,17 @@ export default class CodeTab extends Component {
         filename: AppData.getJavaName() + 'Dto.java'
       })
     }
+    if (key == 'copy') {
+      let code = CodeGengerator.generatorCopyCode()
+      this.setState({
+        copyDtoCode: code,
+        currentKey: key,
+        filename: AppData.getJavaName() + 'Snipt.java'
+      })
+    }
   }
 
   refreshCode () {
-    console.log('event fire')
     this.showCode(this.state.currentKey)
   }
 
@@ -82,6 +89,13 @@ export default class CodeTab extends Component {
           <CodePreview
             code={this.state.modelCode}
             path='/dto/'
+            filename={this.state.filename}
+          />
+        </TabPane>
+        <TabPane tab='copydto2model' key='copy'>
+          <CodePreview
+            code={this.state.copyDtoCode}
+            path='/snipt/'
             filename={this.state.filename}
           />
         </TabPane>

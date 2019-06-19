@@ -1,4 +1,6 @@
 import CodeUtils from '../utils/CodeUtils'
+import eventbus from '../eventbus/EventBus'
+import EventType from '../eventbus/EventTyp'
 
 function setDatabaseConfig (name, value) {
   localStorage.setItem('database.config.' + name, value)
@@ -49,6 +51,7 @@ function getTableName () {
 
 function setTableName (tablename) {
   localStorage.setItem('table', tablename)
+  eventbus.fire(EventType.TABLE_DATA_CHANGE)
 }
 
 function getColumnFields () {
@@ -59,12 +62,13 @@ function getColumnFields () {
 function setColumnFields (columnFields) {
   let json = JSON.stringify(columnFields)
   localStorage.setItem('table.column', json)
+  eventbus.fire(EventType.TABLE_DATA_CHANGE)
 }
 
 function getJavaName () {
   let tableName = getTableName()
   if (tableName) {
-    return CodeUtils.table2Model(tableName)
+    return CodeUtils.bigCamelCase(tableName)
   }
   return null
 }
@@ -75,19 +79,17 @@ function getJavaFields () {
   if (tableFields && Array.isArray(tableFields)) {
     for (const tableField of tableFields) {
       let modelField = {}
-      modelField['column'] = tableField['COLUMN_NAME']
+      // 字段定义
+      const columnName = tableField['COLUMN_NAME']
+      modelField['column'] = columnName
+      modelField['name'] = CodeUtils.littleCamelCase(columnName)
+      modelField['firstLetterUpperName'] = CodeUtils.bigCamelCase(columnName)
+      // 类型
+      const dataType = tableField['DATA_TYPE']
+      modelField['type'] = CodeUtils.tableType2ModelType(dataType)
+      // 特殊表示
       modelField['isPK'] = tableField['COLUMN_KEY'] == 'PRI'
       modelField['increment'] = tableField['EXTRA'] == 'auto_increment'
-
-      modelField['name'] = CodeUtils.column2Field(tableField['COLUMN_NAME'])
-
-      modelField['firstLetterUpperName'] = CodeUtils.firstLetterUpperFiledName(
-        tableField['COLUMN_NAME']
-      )
-
-      modelField['type'] = CodeUtils.tableType2ModelType(
-        tableField['DATA_TYPE']
-      )
 
       modelField['comment'] = tableField['COLUMN_COMMENT']
       modelFields.push(modelField)

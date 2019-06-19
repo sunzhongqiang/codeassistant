@@ -5,6 +5,8 @@ import TemplateEngin from '../template/TemplateEngin'
 import modelTemplateContent from '../../template/api/model'
 import variableTemplateContent from '../../template/variable'
 import dtoTemplateContent from '../../template/api/dto'
+import CodeUtils from '../../utils/CodeUtils'
+import copyModelTemplateContent from '../../template/api/dto2model'
 
 export default class CodeGengerator {
   /**
@@ -67,5 +69,18 @@ export default class CodeGengerator {
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
     return TemplateEngin.generatorCodeByContent(dtoTemplateContent, keyValue)
+  }
+
+  static generatorCopyCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    keyValue['fields'] = AppData.getJavaFields()
+
+    return TemplateEngin.generatorCodeByContent(
+      copyModelTemplateContent,
+      keyValue
+    )
   }
 }

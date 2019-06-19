@@ -1,19 +1,27 @@
 import FieldTypeUtils from './FieldTypeUtils'
 
 export default class CodeUtils {
-  static table2Model (tableName) {
-    return this.preSql(tableName)
+  /**
+   *将数据字段以大驼峰命名方式返回
+   * @param {数据库命名方式} name
+   */
+  static bigCamelCase (name) {
+    return this.preSql(name)
   }
 
-  static column2Field (column) {
-    let preSql = this.preSql(column)
+  /**
+   * 将数据字段以小驼峰命名方式返回
+   * @param {数据库命名方式} name
+   */
+  static littleCamelCase (name) {
+    let preSql = this.preSql(name)
     return this.firstLetterLowerCase(preSql)
   }
 
-  static firstLetterUpperFiledName (tableName) {
-    return this.preSql(tableName)
-  }
-
+  /**
+   * 将命名的第一个首字母大写
+   * @param {命名} name
+   */
   static firstLetterUpperCase (name) {
     if (name.length > 1) {
       return name
@@ -23,6 +31,10 @@ export default class CodeUtils {
     }
   }
 
+  /**
+   * 将命名的第一个首字母小写
+   * @param {命名} name
+   */
   static firstLetterLowerCase (name) {
     if (name.length > 1) {
       return name
@@ -32,8 +44,12 @@ export default class CodeUtils {
     }
   }
 
-  static preSql (sql) {
-    let preSql = sql.replace(/-/g, '_')
+  /**
+   *
+   * @param {数据库命名方式} databaseName
+   */
+  static preSql (databaseName) {
+    let preSql = databaseName.replace(/-/g, '_')
     let names = preSql.split('_')
     let result = []
     for (const name of names) {
@@ -42,6 +58,10 @@ export default class CodeUtils {
     return result.join('')
   }
 
+  /**
+   * 将数据库的数据类型翻译为java的数据类型
+   * @param {数据库数据类型} datatype
+   */
   static tableType2ModelType (datatype) {
     let modelType = 'String'
     if (datatype) {

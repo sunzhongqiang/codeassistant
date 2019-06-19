@@ -42,6 +42,7 @@ export default class DbTree extends Component {
     } else {
       AppData.setTableName(table)
       DataLoad.loadColumn(database, table)
+      DataLoad.loadTableComment(database, table)
     }
   }
 

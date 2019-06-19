@@ -28,6 +28,7 @@ export default class CodeGengerator {
     keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
 
     return TemplateEngin.generatorCodeByContent(
       variableTemplateContent,
@@ -46,6 +47,7 @@ export default class CodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = AppData.getJavaName()
+    keyValue['comment'] = AppData.getTableComment()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
@@ -64,6 +66,7 @@ export default class CodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = AppData.getJavaName()
+    keyValue['comment'] = AppData.getTableComment()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')

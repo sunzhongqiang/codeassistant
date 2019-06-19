@@ -65,6 +65,15 @@ function getTableList () {
   return JSON.parse(tables)
 }
 
+function setTableComment (comment) {
+  localStorage.setItem('table.comment', comment)
+  eventbus.fire(EventType.TABLE_COMMENT_CHANGE)
+}
+
+function getTableComment () {
+  return localStorage.getItem('table.comment')
+}
+
 function getTableName () {
   return localStorage.getItem('table')
 }
@@ -132,6 +141,9 @@ const AppData = {
 
   setTableList,
   getTableList,
+
+  setTableComment,
+  getTableComment,
 
   getDatabase: getDatabase,
   setDatabase: setDatabase,

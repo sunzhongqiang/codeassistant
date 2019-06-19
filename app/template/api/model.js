@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 /**
-* {{=it.model}}: {{=it.model}} 数据领域模型
+* {{=it.model}}: {{=it.comment}} 数据领域模型.
 * {{=it.date}}
 *@author : {{=it.author}}
 *@version {{=it.version}}

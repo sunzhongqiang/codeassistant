@@ -13,8 +13,10 @@ author:{{=it.author}}
 
 #当前工作变量
 database:{{=it.database}}
+comment:{{=it.tablecomment}}
 table:{{=it.table}}
 model:{{=it.model}}
+
 `
 
 export default variableTemplateContent

@@ -33,4 +33,18 @@ export default class DataLoad {
       }
     )
   }
+
+  static loadTableComment (database, table) {
+    const mysqldb = new MySqlDriver()
+    mysqldb.query(
+      'select TABLE_NAME,TABLE_COMMENT,TABLE_ROWS,AUTO_INCREMENT from information_schema.`TABLES` where TABLE_SCHEMA = ? and TABLE_NAME =? ',
+      [database, table],
+      data => {
+        console.log('tablecomment', data)
+        if (data.length > 0) {
+          AppData.setTableComment(data[0]['TABLE_COMMENT'])
+        }
+      }
+    )
+  }
 }

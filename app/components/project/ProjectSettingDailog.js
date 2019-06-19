@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Input, Button } from 'antd'
+import { Modal, Input, Button, Form } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'

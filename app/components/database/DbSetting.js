@@ -23,52 +23,48 @@ class DbSettingForm extends Component {
     const { getFieldDecorator } = this.props.form
     return (
       <Form {...formItemLayout}>
-        <Form.Item label='主机'>
+        <Form.Item label='主机' style={{ marginBottom: 8 }}>
           {getFieldDecorator('host', {
             initialValue: AppData.getDatabaseConfig('host')
           })(
             <Input
               name='host'
-              style={{ margin: 10 }}
               placeholder='数据库链接地址'
               onChange={this.changeDbConfig.bind(this, 'host')}
               allowClear
             />
           )}
         </Form.Item>
-        <Form.Item label='端口号'>
+        <Form.Item label='端口号' style={{ marginBottom: 8 }}>
           {getFieldDecorator('port', {
             initialValue: AppData.getDatabaseConfig('port')
           })(
             <Input
               name='port'
-              style={{ margin: 10 }}
               placeholder='数据库端口号'
               onChange={this.changeDbConfig.bind(this, 'port')}
               allowClear
             />
           )}
         </Form.Item>
-        <Form.Item label='用户名'>
+        <Form.Item label='用户名' style={{ marginBottom: 8 }}>
           {getFieldDecorator('user', {
             initialValue: AppData.getDatabaseConfig('user')
           })(
             <Input
               name='user'
-              style={{ margin: 10 }}
               placeholder='user'
               onChange={this.changeDbConfig.bind(this, 'user')}
               allowClear
             />
           )}
         </Form.Item>
-        <Form.Item label='密码'>
+        <Form.Item label='密码' style={{ marginBottom: 8 }}>
           {getFieldDecorator('password', {
             initialValue: AppData.getDatabaseConfig('password')
           })(
             <Input
               name='password'
-              style={{ margin: 10 }}
               placeholder='password'
               onChange={this.changeDbConfig.bind(this, 'password')}
               allowClear
@@ -115,7 +111,7 @@ class DbSetting extends Component {
   render () {
     return (
       <Modal
-        title='数据库链接'
+        title='连接数据库'
         visible={this.state.visible}
         onCancel={this.closeDbSetting.bind(this)}
         onOk={this.saveConfig.bind(this)}

@@ -86,45 +86,45 @@ export default class ProjectSettingDailog extends Component {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '10px',
-            marginLeft: '10px'
-          }}
-        >
-          <span>项目地址：{this.state.path}</span>
-          <Button onClick={this.selectWorkDirectory.bind(this)}>
-            选择工作目录
-          </Button>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px',
             justifyContent: 'space-between'
           }}
         >
-          <span>源码路径：/src/main/java</span>
+          <span>项目地址：{this.state.path}</span>
+          <Button onClick={this.selectWorkDirectory.bind(this)} size='small'>
+            选择工作目录
+          </Button>
+        </div>
+        <div>源码路径：/src/main/java</div>
+        <div
+          style={{
+            marginTop: '16px'
+          }}
+        >
+          项目GAV参数：
         </div>
         <Input
-          name='groupId'
-          style={{ margin: 10 }}
           placeholder='groupId'
+          style={{
+            marginTop: '4px'
+          }}
           onChange={this.changeConfig.bind(this, 'groupId')}
           defaultValue={this.state.groupId}
           allowClear
         />
         <Input
-          name='artifactId'
-          style={{ margin: 10 }}
           placeholder='artifactId'
+          style={{
+            marginTop: '4px'
+          }}
           onChange={this.changeConfig.bind(this, 'artifactId')}
           defaultValue={this.state.artifactId}
           allowClear
         />
         <Input
           name='version'
-          style={{ margin: 10 }}
+          style={{
+            marginTop: '4px'
+          }}
           placeholder='version'
           onChange={this.changeConfig.bind(this, 'version')}
           defaultValue={this.state.version}
@@ -132,7 +132,9 @@ export default class ProjectSettingDailog extends Component {
         />
         <Input
           name='author'
-          style={{ margin: 10 }}
+          style={{
+            marginTop: '4px'
+          }}
           placeholder='author'
           onChange={this.changeConfig.bind(this, 'author')}
           defaultValue={this.state.author}
@@ -141,8 +143,7 @@ export default class ProjectSettingDailog extends Component {
         <div
           style={{
             display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            marginTop: '16px'
           }}
         >
           <div style={{ width: 150 }}>model路径：</div>
@@ -150,9 +151,7 @@ export default class ProjectSettingDailog extends Component {
         </div>
         <div
           style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            display: 'flex'
           }}
         >
           <div style={{ width: 150 }}>dto路径：</div>
@@ -160,9 +159,7 @@ export default class ProjectSettingDailog extends Component {
         </div>
         <div
           style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            display: 'flex'
           }}
         >
           <div style={{ width: 150 }}>service路径：</div>
@@ -170,9 +167,7 @@ export default class ProjectSettingDailog extends Component {
         </div>
         <div
           style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            display: 'flex'
           }}
         >
           <div style={{ width: 150 }}>serviceImpl路径：</div>
@@ -180,9 +175,7 @@ export default class ProjectSettingDailog extends Component {
         </div>
         <div
           style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            display: 'flex'
           }}
         >
           <div style={{ width: 150 }}>dao路径：</div>
@@ -190,9 +183,7 @@ export default class ProjectSettingDailog extends Component {
         </div>
         <div
           style={{
-            display: 'flex',
-            marginTop: '10px',
-            marginLeft: '10px'
+            display: 'flex'
           }}
         >
           <div style={{ width: 150 }}>daoImpl路径：</div>

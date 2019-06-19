@@ -24,6 +24,7 @@ export default class DataLoad {
   }
 
   static loadColumn (database, table) {
+    const mysqldb = new MySqlDriver()
     mysqldb.query(
       'Select TABLE_NAME,COLUMN_NAME ,DATA_TYPE,COLUMN_KEY,EXTRA,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA= ? and TABLE_NAME = ? ',
       [database, table],

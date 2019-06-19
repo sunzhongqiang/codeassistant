@@ -51,7 +51,6 @@ export default class DbTree extends Component {
    */
   showTable () {
     let tables = AppData.getTableList()
-    console.log('tables', tables)
     if (tables.length > 0) {
       let table = tables[0]
       let database = this.state.database

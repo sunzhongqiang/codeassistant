@@ -29,7 +29,7 @@ export default class CodeTab extends Component {
       this.setState({
         variableCode: code,
         currentKey: key,
-        filename: AppData.getJavaName() + '.txt'
+        variableFilename: AppData.getJavaName() + '.txt'
       })
     }
 
@@ -38,16 +38,16 @@ export default class CodeTab extends Component {
       this.setState({
         modelCode: code,
         currentKey: key,
-        filename: AppData.getJavaName() + '.java'
+        modelFilename: AppData.getJavaName() + '.java'
       })
     }
 
     if (key == 'dto') {
       let code = CodeGengerator.generatorDtoCode()
       this.setState({
-        modelCode: code,
+        dtoCode: code,
         currentKey: key,
-        filename: AppData.getJavaName() + 'Dto.java'
+        dtoFilename: AppData.getJavaName() + 'Dto.java'
       })
     }
     if (key == 'copy') {
@@ -55,7 +55,7 @@ export default class CodeTab extends Component {
       this.setState({
         copyDtoCode: code,
         currentKey: key,
-        filename: AppData.getJavaName() + 'Snipt.java'
+        copyFilename: AppData.getJavaName() + 'Snipt.java'
       })
     }
   }
@@ -75,28 +75,28 @@ export default class CodeTab extends Component {
           <CodePreview
             code={this.state.variableCode}
             moudle='variable'
-            filename={this.state.filename}
+            filename={this.state.variableFilename}
           />
         </TabPane>
         <TabPane tab='model code' key='model'>
           <CodePreview
             code={this.state.modelCode}
             moudle='model'
-            filename={this.state.filename}
+            filename={this.state.modelFilename}
           />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
           <CodePreview
-            code={this.state.modelCode}
+            code={this.state.dtoCode}
             moudle='dto'
-            filename={this.state.filename}
+            filename={this.state.dtoFilename}
           />
         </TabPane>
         <TabPane tab='copydto2model' key='copy'>
           <CodePreview
             code={this.state.copyDtoCode}
             moudle='snipt'
-            filename={this.state.filename}
+            filename={this.state.copyFilename}
           />
         </TabPane>
       </Tabs>

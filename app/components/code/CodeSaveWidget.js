@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 import { Button, message, Modal } from 'antd'
 import copy from 'copy-to-clipboard'
-import AppData from '../../constants/AppData'
-import eventbus from '../../eventbus/EventBus'
-import EventType from '../../eventbus/EventTyp'
 import PathUtils from '../../utils/PathUtils'
-const fs = require('fs')
+import FileSystemUtils from '../../utils/FileSystemUtils'
 const confirm = Modal.confirm
 
 export default class CodeSaveWidget extends Component {
   state = {
-    projectPath: ''
+    file: ''
   }
-
   componentDidMount () {
     this.initValue()
-    eventbus.on(EventType.PROJECT_CONFIG_CHANGE, this.initValue.bind(this))
-    eventbus.on(EventType.TABLE_DATA_CHANGE, this.initValue.bind(this))
+  }
+
+  componentWillReceiveProps () {
+    console.log('componentWillReceiveProps', arguments)
+    this.initValue()
   }
 
   initValue () {
@@ -35,7 +34,7 @@ export default class CodeSaveWidget extends Component {
 
   saveFile () {
     let self = this
-    if (this.existsFile()) {
+    if (FileSystemUtils.existFile(this.state.file)) {
       confirm({
         title: '文件已经存在',
         content: '否发要覆盖已经存在的文件',
@@ -52,19 +51,12 @@ export default class CodeSaveWidget extends Component {
   }
 
   directSave () {
-    let path = AppData.getProjectConfig('path') + this.props.path
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(AppData.getProjectConfig('path') + this.props.path)
-    }
-    let result = fs.writeFileSync(this.state.file, this.props.code)
+    let completePath = PathUtils.getPackagePath(this.props.moudle)
+    FileSystemUtils.mkdir(completePath)
+    let result = FileSystemUtils.saveCode(this.state.file, this.props.code)
     if (!result) {
       message.success('代码保存成功：' + this.state.file)
     }
-  }
-
-  existsFile () {
-    let filename = this.state.file
-    return fs.existsSync(filename)
   }
 
   render () {

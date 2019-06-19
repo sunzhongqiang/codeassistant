@@ -5,6 +5,7 @@ import EventType from '../../eventbus/EventTyp'
 import MySqlDriver from '../../service/mysqlDriver'
 import CodeUtils from '../../utils/CodeUtils'
 import AppData from '../../constants/AppData'
+import DataLoad from './DataLoad'
 
 const { TreeNode } = Tree
 const DirectoryTree = Tree.DirectoryTree
@@ -15,20 +16,15 @@ export default class DbTree extends Component {
   }
 
   componentDidMount () {
-    eventbus.on(EventType.DATABASE_CONFIG_CHANGE, this.reRenderTree.bind(this))
+    eventbus.on(EventType.DATABASE_CONFIG_CHANGE, () => DataLoad.loadDatabase())
+    eventbus.on(EventType.DATABASE_LIST_CHANGE, this.reRenderTree.bind(this))
+    eventbus.on(EventType.TABLE_LIST_CHANGE, this.showTable.bind(this))
   }
 
   reRenderTree () {
-    const mysqldb = new MySqlDriver()
-    mysqldb.query(
-      "select SCHEMA_NAME from information_schema.SCHEMATA where SCHEMA_NAME not  in('information_schema','mysql','performance_schema')",
-      this.showDatabaseName.bind(this)
-    )
-  }
-
-  showDatabaseName (data) {
+    let database = AppData.getDatabaseList()
     this.setState({
-      database: data
+      database: database
     })
   }
 
@@ -42,45 +38,33 @@ export default class DbTree extends Component {
     const mysqldb = new MySqlDriver()
     if (length === 2) {
       AppData.setDatabase(database)
-      mysqldb.query(
-        'select TABLE_NAME,TABLE_SCHEMA ,true as isNode from information_schema.TABLES where TABLE_SCHEMA = ? ',
-        [database],
-        this.showTable.bind(this, database)
-      )
+      DataLoad.loadTable(database)
     } else {
       AppData.setTableName(table)
-      mysqldb.query(
-        'Select TABLE_NAME,COLUMN_NAME ,DATA_TYPE,COLUMN_KEY,EXTRA,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA= ? and TABLE_NAME = ? ',
-        [database, table],
-        this.showColumn.bind(this)
-      )
+      DataLoad.loadColumn(database, table)
     }
-  }
-
-  showColumn (data) {
-    AppData.setColumnFields(data)
   }
 
   /**
    * 将表展示在对应的数据库中
-   * @param {数据库} database
    * @param {获得的数据库表} tables
    */
-  showTable (openDatabase, tables) {
-    let database = this.state.database
-    for (let item of database) {
-      if (item['SCHEMA_NAME'] === openDatabase) {
-        item['RowData'] = tables
+  showTable () {
+    let tables = AppData.getTableList()
+    console.log('tables', tables)
+    if (tables.length > 0) {
+      let table = tables[0]
+      let database = this.state.database
+      for (let item of database) {
+        if (item['SCHEMA_NAME'] === table['TABLE_SCHEMA']) {
+          item['RowData'] = tables
+          break
+        }
       }
-    }
-    this.setState(
-      {
+      this.setState({
         database: database
-      },
-      () => {
-        eventbus.fire(EventType.DATABASE_NAME_CHANGE)
-      }
-    )
+      })
+    }
   }
 
   render () {

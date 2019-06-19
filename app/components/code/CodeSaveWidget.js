@@ -4,6 +4,7 @@ import copy from 'copy-to-clipboard'
 import AppData from '../../constants/AppData'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import PathUtils from '../../utils/PathUtils'
 const fs = require('fs')
 const confirm = Modal.confirm
 
@@ -19,9 +20,9 @@ export default class CodeSaveWidget extends Component {
   }
 
   initValue () {
-    let projectPath = AppData.getProjectConfig('path')
+    let completePath = PathUtils.getPackagePath(this.props.moudle)
     this.setState({
-      file: projectPath + this.props.path + this.props.filename
+      file: completePath + '/' + this.props.filename
     })
   }
 

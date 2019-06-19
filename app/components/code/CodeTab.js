@@ -74,28 +74,28 @@ export default class CodeTab extends Component {
         <TabPane tab='当前变量' key='variable'>
           <CodePreview
             code={this.state.variableCode}
-            path='/variable/'
+            moudle='variable'
             filename={this.state.filename}
           />
         </TabPane>
         <TabPane tab='model code' key='model'>
           <CodePreview
             code={this.state.modelCode}
-            path='/model/'
+            moudle='model'
             filename={this.state.filename}
           />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
           <CodePreview
             code={this.state.modelCode}
-            path='/dto/'
+            moudle='dto'
             filename={this.state.filename}
           />
         </TabPane>
         <TabPane tab='copydto2model' key='copy'>
           <CodePreview
             code={this.state.copyDtoCode}
-            path='/snipt/'
+            moudle='snipt'
             filename={this.state.filename}
           />
         </TabPane>

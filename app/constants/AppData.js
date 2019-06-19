@@ -45,6 +45,26 @@ function setDatabase (database) {
   localStorage.setItem('database.database', database)
 }
 
+function setDatabaseList (data) {
+  localStorage.setItem('database.database.list', JSON.stringify(data))
+  eventbus.fire(EventType.DATABASE_LIST_CHANGE)
+}
+
+function getDatabaseList () {
+  let database = localStorage.getItem('database.database.list')
+  return JSON.parse(database)
+}
+
+function setTableList (data) {
+  localStorage.setItem('database.table.list', JSON.stringify(data))
+  eventbus.fire(EventType.TABLE_LIST_CHANGE)
+}
+
+function getTableList () {
+  let tables = localStorage.getItem('database.table.list')
+  return JSON.parse(tables)
+}
+
 function getTableName () {
   return localStorage.getItem('table')
 }
@@ -106,6 +126,12 @@ const AppData = {
   getAllProjectConfig: getAllProjectConfig,
   setProjectConfig: setProjectConfig,
   getProjectConfig: getProjectConfig,
+
+  setDatabaseList,
+  getDatabaseList,
+
+  setTableList,
+  getTableList,
 
   getDatabase: getDatabase,
   setDatabase: setDatabase,

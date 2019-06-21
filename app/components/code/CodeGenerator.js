@@ -91,7 +91,13 @@ export default class CodeGengerator {
   static generatorRepositoryCode () {
     let keyValue = {}
     const javaModel = AppData.getJavaName()
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = javaModel
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['comment'] = AppData.getTableComment()
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
 
     return TemplateEngin.generatorCodeByContent(repositoryTemplate, keyValue)

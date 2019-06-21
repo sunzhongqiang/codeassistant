@@ -2,7 +2,9 @@ const repositoryTemplate = `package {{=it.groupId}}.{{=it.artifactId}}.repositor
 import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
 
 /**
- * {{=it.model}}Repository: {{=it.comment}} 数据资源层 {{=it.date}}.
+ * {{=it.model}}Repository: {{=it.comment}} 数据资源层 
+ * 
+ * {{=it.date}}.
  * 
  * @author {{=it.author}}
  * @version {{=it.version}}

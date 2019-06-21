@@ -7,6 +7,7 @@ import variableTemplateContent from '../../template/variable'
 import dtoTemplateContent from '../../template/api/dto'
 import CodeUtils from '../../utils/CodeUtils'
 import copyModelTemplateContent from '../../template/api/dto2model'
+import repositoryTemplate from '../../template/api/repository'
 
 export default class CodeGengerator {
   /**
@@ -85,5 +86,14 @@ export default class CodeGengerator {
       copyModelTemplateContent,
       keyValue
     )
+  }
+
+  static generatorRepositoryCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+
+    return TemplateEngin.generatorCodeByContent(repositoryTemplate, keyValue)
   }
 }

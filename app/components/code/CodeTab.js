@@ -58,6 +58,14 @@ export default class CodeTab extends Component {
         copyFilename: AppData.getJavaName() + 'Snipt.java'
       })
     }
+    if (key == 'repository') {
+      let repositoryCode = CodeGengerator.generatorRepositoryCode()
+      this.setState({
+        repositoryCode,
+        currentKey: key,
+        repositoryFilename: AppData.getJavaName() + 'Repository.java'
+      })
+    }
   }
 
   refreshCode () {
@@ -97,6 +105,13 @@ export default class CodeTab extends Component {
             code={this.state.copyDtoCode}
             moudle='snipt'
             filename={this.state.copyFilename}
+          />
+        </TabPane>
+        <TabPane tab='repository' key='repository'>
+          <CodePreview
+            code={this.state.repositoryCode}
+            moudle='repository'
+            filename={this.state.repositoryFilename}
           />
         </TabPane>
       </Tabs>

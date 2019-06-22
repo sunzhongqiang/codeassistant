@@ -5,7 +5,9 @@ import EventType from '../../eventbus/EventTyp'
 import CodeGengerator from '../code/CodeGenerator'
 import TableColumn from './TableColumn'
 import Usage from './Usage'
-import CodeTab from '../code/CodeTab'
+import JavaCodeTab from '../code/JavaCodeTab'
+import AntdCodeTab from '../code/AntDCode'
+import CommonCodeTab from '../code/CommonCode'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -49,15 +51,17 @@ export default class ContentTab extends Component {
         <TabPane tab='字段信息' key='1'>
           <TableColumn />
         </TabPane>
-
+        <TabPane tab='通用代码' key='2'>
+          <CommonCodeTab />
+        </TabPane>
         <TabPane tab='Java代码' key='3'>
-          <CodeTab />
+          <JavaCodeTab />
         </TabPane>
         <TabPane tab='PC前端代码' key='4'>
-          <CodeTab />
+          <AntdCodeTab />
         </TabPane>
         <TabPane tab='App端Flutter代码' key='5'>
-          <CodeTab />
+          <AntdCodeTab />
         </TabPane>
       </Tabs>
     )

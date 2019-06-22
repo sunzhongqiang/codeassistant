@@ -8,31 +8,18 @@ import AppData from '../../constants/AppData'
 
 const { TabPane } = Tabs
 
-export default class CodeTab extends Component {
+export default class JavaCodeTab extends Component {
   state = {
     currentKey: 'variable'
   }
 
   componentDidMount () {
-    let code = CodeGengerator.generatorTemplateVariable()
-    this.setState({
-      variableCode: code,
-      filename: AppData.getJavaName() + '.txt'
-    })
     eventbus.on(EventType.TABLE_DATA_CHANGE, this.refreshCode.bind(this))
     eventbus.on(EventType.PROJECT_CONFIG_CHANGE, this.refreshCode.bind(this))
+    this.showCode('model')
   }
 
   showCode (key) {
-    if (key == 'variable') {
-      let code = CodeGengerator.generatorTemplateVariable()
-      this.setState({
-        variableCode: code,
-        currentKey: key,
-        variableFilename: AppData.getJavaName() + '.txt'
-      })
-    }
-
     if (key == 'model') {
       let code = CodeGengerator.generatorModelCode()
       this.setState({
@@ -123,13 +110,6 @@ export default class CodeTab extends Component {
         tabPosition='right'
         onChange={this.showCode.bind(this)}
       >
-        <TabPane tab='当前变量' key='variable'>
-          <CodePreview
-            code={this.state.variableCode}
-            moudle='variable'
-            filename={this.state.variableFilename}
-          />
-        </TabPane>
         <TabPane tab='model code' key='model'>
           <CodePreview
             code={this.state.modelCode}

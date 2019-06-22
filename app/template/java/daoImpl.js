@@ -78,26 +78,26 @@ public interface {{=it.model}}DaoImpl  extends SpringDataQueryDaoImpl<{{=it.mode
     return queryFieldsBySql(sb.toString(), params, pageable);
   }
 
-@Override 
-public {{=it.model}} findBy(String field,Object value){
-    StringBuilder sb=new StringBuilder("select model from {{=it.model}} model  where model.");
-    sb.append(field);
-    sb.append(" = :value ");
-    Map<String,Object> params = new HashMap<>(16);
-    params.put("value",value);
-    List<{{=it.model}}> result = queryByJpql(sb.toString(), params,0l,1l);
-    return result.isEmpty() ? null : result.get(0);
-}
+  @Override 
+  public {{=it.model}} findBy(String field,Object value){
+      StringBuilder sb=new StringBuilder("select model from {{=it.model}} model  where model.");
+      sb.append(field);
+      sb.append(" = :value ");
+      Map<String,Object> params = new HashMap<>(16);
+      params.put("value",value);
+      List<{{=it.model}}> result = queryByJpql(sb.toString(), params,0l,1l);
+      return result.isEmpty() ? null : result.get(0);
+  }
 
-@Override 
-public List<{{=it.model}}> findAllBy(String field,Object value){
-    StringBuilder sb=new StringBuilder("select model from {{=it.model}} model  where model.");
-    sb.append(field);
-    sb.append(" = :value ");
-    Map<String,Object> params = new HashMap<>(16);
-    params.put("value",value);
-    return queryByJpql(sb.toString(), params);
-}
+  @Override 
+  public List<{{=it.model}}> findAllBy(String field,Object value){
+      StringBuilder sb=new StringBuilder("select model from {{=it.model}} model  where model.");
+      sb.append(field);
+      sb.append(" = :value ");
+      Map<String,Object> params = new HashMap<>(16);
+      params.put("value",value);
+      return queryByJpql(sb.toString(), params);
+  }
   
 }
 `

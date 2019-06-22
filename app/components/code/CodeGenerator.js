@@ -1,17 +1,18 @@
 import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
 import TemplateEngin from '../template/TemplateEngin'
-import modelTemplateContent from '../../template/api/model'
+import modelTemplateContent from '../../template/java/model'
 import variableTemplateContent from '../../template/variable'
-import dtoTemplateContent from '../../template/api/dto'
+import dtoTemplateContent from '../../template/java/dto'
 import CodeUtils from '../../utils/CodeUtils'
-import copyModelTemplateContent from '../../template/api/dto2model'
-import repositoryTemplate from '../../template/api/repository'
-import daoTemplate from '../../template/api/dao'
-import daoImplTemplate from '../../template/api/daoImpl'
-import serviceTemplate from '../../template/api/service'
-import serviceImplTemplate from '../../template/api/serviceImpl'
-import controllerTemplate from '../../template/api/controller'
+import copyModelTemplateContent from '../../template/java/dto2model'
+import repositoryTemplate from '../../template/java/repository'
+import daoTemplate from '../../template/java/dao'
+import daoImplTemplate from '../../template/java/daoImpl'
+import serviceTemplate from '../../template/java/service'
+import serviceImplTemplate from '../../template/java/serviceImpl'
+import controllerTemplate from '../../template/java/controller'
+import jsonTemplateContent from '../../template/common/json'
 
 export default class CodeGengerator {
   /**
@@ -39,6 +40,13 @@ export default class CodeGengerator {
       variableTemplateContent,
       keyValue
     )
+  }
+
+  static generatorJson () {
+    let keyValue = {}
+
+    keyValue['fields'] = AppData.getJavaFields()
+    return TemplateEngin.generatorCodeByContent(jsonTemplateContent, keyValue)
   }
 
   /**

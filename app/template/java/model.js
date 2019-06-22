@@ -1,5 +1,5 @@
 const modelTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.model;
-
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

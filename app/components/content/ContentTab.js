@@ -53,6 +53,12 @@ export default class ContentTab extends Component {
         <TabPane tab='Java代码' key='3'>
           <CodeTab />
         </TabPane>
+        <TabPane tab='PC前端代码' key='4'>
+          <CodeTab />
+        </TabPane>
+        <TabPane tab='App端Flutter代码' key='5'>
+          <CodeTab />
+        </TabPane>
       </Tabs>
     )
   }

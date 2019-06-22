@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Tree } from 'antd'
+import { Tree, Button } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import MySqlDriver from '../../service/mysqlDriver'
-import CodeUtils from '../../utils/CodeUtils'
 import AppData from '../../constants/AppData'
 import DataLoad from './DataLoad'
 
@@ -19,7 +18,11 @@ export default class DbTree extends Component {
     eventbus.on(EventType.DATABASE_CONFIG_CHANGE, () => DataLoad.loadDatabase())
     eventbus.on(EventType.DATABASE_LIST_CHANGE, this.reRenderTree.bind(this))
     eventbus.on(EventType.TABLE_LIST_CHANGE, this.showTable.bind(this))
-    DataLoad.loadDatabase()
+    this.reRenderTree()
+  }
+
+  showDatabaseSetting () {
+    eventbus.fire(EventType.DATABASE_SETTING_SHOW, true)
   }
 
   reRenderTree () {
@@ -69,6 +72,24 @@ export default class DbTree extends Component {
   }
 
   render () {
+    // 如果数据没有初始化，则显示加载数据按钮
+    if (!Array.isArray(this.state.database)) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            height: 400,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Button onClick={this.showDatabaseSetting.bind(this)}>
+            设置数据库连接
+          </Button>
+        </div>
+      )
+    }
+    //
     let treeNode = []
     for (let item of this.state.database) {
       if (item['RowData']) {
@@ -105,7 +126,10 @@ export default class DbTree extends Component {
       }
     }
     return (
-      <DirectoryTree onSelect={this.treeAction.bind(this)} defaultExpandAll>
+      <DirectoryTree
+        onSelect={this.treeAction.bind(this)}
+        defaultExpandAll={false}
+      >
         {treeNode}
       </DirectoryTree>
     )

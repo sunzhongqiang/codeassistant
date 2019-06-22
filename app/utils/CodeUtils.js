@@ -69,4 +69,17 @@ export default class CodeUtils {
     }
     return modelType
   }
+
+  /**
+   * 获取当前字段列表的主键类型
+   * @param { 当前的字段列表} fields
+   */
+  static getPkType (fields) {
+    for (let field of fields) {
+      console.log(field['isPK'], field['type'])
+      if (field['isPK']) {
+        return field['type']
+      }
+    }
+  }
 }

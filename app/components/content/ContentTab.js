@@ -50,7 +50,7 @@ export default class ContentTab extends Component {
           <TableColumn />
         </TabPane>
 
-        <TabPane tab='代码' key='3'>
+        <TabPane tab='Java代码' key='3'>
           <CodeTab />
         </TabPane>
       </Tabs>

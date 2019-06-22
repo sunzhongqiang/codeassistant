@@ -10,7 +10,7 @@ import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
  * @version {{=it.version}}
  */
 
-public interface {{=it.model}}Repository extends JpaRepository<{{=it.model}}, Long> , {{=it.model}}Dao {
+public interface {{=it.model}}Repository extends JpaRepository<{{=it.model}}, {{=it.pkType}}> , {{=it.model}}Dao {
 
   
 }

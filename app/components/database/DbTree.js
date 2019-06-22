@@ -19,6 +19,7 @@ export default class DbTree extends Component {
     eventbus.on(EventType.DATABASE_CONFIG_CHANGE, () => DataLoad.loadDatabase())
     eventbus.on(EventType.DATABASE_LIST_CHANGE, this.reRenderTree.bind(this))
     eventbus.on(EventType.TABLE_LIST_CHANGE, this.showTable.bind(this))
+    DataLoad.loadDatabase()
   }
 
   reRenderTree () {

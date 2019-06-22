@@ -2,6 +2,9 @@ import AppData from '../../constants/AppData'
 import MySqlDriver from '../../service/mysqlDriver'
 
 export default class DataLoad {
+  /**
+   * 加载数据库数据
+   */
   static loadDatabase () {
     const mysqldb = new MySqlDriver()
     mysqldb.query(
@@ -12,6 +15,10 @@ export default class DataLoad {
     )
   }
 
+  /**
+   * 加载数据库的表
+   * @param {数据库} database
+   */
   static loadTable (database) {
     const mysqldb = new MySqlDriver()
     mysqldb.query(
@@ -23,6 +30,11 @@ export default class DataLoad {
     )
   }
 
+  /**
+   * 加载数据库表中的字段
+   * @param {数据库} database
+   * @param {表} table
+   */
   static loadColumn (database, table) {
     const mysqldb = new MySqlDriver()
     mysqldb.query(
@@ -34,6 +46,11 @@ export default class DataLoad {
     )
   }
 
+  /**
+   * 加载数据库表中的注释
+   * @param {数据库} database
+   * @param {数据库表} table
+   */
   static loadTableComment (database, table) {
     const mysqldb = new MySqlDriver()
     mysqldb.query(

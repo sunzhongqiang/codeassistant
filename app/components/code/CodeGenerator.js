@@ -13,6 +13,7 @@ import serviceTemplate from '../../template/java/service'
 import serviceImplTemplate from '../../template/java/serviceImpl'
 import controllerTemplate from '../../template/java/controller'
 import jsonTemplateContent from '../../template/common/json'
+import apiTemplateContent from '../../template/common/api'
 
 export default class CodeGengerator {
   /**
@@ -47,6 +48,16 @@ export default class CodeGengerator {
 
     keyValue['fields'] = AppData.getJavaFields()
     return TemplateEngin.generatorCodeByContent(jsonTemplateContent, keyValue)
+  }
+
+  static generatorApi () {
+    let keyValue = {}
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    return TemplateEngin.generatorCodeByContent(apiTemplateContent, keyValue)
   }
 
   /**

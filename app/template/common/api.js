@@ -1,10 +1,10 @@
 const apiTemplateContent = `
 {
-  'model_query':'/{{=it.artifactId}}/{{=it.modelVar}}/query',
-  'model_list':'/{{=it.artifactId}}/{{=it.modelVar}}/list',
-  'model_get':'/{{=it.artifactId}}/{{=it.modelVar}}/get',
-  'model_save':'/{{=it.artifactId}}/{{=it.modelVar}}/save',
-  'model_delete':'/{{=it.artifactId}}/{{=it.modelVar}}/delete'
+  '{{=it.modelVar}}_query':'/{{=it.artifactId}}/{{=it.modelVar}}/query',
+  '{{=it.modelVar}}_list':'/{{=it.artifactId}}/{{=it.modelVar}}/list',
+  '{{=it.modelVar}}_get':'/{{=it.artifactId}}/{{=it.modelVar}}/get',
+  '{{=it.modelVar}}_save':'/{{=it.artifactId}}/{{=it.modelVar}}/save',
+  '{{=it.modelVar}}_delete':'/{{=it.artifactId}}/{{=it.modelVar}}/delete'
 }
 
 `

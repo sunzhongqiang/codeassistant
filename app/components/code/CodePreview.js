@@ -10,7 +10,7 @@ export default class CodePreview extends Component {
           moudle={this.props.moudle}
           filename={this.props.filename}
         />
-        <div style={{ height: 550, overflow: 'scroll' }}>
+        <div style={{ height: 580, overflow: 'scroll' }}>
           <Highlight languages={['java']} className='java'>
             {this.props.code}
           </Highlight>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from './CodePreview'
+import ContentPreview from './ContentPreview'
 import CodeGengerator from './CodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import AppData from '../../constants/AppData'
 
 const { TabPane } = Tabs
 
@@ -24,16 +23,21 @@ export default class CommonCodeTab extends Component {
       let code = CodeGengerator.generatorTemplateVariable()
       this.setState({
         variableCode: code,
-        currentKey: key,
-        variableFilename: AppData.getJavaName() + '.txt'
+        currentKey: key
       })
     }
     if (key == 'json') {
       let jsonCode = CodeGengerator.generatorJson()
       this.setState({
         jsonCode,
-        currentKey: key,
-        variableFilename: AppData.getJavaName() + '.json'
+        currentKey: key
+      })
+    }
+    if (key == 'api') {
+      let apiCode = CodeGengerator.generatorApi()
+      this.setState({
+        apiCode,
+        currentKey: key
       })
     }
   }
@@ -50,25 +54,13 @@ export default class CommonCodeTab extends Component {
         onChange={this.showCode.bind(this)}
       >
         <TabPane tab='当前变量' key='variable'>
-          <CodePreview
-            code={this.state.variableCode}
-            moudle='variable'
-            filename={this.state.variableFilename}
-          />
+          <ContentPreview code={this.state.variableCode} />
         </TabPane>
         <TabPane tab='json' key='json'>
-          <CodePreview
-            code={this.state.jsonCode}
-            moudle='json'
-            filename={this.state.jsonFile}
-          />
+          <ContentPreview code={this.state.jsonCode} />
         </TabPane>
         <TabPane tab='api' key='api'>
-          <CodePreview
-            code={this.state.variableCode}
-            moudle='variable'
-            filename={this.state.variableFilename}
-          />
+          <ContentPreview code={this.state.apiCode} />
         </TabPane>
       </Tabs>
     )

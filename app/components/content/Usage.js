@@ -29,10 +29,6 @@ export default class Usage extends Component {
             </a>
           </li>
         </ul>
-        <webview
-          src='https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md'
-          style={{ display: 'inline-flex', width: '100%', height: '880px' }}
-        />
       </div>
     )
   }

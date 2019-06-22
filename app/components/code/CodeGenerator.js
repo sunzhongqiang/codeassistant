@@ -10,6 +10,7 @@ import repositoryTemplate from '../../template/api/repository'
 import daoTemplate from '../../template/api/dao'
 import daoImplTemplate from '../../template/api/daoImpl'
 import serviceTemplate from '../../template/api/service'
+import serviceImplTemplate from '../../template/api/serviceImpl'
 import controllerTemplate from '../../template/api/controller'
 
 export default class CodeGengerator {
@@ -118,11 +119,7 @@ export default class CodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['comment'] = AppData.getTableComment()
-
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
-    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
-    let fields = AppData.getJavaFields()
-    keyValue['pkType'] = CodeUtils.getPkType(fields)
 
     return TemplateEngin.generatorCodeByContent(daoTemplate, keyValue)
   }
@@ -141,7 +138,6 @@ export default class CodeGengerator {
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()
     keyValue['fields'] = fields
-    keyValue['pkType'] = CodeUtils.getPkType(fields)
 
     return TemplateEngin.generatorCodeByContent(daoImplTemplate, keyValue)
   }
@@ -155,7 +151,6 @@ export default class CodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['comment'] = AppData.getTableComment()
-
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()
@@ -191,11 +186,10 @@ export default class CodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['comment'] = AppData.getTableComment()
-
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()
-    keyValue['pkType'] = CodeUtils.getPkType(fields)
+    keyValue['pkField'] = CodeUtils.getPkField(fields)
 
     return TemplateEngin.generatorCodeByContent(controllerTemplate, keyValue)
   }

@@ -34,47 +34,49 @@ public interface {{=it.model}}DaoImpl  extends SpringDataQueryDaoImpl<{{=it.mode
     super({{=it.model}}.class);
   }
 
-/**
- * 分页查询相关信息，根据传入的bean类对象和分页对象page取得查询结果集List
- * @param {{=it.modelVar}}Dto 查询类
- * @param pageable 传入的分页对象
- * @return 符合条件的查询结果集
- * @author {{=it.author}}
- * 
- */
-@Override 
-public Page<{{=it.model}}> list({{=it.model}}Dto {{=it.modelVar}}Dto,Pageable pageable){
+  /**
+   * 分页查询相关信息，根据传入的bean类对象和分页对象page取得查询结果集List
+   * @param {{=it.modelVar}}Dto 查询类
+   * @param pageable 传入的分页对象
+   * @return 符合条件的查询结果集
+   * @author {{=it.author}}
+   * 
+   */
+  @Override 
+  public Page<{{=it.model}}> list({{=it.model}}Dto {{=it.modelVar}}Dto,Pageable pageable){
     StringBuilder sb=new StringBuilder("select model from {{=it.model}} model  where 1=1  ");
     Map<String,Object> params = new HashMap<>(16);
-{{~it.fields:field:index}}{{?field['type']=='String'}}
-if(StringUtils.isNotBlank({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}())){
-  sb.append(" and model.{{=field['name']}} like :{{=field['name']}} ");
-  params.put("{{=field['name']}}","%"+{{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}()+"%");
-}{{??}}
-if({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}()!=null){
-  sb.append(" and model.{{=field['name']}} = :{{=field['name']}} ");
-  params.put("{{=field['name']}}",{{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());
-}{{?}}
-{{~}}
+    {{~it.fields:field:index}}{{?field['type']=='String'}}
+    if(StringUtils.isNotBlank({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}())){
+      sb.append(" and model.{{=field['name']}} like :{{=field['name']}} ");
+      params.put("{{=field['name']}}","%"+{{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}()+"%");
+    }{{??}}
+    if({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}()!=null){
+      sb.append(" and model.{{=field['name']}} = :{{=field['name']}} ");
+      params.put("{{=field['name']}}",{{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());
+    }{{?}}
+    {{~}}
     return queryByJpql(sb.toString(), params, pageable);
-}
+  }
 
 
-@Override 
-public Page< Map<String,Object>> listBySql({{=it.model}}Dto Dto,Pageable pageable){
+  @Override 
+  public Page< Map<String,Object>> listBySql({{=it.model}}Dto Dto,Pageable pageable){
     StringBuilder sb=new StringBuilder("select {{~it.fields:field:index}}{{?index!=1}},{{?}}{{=field['column']}}{{~}} from {{=it.table}}  where 1=1  ");
     Map<Integer,Object> params = new HashMap<>(16);
-{{~it.fields:field:index}}{{?field['type']=='String'}}
-if(StringUtils.isNotBlank(Dto.get{{=field['firstLetterUpperName']}}())){
-  sb.append(" and {{=field['column']}} like ?{{=index}} ");
-  params.put({{=index}},"%"+Dto.get{{=field['firstLetterUpperName']}}()+"%");
-}
-{{??}}  sb.append(" and {{=field['column']}} like ?{{=index}} ");
-  params.put({{=index}},Dto.get{{=field['firstLetterUpperName']}}());
-{{?}}
-{{~}}
+    {{~it.fields:field:index}}{{?field['type']=='String'}}
+    if(StringUtils.isNotBlank(Dto.get{{=field['firstLetterUpperName']}}())){
+      sb.append(" and {{=field['column']}} like ?{{=index}} ");
+      params.put({{=index}},"%"+Dto.get{{=field['firstLetterUpperName']}}()+"%");
+    }
+    {{??}}if({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}()!=null){
+      sb.append(" and {{=field['column']}} like ?{{=index}} ");
+      params.put({{=index}},Dto.get{{=field['firstLetterUpperName']}}());
+    }
+    {{?}}
+    {{~}}
     return queryFieldsBySql(sb.toString(), params, pageable);
-}
+  }
 
 @Override 
 public {{=it.model}} findBy(String field,Object value){

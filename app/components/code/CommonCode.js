@@ -53,7 +53,7 @@ export default class CommonCodeTab extends Component {
         tabPosition='right'
         onChange={this.showCode.bind(this)}
       >
-        <TabPane tab='当前变量' key='variable'>
+        <TabPane tab='工作变量' key='variable'>
           <ContentPreview code={this.state.variableCode} />
         </TabPane>
         <TabPane tab='json' key='json'>

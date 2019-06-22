@@ -66,6 +66,50 @@ export default class CodeTab extends Component {
         repositoryFilename: AppData.getJavaName() + 'Repository.java'
       })
     }
+
+    if (key == 'dao') {
+      let daoCode = CodeGengerator.generatorDaoCode()
+      this.setState({
+        daoCode,
+        currentKey: key,
+        daoFilename: AppData.getJavaName() + 'Dao.java'
+      })
+    }
+
+    if (key == 'daoImpl') {
+      let daoImplCode = CodeGengerator.generatorDaoImplCode()
+      this.setState({
+        daoImplCode,
+        currentKey: key,
+        daoImplFilename: AppData.getJavaName() + 'DaoImpl.java'
+      })
+    }
+    if (key == 'service') {
+      let serviceCode = CodeGengerator.generatorServiceCode()
+      this.setState({
+        serviceCode,
+        currentKey: key,
+        daoFilename: AppData.getJavaName() + 'Service.java'
+      })
+    }
+
+    if (key == 'serviceImpl') {
+      let serviceImplCode = CodeGengerator.generatorServiceImplCode()
+      this.setState({
+        serviceImplCode,
+        currentKey: key,
+        daoFilename: AppData.getJavaName() + 'ServiceImpl.java'
+      })
+    }
+
+    if (key == 'controller') {
+      let controllerCode = CodeGengerator.generatorControllerCode()
+      this.setState({
+        controllerCode,
+        currentKey: key,
+        daoFilename: AppData.getJavaName() + 'Controller.java'
+      })
+    }
   }
 
   refreshCode () {
@@ -112,6 +156,41 @@ export default class CodeTab extends Component {
             code={this.state.repositoryCode}
             moudle='repository'
             filename={this.state.repositoryFilename}
+          />
+        </TabPane>
+        <TabPane tab='dao' key='dao'>
+          <CodePreview
+            code={this.state.daoCode}
+            moudle='dao'
+            filename={this.state.daoFilename}
+          />
+        </TabPane>
+        <TabPane tab='daoImpl' key='daoImpl'>
+          <CodePreview
+            code={this.state.daoImplCode}
+            moudle='daoImpl'
+            filename={this.state.daoImplFilename}
+          />
+        </TabPane>
+        <TabPane tab='service' key='service'>
+          <CodePreview
+            code={this.state.serviceCode}
+            moudle='service'
+            filename={this.state.serviceFilename}
+          />
+        </TabPane>
+        <TabPane tab='serviceImpl' key='serviceImpl'>
+          <CodePreview
+            code={this.state.serviceImplCode}
+            moudle='serviceImpl'
+            filename={this.state.serviceImplFilename}
+          />
+        </TabPane>
+        <TabPane tab='controller' key='controller'>
+          <CodePreview
+            code={this.state.controllerCode}
+            moudle='controller'
+            filename={this.state.controllerFilename}
           />
         </TabPane>
       </Tabs>

@@ -1,4 +1,4 @@
-const daoTemplate = `package {{=it.groupId}}.{{=it.artifactId}}.dao;
+const serviceTemplate = `package {{=it.groupId}}.{{=it.artifactId}}.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +23,4 @@ public interface {{=it.model}}Dao extends SpringDataQueryDao<{{=it.model}}> {
 }
 `
 
-export default daoTemplate
+export default serviceTemplate

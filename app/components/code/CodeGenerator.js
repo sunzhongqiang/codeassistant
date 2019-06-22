@@ -1,4 +1,3 @@
-import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
 import TemplateEngin from '../template/TemplateEngin'
@@ -8,6 +7,10 @@ import dtoTemplateContent from '../../template/api/dto'
 import CodeUtils from '../../utils/CodeUtils'
 import copyModelTemplateContent from '../../template/api/dto2model'
 import repositoryTemplate from '../../template/api/repository'
+import daoTemplate from '../../template/api/dao'
+import daoImplTemplate from '../../template/api/daoImpl'
+import serviceTemplate from '../../template/api/service'
+import controllerTemplate from '../../template/api/controller'
 
 export default class CodeGengerator {
   /**
@@ -106,5 +109,94 @@ export default class CodeGengerator {
     return TemplateEngin.generatorCodeByContent(repositoryTemplate, keyValue)
   }
 
-  static generatorDaoCode () {}
+  static generatorDaoCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    let fields = AppData.getJavaFields()
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
+
+    return TemplateEngin.generatorCodeByContent(daoTemplate, keyValue)
+  }
+
+  static generatorDaoImplCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    let fields = AppData.getJavaFields()
+    keyValue['fields'] = fields
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
+
+    return TemplateEngin.generatorCodeByContent(daoImplTemplate, keyValue)
+  }
+
+  static generatorServiceCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    let fields = AppData.getJavaFields()
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
+
+    return TemplateEngin.generatorCodeByContent(serviceTemplate, keyValue)
+  }
+
+  static generatorServiceImplCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    let fields = AppData.getJavaFields()
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
+
+    return TemplateEngin.generatorCodeByContent(serviceImplTemplate, keyValue)
+  }
+
+  static generatorControllerCode () {
+    let keyValue = {}
+    const javaModel = AppData.getJavaName()
+    keyValue['model'] = javaModel
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    let fields = AppData.getJavaFields()
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
+
+    return TemplateEngin.generatorCodeByContent(controllerTemplate, keyValue)
+  }
 }

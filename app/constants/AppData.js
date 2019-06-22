@@ -91,6 +91,7 @@ function getColumnFields () {
 function setColumnFields (columnFields) {
   let json = JSON.stringify(columnFields)
   localStorage.setItem('table.column', json)
+  setJavaFields()
   eventbus.fire(EventType.TABLE_DATA_CHANGE)
 }
 
@@ -102,7 +103,7 @@ function getJavaName () {
   return null
 }
 
-function getJavaFields () {
+function setJavaFields () {
   let tableFields = getColumnFields()
   let modelFields = []
   if (tableFields && Array.isArray(tableFields)) {
@@ -124,7 +125,13 @@ function getJavaFields () {
       modelFields.push(modelField)
     }
   }
-  return modelFields
+  let json = JSON.stringify(modelFields)
+  localStorage.setItem('java.field.list', json)
+}
+
+function getJavaFields () {
+  let modelFields = localStorage.getItem('java.field.list')
+  return JSON.parse(modelFields)
 }
 
 const AppData = {

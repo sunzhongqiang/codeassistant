@@ -1,11 +1,15 @@
 const modelTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.model;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 /**
 * {{=it.model}}: {{=it.comment}} 数据领域模型.
@@ -24,7 +28,7 @@ public class {{=it.model}} {
   {{? field['isPK'] }}@Id{{? field['increment']}}
   @GeneratedValue(strategy = GenerationType.IDENTITY){{?}}{{?}}{{? field['type']=='Date' }}@Temporal(TemporalType.TIMESTAMP){{?}}
   @Column(name="{{=field['column']}}",columnDefinition="COMMENT '{{=field['comment']}}'")
-  private {{=field['type']}} {{=field['name']}}{{~}}
+  private {{=field['type']}} {{=field['name']}}{{~}};
 
 {{~it.fields: field:index}}
   /**

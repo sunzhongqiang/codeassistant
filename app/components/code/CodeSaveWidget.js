@@ -71,7 +71,7 @@ export default class CodeSaveWidget extends Component {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div>保存路径：</div>
+          <div>路径：</div>
           <div style={{ marginLeft: 4 }}>{this.state.file}</div>
         </div>
         <div>

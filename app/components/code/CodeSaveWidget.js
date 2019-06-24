@@ -75,11 +75,8 @@ export default class CodeSaveWidget extends Component {
           <div style={{ marginLeft: 4 }}>{this.state.file}</div>
         </div>
         <div>
-          <Button shape='circle' icon='reload' />
-          <Button style={{ margin: 8 }} onClick={this.copyCode.bind(this)}>
-            复制代码
-          </Button>
-          <Button onClick={this.saveFile.bind(this)}>保存</Button>
+          <Button icon='copy' onClick={this.copyCode.bind(this)} />
+          <Button icon='save' onClick={this.saveFile.bind(this)} />
         </div>
       </div>
     )

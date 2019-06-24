@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import com.linshang.balance.common.ResultData;
 import {{=it.groupId}}.{{=it.artifactId}}.service.{{=it.model}}Service;
 import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
-import {{=it.groupId}}.{{=it.artifactId}}.condition.{{=it.model}}Condition;
+import {{=it.groupId}}.{{=it.artifactId}}.condition.{{=it.model}}Dto;
 
 
 /**
@@ -41,7 +42,7 @@ public class {{=it.model}}Controller {
    * 跳转至列表页面
    * @return 返回页面以及页面模型
    */
-  @RequestMapping("/{{=it.artifactId}}/{{=it.modelVar}}/list")
+  @GetMapping("/{{=it.artifactId}}/{{=it.modelVar}}/list")
   public ResultData list(){
       log.info("{{=it.comment}}列表查询");
       ResultData result = new ResultData(true,"{{=it.comment}}列表查询");
@@ -53,7 +54,7 @@ public class {{=it.model}}Controller {
   /**
    * 加载表格数据 用户
    * 
-   * @param {{=it.modelVar}}Condition
+   * @param {{=it.modelVar}}Dto
    *            用户查询参数
    * @param pageable
    *            分页参数
@@ -61,9 +62,9 @@ public class {{=it.model}}Controller {
    */
   @RequestMapping("/{{=it.artifactId}}/{{=it.modelVar}}/gridData")
   @ResponseBody
-  public  Page<{{=it.model}}> loadList({{=it.model}}Condition {{=it.modelVar}}Condition, Pageable pageable){
+  public  Page<{{=it.model}}> loadList({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable){
       log.info("获取{{=it.comment}}列表数据");
-      Page<{{=it.model}}> {{=it.modelVar}}Page = {{=it.modelVar}}Service.list({{=it.modelVar}}Condition,pageable);
+      Page<{{=it.model}}> {{=it.modelVar}}Page = {{=it.modelVar}}Service.list({{=it.modelVar}}Dto,pageable);
       return {{=it.modelVar}}Page;
   }
   

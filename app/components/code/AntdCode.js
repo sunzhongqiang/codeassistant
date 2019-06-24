@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from './CodePreview'
+import CodePreview from './CommonCodePreview'
 import CodeGengerator from './CodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'

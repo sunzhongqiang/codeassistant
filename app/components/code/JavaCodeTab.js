@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from './CodePreview'
-import CodeGengerator from './CodeGenerator'
+import CodePreview from './CommonCodePreview'
+import JavaCodeGenerator from './JavaCodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
@@ -21,7 +21,7 @@ export default class JavaCodeTab extends Component {
 
   showCode (key) {
     if (key == 'model') {
-      let code = CodeGengerator.generatorModelCode()
+      let code = JavaCodeGenerator.generatorModelCode()
       this.setState({
         modelCode: code,
         currentKey: key,
@@ -30,7 +30,7 @@ export default class JavaCodeTab extends Component {
     }
 
     if (key == 'dto') {
-      let code = CodeGengerator.generatorDtoCode()
+      let code = JavaCodeGenerator.generatorDtoCode()
       this.setState({
         dtoCode: code,
         currentKey: key,
@@ -38,7 +38,7 @@ export default class JavaCodeTab extends Component {
       })
     }
     if (key == 'copy') {
-      let code = CodeGengerator.generatorCopyCode()
+      let code = JavaCodeGenerator.generatorCopyCode()
       this.setState({
         copyDtoCode: code,
         currentKey: key,
@@ -46,7 +46,7 @@ export default class JavaCodeTab extends Component {
       })
     }
     if (key == 'repository') {
-      let repositoryCode = CodeGengerator.generatorRepositoryCode()
+      let repositoryCode = JavaCodeGenerator.generatorRepositoryCode()
       this.setState({
         repositoryCode,
         currentKey: key,
@@ -55,7 +55,7 @@ export default class JavaCodeTab extends Component {
     }
 
     if (key == 'dao') {
-      let daoCode = CodeGengerator.generatorDaoCode()
+      let daoCode = JavaCodeGenerator.generatorDaoCode()
       this.setState({
         daoCode,
         currentKey: key,
@@ -64,7 +64,7 @@ export default class JavaCodeTab extends Component {
     }
 
     if (key == 'daoImpl') {
-      let daoImplCode = CodeGengerator.generatorDaoImplCode()
+      let daoImplCode = JavaCodeGenerator.generatorDaoImplCode()
       this.setState({
         daoImplCode,
         currentKey: key,
@@ -72,7 +72,7 @@ export default class JavaCodeTab extends Component {
       })
     }
     if (key == 'service') {
-      let serviceCode = CodeGengerator.generatorServiceCode()
+      let serviceCode = JavaCodeGenerator.generatorServiceCode()
       this.setState({
         serviceCode,
         currentKey: key,
@@ -81,7 +81,7 @@ export default class JavaCodeTab extends Component {
     }
 
     if (key == 'serviceImpl') {
-      let serviceImplCode = CodeGengerator.generatorServiceImplCode()
+      let serviceImplCode = JavaCodeGenerator.generatorServiceImplCode()
       this.setState({
         serviceImplCode,
         currentKey: key,
@@ -90,7 +90,7 @@ export default class JavaCodeTab extends Component {
     }
 
     if (key == 'controller') {
-      let controllerCode = CodeGengerator.generatorControllerCode()
+      let controllerCode = JavaCodeGenerator.generatorControllerCode()
       this.setState({
         controllerCode,
         currentKey: key,

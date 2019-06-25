@@ -141,7 +141,7 @@ export default class JavaCodeTab extends Component {
         <TabPane tab='daoImpl' key='daoImpl'>
           <CodePreview
             code={this.state.daoImplCode}
-            moudle='daoImpl'
+            moudle='dao.impl'
             filename={this.state.daoImplFilename}
           />
         </TabPane>

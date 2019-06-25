@@ -106,7 +106,7 @@ export default class JavaCodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['comment'] = AppData.getTableComment()
-
+    keyValue['table'] = AppData.getTableName()
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()

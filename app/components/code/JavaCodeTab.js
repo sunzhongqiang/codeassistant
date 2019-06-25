@@ -163,14 +163,14 @@ export default class JavaCodeTab extends Component {
         <TabPane tab='serviceImpl' key='serviceImpl'>
           <CodePreview
             code={this.state.serviceImplCode}
-            moudle='serviceImpl'
+            moudle='service.impl'
             filename={this.state.serviceImplFilename}
           />
         </TabPane>
         <TabPane tab='controller' key='controller'>
           <CodePreview
             code={this.state.controllerCode}
-            moudle='controller'
+            moudle='web.controller'
             filename={this.state.controllerFilename}
           />
         </TabPane>

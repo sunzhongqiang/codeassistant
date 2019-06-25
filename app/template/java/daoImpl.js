@@ -57,7 +57,7 @@ public class {{=it.model}}DaoImpl extends SpringDataQueryDaoImpl<{{=it.model}}> 
 
   @Override 
   public Page<Map<String, Object>> listBySql({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable) {
-    StringBuilder sb = new StringBuilder("select {{~it.fields:field:index}}{{?index != 1}}, {{?}}{{=field['column']}}{{~}} from {{=it.table}}  where 1=1  ");
+    StringBuilder sb = new StringBuilder("select {{~it.fields:field:index}}{{?index != 0}}, {{?}}{{=field['column']}}{{~}} from {{=it.table}}  where 1=1  ");
     Map<Integer, Object> params = new HashMap<>(16);
     {{~it.fields:field:index}}{{?field['type'] == 'String'}}
     if (StringUtils.isNotBlank({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}())) {

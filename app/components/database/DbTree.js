@@ -39,7 +39,6 @@ export default class DbTree extends Component {
     let database = data[1]
     let table = data[3]
 
-    const mysqldb = new MySqlDriver()
     if (length === 2) {
       AppData.setDatabase(database)
       DataLoad.loadTable(database)
@@ -47,6 +46,7 @@ export default class DbTree extends Component {
       AppData.setTableName(table)
       DataLoad.loadColumn(database, table)
       DataLoad.loadTableComment(database, table)
+      DataLoad.loadMockData(table)
     }
   }
 

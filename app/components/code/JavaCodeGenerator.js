@@ -86,6 +86,7 @@ export default class JavaCodeGengerator {
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     keyValue['groupId'] = AppData.getProjectConfig('groupId')
     keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
     keyValue['version'] = AppData.getProjectConfig('version')
@@ -162,6 +163,7 @@ export default class JavaCodeGengerator {
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()
     keyValue['pkField'] = CodeUtils.getPkField(fields)
+    keyValue['fields'] = fields
 
     return TemplateEngin.generatorCodeByContent(controllerTemplate, keyValue)
   }

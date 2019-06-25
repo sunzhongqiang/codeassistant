@@ -7,10 +7,8 @@ const EventType = {
   TABLE_DATA_CHANGE: 'table_data_change',
   TABLE_COMMENT_CHANGE: 'table_comment_change',
 
-  PROJECT_SETTING_SHOW: 'project_setting_show',
-  PROJECT_CONFIG_CHANGE: 'project_config_change',
-
-  CODE_DATA_CHANGE: 'code_data_change'
+  PROJECT_SETTING_SHOW: 'app-setting-project-show',
+  PROJECT_CONFIG_CHANGE: 'app-data-project-config-change'
 }
 
 export default EventType

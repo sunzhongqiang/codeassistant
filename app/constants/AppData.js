@@ -16,6 +16,12 @@ function getAllDatabaseConfig () {
   databaseConfig['port'] = getDatabaseConfig('port')
   databaseConfig['user'] = getDatabaseConfig('user')
   databaseConfig['password'] = getDatabaseConfig('password')
+  let database = getDatabase()
+  if (database) {
+    databaseConfig['database'] = database
+  } else {
+    delete databaseConfig['database']
+  }
   return databaseConfig
 }
 
@@ -134,6 +140,20 @@ function getJavaFields () {
   return JSON.parse(modelFields)
 }
 
+function setMockData (data) {
+  console.log('data is ', data)
+  if (data && data.length > 0) {
+    console.log('set mock action')
+    let json = JSON.stringify(data[0])
+    localStorage.setItem('mock.table.data', json)
+  }
+}
+
+function getMockData () {
+  let data = localStorage.getItem('mock.table.data')
+  return JSON.parse(data)
+}
+
 const AppData = {
   getAllDatabaseConfig: getAllDatabaseConfig,
   setDatabaseConfig: setDatabaseConfig,
@@ -151,6 +171,19 @@ const AppData = {
 
   setTableComment,
   getTableComment,
+
+  getMockData,
+  getJavaMockData: function () {
+    let data = localStorage.getItem('mock.table.data')
+    let json = JSON.parse(data)
+    let result = {}
+    for (let key in json) {
+      let fieldName = CodeUtils.littleCamelCase(key)
+      result[fieldName] = json[key]
+    }
+    return result
+  },
+  setMockData,
 
   getDatabase: getDatabase,
   setDatabase: setDatabase,

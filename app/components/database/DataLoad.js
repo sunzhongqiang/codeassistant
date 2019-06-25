@@ -57,11 +57,21 @@ export default class DataLoad {
       'select TABLE_NAME,TABLE_COMMENT,TABLE_ROWS,AUTO_INCREMENT from information_schema.`TABLES` where TABLE_SCHEMA = ? and TABLE_NAME =? ',
       [database, table],
       data => {
-        console.log('tablecomment', data)
         if (data.length > 0) {
           AppData.setTableComment(data[0]['TABLE_COMMENT'])
         }
       }
     )
+  }
+
+  static loadMockData (table) {
+    const mysqldb = new MySqlDriver()
+    mysqldb.query(`select * from ${table} limit 1`, [], data => {
+      console.log('mock data', data)
+      if (data.length > 0) {
+        console.log('setMockdata')
+        AppData.setMockData(data)
+      }
+    })
   }
 }

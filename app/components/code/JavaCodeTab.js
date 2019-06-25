@@ -76,7 +76,7 @@ export default class JavaCodeTab extends Component {
       this.setState({
         serviceCode,
         currentKey: key,
-        daoFilename: AppData.getJavaName() + 'Service.java'
+        serviceFilename: AppData.getJavaName() + 'Service.java'
       })
     }
 
@@ -85,7 +85,7 @@ export default class JavaCodeTab extends Component {
       this.setState({
         serviceImplCode,
         currentKey: key,
-        daoFilename: AppData.getJavaName() + 'ServiceImpl.java'
+        serviceImplFilename: AppData.getJavaName() + 'ServiceImpl.java'
       })
     }
 
@@ -94,7 +94,7 @@ export default class JavaCodeTab extends Component {
       this.setState({
         controllerCode,
         currentKey: key,
-        daoFilename: AppData.getJavaName() + 'Controller.java'
+        controllerFilename: AppData.getJavaName() + 'Controller.java'
       })
     }
   }
@@ -131,13 +131,6 @@ export default class JavaCodeTab extends Component {
             filename={this.state.copyFilename}
           />
         </TabPane>
-        <TabPane tab='repository' key='repository'>
-          <CodePreview
-            code={this.state.repositoryCode}
-            moudle='repository'
-            filename={this.state.repositoryFilename}
-          />
-        </TabPane>
         <TabPane tab='dao' key='dao'>
           <CodePreview
             code={this.state.daoCode}
@@ -152,6 +145,14 @@ export default class JavaCodeTab extends Component {
             filename={this.state.daoImplFilename}
           />
         </TabPane>
+        <TabPane tab='repository' key='repository'>
+          <CodePreview
+            code={this.state.repositoryCode}
+            moudle='repository'
+            filename={this.state.repositoryFilename}
+          />
+        </TabPane>
+
         <TabPane tab='service' key='service'>
           <CodePreview
             code={this.state.serviceCode}

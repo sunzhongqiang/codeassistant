@@ -32,6 +32,7 @@ public interface {{=it.model}}Dao extends SpringDataQueryDao<{{=it.model}}> {
    * 不分页查询相关信息，根据传入的model类对象取得查询结果集List.
    * 
    * @param {{=it.modelVar}}Dto 查询类
+   * @param pageable 传入的分页对象
    * @return 符合条件的查询结果集
    */
   Page<Map<String, Object>> listBySql({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable);

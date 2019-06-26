@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
  * @author {{=it.author}}
  * @version {{=it.version}}
  */
-
 public interface {{=it.model}}Service extends BaseService<{{=it.model}}, {{=it.pkType }}> {
 
   /**

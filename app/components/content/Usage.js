@@ -14,10 +14,18 @@ export default class Usage extends Component {
         <ul>
           <li>
             <a
+              href='https://github.com/sunzhongqiang/CodeGuide/blob/master/docs/Java.md'
+              target='_blank'
+            >
+              Java代码风格
+            </a>
+          </li>
+          <li>
+            <a
               href='https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md'
               target='_blank'
             >
-              遵循的Java代码风格
+              API架构风格
             </a>
           </li>
           <li>
@@ -25,7 +33,7 @@ export default class Usage extends Component {
               href='http://note.youdao.com/noteshare?id=9ecb2f953f82a823c799a9300bb7fa14'
               target='_blank'
             >
-              遵循的前端代码风格
+              前端代码风格
             </a>
           </li>
         </ul>

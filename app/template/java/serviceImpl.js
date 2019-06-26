@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.stereotype.Service;
 /**
  * {{=it.model}}ServiceImpl: {{=it.comment}} 业务服务层实现.
  * 
@@ -21,7 +21,7 @@ import org.springframework.data.domain.Pageable;
  * @author {{=it.author}}
  * @version {{=it.version}}
  */
-
+@Service
 public class {{=it.model}}ServiceImpl extends BaseServiceImpl<{{=it.model}}, {{=it.pkType}}> implements {{=it.model}}Service {
 
   private Log log = LogFactory.getLog(this.getClass());

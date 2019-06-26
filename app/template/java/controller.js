@@ -7,6 +7,7 @@ import com.mmk.common.web.ResultData;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,14 +35,16 @@ public class {{=it.model}}Controller {
 
   /**
    * 跳转至列表页面.
-   * 
-   * @return 返回页面以及页面模型
+   *
+   * @param {{=it.modelVar}}Dto 查询参数
+   * @param pageable 分页参数
+   * @return 返回分页数据
    */
   @GetMapping("/{{=it.modelVar}}")
-  public ResultData list() {
+  public ResultData list({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable) {
     log.info("{{=it.comment}}列表查询");
     ResultData result = new ResultData(true,"{{=it.comment}}列表查询");
-    result.addData("result", {{=it.modelVar}}Service.findAll());
+    result.addData("result", {{=it.modelVar}}Service.list({{=it.modelVar}}Dto, pageable));
     return  result;
   }
   
@@ -105,8 +108,7 @@ public class {{=it.model}}Controller {
   public ResultData delete(@PathVariable {{=it.pkField['type']}} id) {
     log.info("{{=it.comment}}删除");
     try {
-      {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Service.find(id);
-      {{=it.modelVar}}Service.delete({{=it.modelVar}});
+      {{=it.modelVar}}Service.deleteById({{=it.modelVar}});
     } catch (Exception e) {
       log.error(e.getMessage(), e);
       return new ResultData(false, "删除失败");

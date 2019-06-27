@@ -17,7 +17,14 @@ export default class Usage extends Component {
               href='https://github.com/sunzhongqiang/CodeGuide/blob/master/docs/Java.md'
               target='_blank'
             >
-              Java代码风格
+              Java代码风格： [
+              <a
+                href='https://github.com/sunzhongqiang/CodeGuide/blob/master/docs/Java.md'
+                target='_blank'
+              >
+                https://github.com/sunzhongqiang/CodeGuide/blob/master/docs/Java.md
+              </a>
+              ]
             </a>
           </li>
           <li>
@@ -25,7 +32,14 @@ export default class Usage extends Component {
               href='https://github.com/sunzhongqiang/gene/blob/master/README.md'
               target='_blank'
             >
-              基础代码介绍
+              基础代码介绍： [
+              <a
+                href='https://github.com/sunzhongqiang/gene/blob/master/README.md'
+                target='_blank'
+              >
+                https://github.com/sunzhongqiang/gene/blob/master/README.md
+              </a>
+              ]
             </a>
           </li>
           <li>
@@ -33,7 +47,14 @@ export default class Usage extends Component {
               href='https://github.com/sunzhongqiang/common-web/blob/master/README.md'
               target='_blank'
             >
-              common-web介绍
+              common-web介绍: [
+              <a
+                href='https://github.com/sunzhongqiang/common-web/blob/master/README.md'
+                target='_blank'
+              >
+                https://github.com/sunzhongqiang/common-web/blob/master/README.md
+              </a>
+              ]
             </a>
           </li>
           <li>
@@ -41,7 +62,14 @@ export default class Usage extends Component {
               href='https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md'
               target='_blank'
             >
-              API架构风格
+              API架构风格： [
+              <a
+                href='https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md'
+                target='_blank'
+              >
+                https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md
+              </a>
+              ]
             </a>
           </li>
           <li>
@@ -49,7 +77,14 @@ export default class Usage extends Component {
               href='http://note.youdao.com/noteshare?id=9ecb2f953f82a823c799a9300bb7fa14'
               target='_blank'
             >
-              前端代码风格
+              前端代码风格： [
+              <a
+                href='http://note.youdao.com/noteshare?id=9ecb2f953f82a823c799a9300bb7fa14'
+                target='_blank'
+              >
+                http://note.youdao.com/noteshare?id=9ecb2f953f82a823c799a9300bb7fa14
+              </a>
+              ]
             </a>
           </li>
         </ul>

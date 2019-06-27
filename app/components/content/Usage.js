@@ -22,6 +22,22 @@ export default class Usage extends Component {
           </li>
           <li>
             <a
+              href='https://github.com/sunzhongqiang/gene/blob/master/README.md'
+              target='_blank'
+            >
+              基础代码介绍
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://github.com/sunzhongqiang/common-web/blob/master/README.md'
+              target='_blank'
+            >
+              common-web介绍
+            </a>
+          </li>
+          <li>
+            <a
               href='https://github.com/sunzhongqiang/JavaCodeStyle/blob/master/README.md'
               target='_blank'
             >

@@ -7,6 +7,7 @@ import com.mmk.common.web.ResultData;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,9 +44,8 @@ public class {{=it.model}}Controller {
   @GetMapping("/{{=it.modelVar}}")
   public ResultData list({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable) {
     log.info("{{=it.comment}}列表查询");
-    ResultData result = new ResultData(true,"{{=it.comment}}列表查询");
-    result.addData("result", {{=it.modelVar}}Service.list({{=it.modelVar}}Dto, pageable));
-    return  result;
+    Page<{{=it.model}}> {{=it.modelVar}}Page = {{=it.modelVar}}Service.list({{=it.modelVar}}Dto, pageable);
+    return  ResultData.SUCCESS("{{=it.comment}}列表查询").content({{=it.modelVar}}Page);
   }
   
   
@@ -71,15 +71,14 @@ public class {{=it.model}}Controller {
       if ({{=it.modelVar}} == null) {
         {{=it.modelVar}} = new {{=it.model}}();
       }
-      
       {{~it.fields: field:index}}
       {{=it.modelVar}}.set{{=field['firstLetterUpperName']}}({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());{{~}}
       {{=it.modelVar}}Service.save({{=it.modelVar}});
     } catch (Exception e) {
       log.error(e.getMessage(),e);
-      return new ResultData(false,"{{=it.comment}}保存失败");
+      return ResultData.ERROR("{{=it.comment}}保存失败");
     }
-    return new ResultData(true, "{{=it.comment}}保存成功");
+    return ResultData.SUCCESS("{{=it.comment}}保存成功");
   }
   
   
@@ -108,12 +107,12 @@ public class {{=it.model}}Controller {
   public ResultData delete(@PathVariable {{=it.pkField['type']}} id) {
     log.info("{{=it.comment}}删除");
     try {
-      {{=it.modelVar}}Service.deleteById({{=it.modelVar}});
+      {{=it.modelVar}}Service.deleteById(id);
     } catch (Exception e) {
       log.error(e.getMessage(), e);
-      return new ResultData(false, "删除失败");
+      return ResultData.ERROR("删除失败");
     }
-    return new ResultData(true,"删除成功"); 
+    return ResultData.SUCCESS("删除成功"); 
   }
 
 }

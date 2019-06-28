@@ -1,70 +1,29 @@
 <div align="center">
-<br>
-<img src="https://user-images.githubusercontent.com/12294525/44203609-77d50800-a147-11e8-98f0-f2403527abdc.png" width="600px" />
-
+代码开发辅助
 </div>
 
 <br>
 
 <p align="center">
-A boilerplate for Scalable Cross-Platform Desktop Apps based on  <a href="http://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="http://webpack.github.io/docs/">Webpack</a> and <a href="https://github.com/gaearon/react-hot-loader">React Hot Loader</a> for rapid application development (HMR).
+基于 electron-react-boilerplate 进行开发：一个跨平台的桌面应用 boilerplate <br>
+ based on  <a href="http://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="http://webpack.github.io/docs/">Webpack</a> and <a href="https://github.com/gaearon/react-hot-loader">React Hot Loader</a> for rapid application development (HMR).
 </p>
 
-<div align="center">
-<br>
-<img src="https://forthebadge.com/images/badges/built-with-love.svg" />
-<img src="https://forthebadge.com/images/badges/made-with-javascript.svg" />
-<img src="https://forthebadge.com/images/badges/for-you.svg" />
-</div>
 
-<br>
 
-<div align="center">
-
-<a href="https://facebook.github.io/react/"><img src="./internals/img/react-padded-90.png" /></a>
-<a href="https://webpack.github.io/"><img src="./internals/img/webpack-padded-90.png" /></a>
-<a href="http://redux.js.org/"><img src="./internals/img/redux-padded-90.png" /></a>
-<a href="https://github.com/ReactTraining/react-router"><img src="./internals/img/react-router-padded-90.png" /></a>
-<a href="https://flowtype.org/"><img src="./internals/img/flow-padded-90.png" /></a>
-<a href="http://eslint.org/"><img src="./internals/img/eslint-padded-90.png" /></a>
-<a href="https://facebook.github.io/jest/"><img src="./internals/img/jest-padded-90.png" /></a>
-<a href="https://yarnpkg.com/"><img src="./internals/img/yarn-padded-90.png" /></a>
-
-</div>
 
 <hr>
-<br>
 
-<div align="center">
-
-[![Build Status][travis-image]][travis-url]
-[![Appveyor Build Status][appveyor-image]][appveyor-url]
-[![Dependency Status][david_img]][david_site]
-[![DevDependency Status][david_img_dev]][david_site_dev]
-[![Github Tag][github-tag-image]][github-tag-url]
-[![Join the chat at https://gitter.im/electron-react-boilerplate/Lobby](https://badges.gitter.im/electron-react-boilerplate/Lobby.svg)](https://gitter.im/electron-react-boilerplate/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![OpenCollective](https://opencollective.com/electron-react-boilerplate/backers/badge.svg)](#backers)
-[![OpenCollective](https://opencollective.com/electron-react-boilerplate/sponsors/badge.svg)](#sponsors)
-
-</div>
-
-<div align="center">
-
-![Electron Boilerplate Demo](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
-
-</div>
 
 ## Install
 
-- **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/400)**
-
-First, clone the repo via git:
+通过git同步到本地
 
 ```bash
 git clone --depth 1 --single-branch --branch master https://github.com/electron-react-boilerplate/electron-react-boilerplate.git your-project-name
 ```
 
-And then install the dependencies with yarn.
+使用 yarn 安装依赖.
 
 ```bash
 $ cd your-project-name
@@ -73,13 +32,12 @@ $ yarn
 
 ## Run
 
-Start the app in the `dev` environment. This starts the renderer process in [**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) mode and starts a webpack dev server that sends hot updates to the renderer process:
-
+运行在开发环境，这样渲染进行在[**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) 模式；这样会开启一个webpack dev server 会及时更新热更细到渲染进程，让你看到最新到编写的程序运行效果；
 ```bash
 $ yarn dev
 ```
 
-If you don't need autofocus when your files was changed, then run `dev` with env `START_MINIMIZED=true`:
+如果不关心文件到变化，可以使用下面到命令，在最小化运行 run `dev` with env `START_MINIMIZED=true`:
 
 ```bash
 $ START_MINIMIZED=true yarn dev
@@ -87,23 +45,24 @@ $ START_MINIMIZED=true yarn dev
 
 ## Packaging
 
-To package apps for the local platform:
+基于当前开发环境进行打包: mac开发环境会打包dmg  ，win会打包exe ，Linux 会打包zip
 
 ```bash
 $ yarn package
 ```
 
-To package apps for all platforms:
+打包全平台:
 
-First, refer to the [Multi Platform Build docs](https://www.electron.build/multi-platform-build) for dependencies.
+首先到 [Multi Platform Build docs](https://www.electron.build/multi-platform-build) 解决依赖问题.
 
-Then,
+然后运行,
 
 ```bash
 $ yarn package-all
 ```
 
-To package apps with options:
+
+打包到制定平台请使用 option参数:
 
 ```bash
 $ yarn package --[option]

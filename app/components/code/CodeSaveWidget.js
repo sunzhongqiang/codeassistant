@@ -10,18 +10,20 @@ export default class CodeSaveWidget extends Component {
     file: ''
   }
   componentDidMount () {
-    this.initValue()
+    console.log('CodeSaveWidget.componentDidMount', this.state, this.props)
+    this.initValue(this.props.moudle, this.props.filename)
   }
 
-  componentWillReceiveProps () {
-    console.log('componentWillReceiveProps', arguments)
-    this.initValue()
+  componentWillReceiveProps (nextProps) {
+    console.log('CodeSaveWidget.componentWillReceiveProps', nextProps)
+    this.initValue(nextProps.moudle, nextProps.filename)
   }
 
-  initValue () {
-    let completePath = PathUtils.getPackagePath(this.props.moudle)
+  initValue (moudle, filename) {
+    console.log('CodeSaveWidget.init', this.state, this.props)
+    let completePath = PathUtils.getPackagePath(moudle)
     this.setState({
-      file: completePath + '/' + this.props.filename
+      file: completePath + '/' + filename
     })
   }
 

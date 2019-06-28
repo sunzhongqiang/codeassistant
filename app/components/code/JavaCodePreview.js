@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import Highlight from 'react-highlight'
 import CodeSaveWidget from './CodeSaveWidget'
-export default class CodePreview extends Component {
+export default class JavaCodePreview extends Component {
+  componentDidMount () {
+    console.log('JavaCodePreview', this.props)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('JavaCodePreview.componentWillReceiveProps', nextProps)
+  }
+
   render () {
     return (
       <div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from './CommonCodePreview'
+import JavaCodePreview from './JavaCodePreview'
 import JavaCodeGenerator from './JavaCodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
@@ -111,42 +111,42 @@ export default class JavaCodeTab extends Component {
         onChange={this.showCode.bind(this)}
       >
         <TabPane tab='model code' key='model'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.modelCode}
             moudle='model'
             filename={this.state.modelFilename}
           />
         </TabPane>
         <TabPane tab='dto code' key='dto'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.dtoCode}
             moudle='dto'
             filename={this.state.dtoFilename}
           />
         </TabPane>
         <TabPane tab='copydto2model' key='copy'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.copyDtoCode}
             moudle='snipt'
             filename={this.state.copyFilename}
           />
         </TabPane>
         <TabPane tab='dao' key='dao'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.daoCode}
             moudle='dao'
             filename={this.state.daoFilename}
           />
         </TabPane>
         <TabPane tab='daoImpl' key='daoImpl'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.daoImplCode}
             moudle='dao.impl'
             filename={this.state.daoImplFilename}
           />
         </TabPane>
         <TabPane tab='repository' key='repository'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.repositoryCode}
             moudle='repository'
             filename={this.state.repositoryFilename}
@@ -154,21 +154,21 @@ export default class JavaCodeTab extends Component {
         </TabPane>
 
         <TabPane tab='service' key='service'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.serviceCode}
             moudle='service'
             filename={this.state.serviceFilename}
           />
         </TabPane>
         <TabPane tab='serviceImpl' key='serviceImpl'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.serviceImplCode}
             moudle='service.impl'
             filename={this.state.serviceImplFilename}
           />
         </TabPane>
         <TabPane tab='controller' key='controller'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.controllerCode}
             moudle='web.controller'
             filename={this.state.controllerFilename}

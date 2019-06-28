@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import CodePreview from './CommonCodePreview'
+import JavaCodePreview from './JavaCodePreview'
 import CodeGengerator from './CodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
@@ -46,7 +46,7 @@ export default class AntdCodeTab extends Component {
         onChange={this.showCode.bind(this)}
       >
         <TabPane tab='当前变量' key='variable'>
-          <CodePreview
+          <JavaCodePreview
             code={this.state.variableCode}
             moudle='variable'
             filename={this.state.variableFilename}

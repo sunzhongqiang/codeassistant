@@ -17,6 +17,7 @@ export default class JavaCodeGengerator {
    * 生成java model 的代码
    */
   static generatorModelCode () {
+    console.log('generatorModelCode')
     let keyValue = {}
 
     keyValue['groupId'] = AppData.getProjectConfig('groupId')
@@ -36,6 +37,7 @@ export default class JavaCodeGengerator {
    * 生成java dto 的代码
    */
   static generatorDtoCode () {
+    console.log('generatorDtoCode')
     let keyValue = {}
 
     keyValue['groupId'] = AppData.getProjectConfig('groupId')
@@ -52,6 +54,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorCopyCode () {
+    console.log('generatorCopyCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -65,6 +68,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorRepositoryCode () {
+    console.log('generatorRepositoryCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -83,6 +87,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorDaoCode () {
+    console.log('generatorDaoCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -98,6 +103,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorDaoImplCode () {
+    console.log('generatorDaoImplCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -116,6 +122,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorServiceCode () {
+    console.log('generatorServiceCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -133,6 +140,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorServiceImplCode () {
+    console.log('generatorServiceImplCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel
@@ -151,6 +159,7 @@ export default class JavaCodeGengerator {
   }
 
   static generatorControllerCode () {
+    console.log('generatorControllerCode')
     let keyValue = {}
     const javaModel = AppData.getJavaName()
     keyValue['model'] = javaModel

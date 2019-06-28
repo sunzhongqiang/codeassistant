@@ -16,24 +16,8 @@ export default class ContentTab extends Component {
     keyValue: ''
   }
 
-  componentDidMount () {
-    eventbus.on(EventType.VARIABLE_CHANGE, this.updateVariable.bind(this))
-    eventbus.on(
-      EventType.VARIABLE_CODE_CHANGE,
-      this.showVariableChange.bind(this)
-    )
-  }
-
-  updateVariable () {
-    CodeGengerator.generatorTemplateVariable()
-  }
-
   showCodeChange (data) {
     this.setState({ modelCode: data })
-  }
-
-  showVariableChange (data) {
-    this.setState({ keyValue: data })
   }
 
   render () {

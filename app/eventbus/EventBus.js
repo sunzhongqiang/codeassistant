@@ -6,7 +6,13 @@ class AppEventBus extends EventEmitter {
    * @param  {...any} args 触发事件的参数
    */
   fire (type, ...args) {
+    console.log('fire', type, ...args)
     this.emit(type, ...args)
+  }
+
+  on (event, action) {
+    console.log('on', event, action)
+    super.on(event, action)
   }
 }
 const eventbus = new AppEventBus()

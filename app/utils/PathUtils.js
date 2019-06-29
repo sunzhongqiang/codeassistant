@@ -1,4 +1,5 @@
 import AppData from '../constants/AppData'
+import CodeUtils from './CodeUtils'
 const javaPath = '/src/main/java'
 
 export default class PathUtils {
@@ -24,5 +25,15 @@ export default class PathUtils {
     let path = completePackage.split('.')
 
     return this.getSrcPath() + '/' + path.join('/')
+  }
+
+  /**
+   * 获得保存文件的全路径：根据包和文件名
+   * @param {所在的包} packagename
+   * @param {文件名} file
+   */
+  static getCompleteFilePath (packagename, filename, suffix) {
+    let path = this.getPackagePath(packagename)
+    return path + '/' + filename + suffix
   }
 }

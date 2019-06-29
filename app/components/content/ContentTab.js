@@ -8,6 +8,7 @@ import Usage from './Usage'
 import JavaCodeTab from '../code/JavaCodeTab'
 import AntdCodeTab from '../code/AntDCode'
 import CommonCodeTab from '../code/CommonCode'
+import { FreeModel } from '../code/FreeModel'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -35,11 +36,15 @@ export default class ContentTab extends Component {
         <TabPane tab='Java代码' key='3'>
           <JavaCodeTab />
         </TabPane>
+
         <TabPane tab='PC前端代码' key='4'>
           <AntdCodeTab />
         </TabPane>
         <TabPane tab='App端Flutter代码' key='5'>
           <AntdCodeTab />
+        </TabPane>
+        <TabPane tab='自由模式' key='6'>
+          <FreeModel />
         </TabPane>
       </Tabs>
     )

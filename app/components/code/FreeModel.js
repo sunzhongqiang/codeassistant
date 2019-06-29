@@ -92,6 +92,11 @@ export class FreeModel extends Component {
       )
     }
 
+    if (value == 'copy') {
+      code = JavaCodeGengerator.generatorCopyCode()
+      filename = ''
+    }
+
     this.setState({
       layer: e.target.value,
       code: code,
@@ -158,6 +163,13 @@ export class FreeModel extends Component {
               onChange={this.switchLayer.bind(this)}
             >
               {this.renderLayer()}
+            </Radio.Group>
+            <Radio.Group
+              value={this.state.layer}
+              onChange={this.switchLayer.bind(this)}
+            >
+              <Radio.Button value='copy'>相互赋值</Radio.Button>
+              <Radio.Button value='sql'>复杂查询</Radio.Button>
             </Radio.Group>
             <Button icon='copy' onClick={this.copyCode.bind(this)} />
           </div>

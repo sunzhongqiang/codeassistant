@@ -1,5 +1,7 @@
 import AppData from '../../constants/AppData'
 import MySqlDriver from '../../service/mysqlDriver'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
 
 export default class DataLoad {
   /**
@@ -72,6 +74,14 @@ export default class DataLoad {
         console.log('setMockdata')
         AppData.setMockData(data)
       }
+    })
+  }
+
+  static loadDataBySql (sql) {
+    const mysqldb = new MySqlDriver()
+    mysqldb.query(sql, [], data => {
+      console.log('mock data', data)
+      eventbus.fire(EventType.DATABASE_DATA_LOAD, data)
     })
   }
 }

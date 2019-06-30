@@ -9,6 +9,7 @@ import JavaCodeTab from '../code/JavaCodeTab'
 import AntdCodeTab from '../code/AntDCode'
 import CommonCodeTab from '../code/CommonCode'
 import { FreeModel } from '../code/FreeModel'
+import MysqlModel from '../code/MysqlModel'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -45,6 +46,9 @@ export default class ContentTab extends Component {
         </TabPane>
         <TabPane tab='自由模式' key='6'>
           <FreeModel />
+        </TabPane>
+        <TabPane tab='SQL模式' key='sql'>
+          <MysqlModel />
         </TabPane>
       </Tabs>
     )

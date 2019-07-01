@@ -2,6 +2,7 @@ import AppData from '../../constants/AppData'
 import MySqlDriver from '../../service/mysqlDriver'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import JsonFormatter from '../../utils/JsonFormatter'
 
 export default class DataLoad {
   /**
@@ -81,7 +82,8 @@ export default class DataLoad {
     const mysqldb = new MySqlDriver()
     mysqldb.query(sql, [], data => {
       console.log('mock data', data)
-      eventbus.fire(EventType.DATABASE_DATA_LOAD, data)
+      let json = JsonFormatter.toJson(data)
+      eventbus.fire(EventType.DATABASE_DATA_LOAD, json)
     })
   }
 }

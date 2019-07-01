@@ -325,6 +325,18 @@ eval("module.exports = react-router-dom;\n\n//# sourceURL=webpack://renderer/ext
 
 eval("module.exports = source-map-support;\n\n//# sourceURL=webpack://renderer/external_%22source-map-support%22?");
 
+/***/ }),
+
+/***/ "sql-formatter":
+/*!********************************!*\
+  !*** external "sql-formatter" ***!
+  \********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = sql-formatter;\n\n//# sourceURL=webpack://renderer/external_%22sql-formatter%22?");
+
 /***/ })
 
 /******/ });

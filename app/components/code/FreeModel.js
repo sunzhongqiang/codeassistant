@@ -68,7 +68,7 @@ export class FreeModel extends Component {
       )
     }
     if (value == 'service') {
-      code = JavaCodeGengerator.generatorDaoImplCode()
+      code = JavaCodeGengerator.generatorServiceCode()
       filename = PathUtils.getCompleteFilePath(
         value,
         AppData.getJavaName(),

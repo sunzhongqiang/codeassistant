@@ -31,7 +31,7 @@ export default class MysqlModel extends Component {
 
   showDatabaseData (data) {
     this.setState({
-      data: JSON.stringify(data)
+      data: data
     })
   }
 
@@ -46,6 +46,9 @@ export default class MysqlModel extends Component {
     let value = e.target.value
     console.log('sql', value)
     this.sql = value
+    this.setState({
+      sql: value
+    })
   }
 
   action (e) {
@@ -59,7 +62,7 @@ export default class MysqlModel extends Component {
     }
 
     if (value == 'formate') {
-      let prettySql = sqlFormatter.format('SELECT * FROM table1')
+      let prettySql = sqlFormatter.format(this.state.sql)
       console.log(prettySql)
       this.setState({
         layer: e.target.value,

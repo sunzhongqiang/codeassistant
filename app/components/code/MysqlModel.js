@@ -27,11 +27,29 @@ export default class MysqlModel extends Component {
 
   componentDidMount () {
     eventbus.on(EventType.DATABASE_DATA_LOAD, this.showDatabaseData.bind(this))
+    eventbus.on(EventType.TABLE_DATA_CHANGE, this.showSql.bind(this))
   }
 
   showDatabaseData (data) {
     this.setState({
       data: data
+    })
+  }
+
+  showSql () {
+    let sql = 'select '
+    let columns = AppData.getColumnFields()
+    for (let column of columns) {
+      sql = sql.concat(`${column['COLUMN_NAME']},`)
+    }
+    sql = sql.substr(0, sql.length - 1)
+    sql = sql.concat(' FROM ')
+    sql = sql.concat(AppData.getTableName())
+    sql = sql.concat(' limit 10 ')
+    sql = sqlFormatter.format(sql)
+
+    this.setState({
+      sql
     })
   }
 
@@ -55,7 +73,7 @@ export default class MysqlModel extends Component {
     let value = e.target.value
 
     if (value == 'execute') {
-      DataLoad.loadDataBySql(this.sql)
+      DataLoad.loadDataBySql(this.state.sql)
       this.setState({
         layer: e.target.value
       })
@@ -63,7 +81,6 @@ export default class MysqlModel extends Component {
 
     if (value == 'formate') {
       let prettySql = sqlFormatter.format(this.state.sql)
-      console.log(prettySql)
       this.setState({
         layer: e.target.value,
         sql: prettySql
@@ -95,20 +112,6 @@ export default class MysqlModel extends Component {
     if (!result) {
       message.success('代码保存成功')
     }
-  }
-
-  renderLayer () {
-    let layerList = this.state.layerList
-
-    let result = []
-    for (let item of layerList) {
-      result.push(
-        <Radio.Button key={item} value={item}>
-          {item}
-        </Radio.Button>
-      )
-    }
-    return result
   }
 
   render () {

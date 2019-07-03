@@ -30,17 +30,20 @@ export default {
       },
       {
         test: /\.less$/,
-        use: [{
-          loader:'style-loader', 
-        },{
-          loader:'css-loader', 
-        },{
-          loader:'less-loader',
-          options:{
-            javascriptEnabled: true
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            }
           }
-        }], // 编译顺序从右往左
-        
+        ] // 编译顺序从右往左
       }
     ]
   },

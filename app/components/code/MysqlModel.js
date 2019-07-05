@@ -23,8 +23,6 @@ export default class MysqlModel extends Component {
     layerList: CodeData.getLayer('java')
   }
 
-  sql = ''
-
   componentDidMount () {
     eventbus.on(EventType.DATABASE_DATA_LOAD, this.showDatabaseData.bind(this))
     eventbus.on(EventType.TABLE_DATA_CHANGE, this.showSql.bind(this))
@@ -60,6 +58,13 @@ export default class MysqlModel extends Component {
     }
   }
 
+  copyJavaCode () {
+    let result = copy(this.state.data)
+    if (result) {
+      message.success('代码复制成功')
+    }
+  }
+
   onTextareaChange (e) {
     let value = e.target.value
     console.log('sql', value)
@@ -71,7 +76,6 @@ export default class MysqlModel extends Component {
 
   action (e) {
     let value = e.target.value
-
     if (value == 'execute') {
       DataLoad.loadDataBySql(this.state.sql)
       this.setState({
@@ -86,31 +90,16 @@ export default class MysqlModel extends Component {
         sql: prettySql
       })
     }
-  }
 
-  saveFile () {
-    let self = this
-    if (FileSystemUtils.existFile(this.state.filename)) {
-      confirm({
-        title: '文件已经存在',
-        content: '否发要覆盖已经存在的文件',
-        onOk () {
-          self.directSave()
-        },
-        onCancel () {
-          message.info('取消了代码生成，没有进行任何的操作！')
-        }
+    if (value == 'code') {
+      let sql = this.state.sql
+
+      let code = JavaCodeGengerator.generatorSqlPartCode(sql)
+
+      this.setState({
+        layer: e.target.value,
+        data: code
       })
-    } else {
-      this.directSave()
-    }
-  }
-
-  directSave () {
-    FileSystemUtils.mkdir(this.state.packagename)
-    let result = FileSystemUtils.saveCode(this.state.filename, this.state.code)
-    if (!result) {
-      message.success('代码保存成功')
     }
   }
 
@@ -133,6 +122,7 @@ export default class MysqlModel extends Component {
             >
               <Radio.Button value='execute'>执行语句</Radio.Button>
               <Radio.Button value='formate'>格式化语句</Radio.Button>
+              <Radio.Button value='code'>生存java代码</Radio.Button>
             </Radio.Group>
             <Button icon='copy' onClick={this.copyCode.bind(this)} />
           </div>
@@ -143,15 +133,18 @@ export default class MysqlModel extends Component {
           onChange={this.onTextareaChange.bind(this)}
           value={this.state.sql}
         />
-
-        <Tabs type='card' style={{ height: '100%', marginTop: 8 }}>
-          <TabPane tab='结果集' key='6'>
-            <ContentPreview code={this.state.data} />
-          </TabPane>
-          <TabPane tab='Java代码' key='sql'>
-            <ContentPreview code={this.state.code} />
-          </TabPane>
-        </Tabs>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: 8,
+            justifyContent: 'flex-end',
+            background: '#eaeaea'
+          }}
+        >
+          <Button icon='copy' onClick={this.copyJavaCode.bind(this)} />
+        </div>
+        <ContentPreview code={this.state.data} />
       </div>
     )
   }

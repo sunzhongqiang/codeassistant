@@ -11,6 +11,7 @@ import daoImplTemplate from '../../template/java/daoImpl'
 import serviceTemplate from '../../template/java/service'
 import serviceImplTemplate from '../../template/java/serviceImpl'
 import controllerTemplate from '../../template/java/controller'
+import sqlPartCode from '../../template/java/jpapart'
 
 export default class JavaCodeGengerator {
   /**
@@ -175,5 +176,13 @@ export default class JavaCodeGengerator {
     keyValue['fields'] = fields
 
     return TemplateEngin.generatorCodeByContent(controllerTemplate, keyValue)
+  }
+
+  static generatorSqlPartCode (sql) {
+    let sqlLines = sql.split('\n')
+    let keyValue = {}
+    keyValue['sqlLines'] = sqlLines
+
+    return TemplateEngin.generatorCodeByContent(sqlPartCode, keyValue)
   }
 }

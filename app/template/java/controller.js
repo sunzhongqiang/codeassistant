@@ -65,7 +65,7 @@ public class {{=it.model}}Controller {
       {{=it.model}} {{=it.modelVar}} = null;
       //从数据库中进行加载，以进行修改
       if ({{=it.modelVar}}Dto.get{{=it.pkField['firstLetterUpperName']}}() != null) {
-        {{=it.modelVar}} = {{=it.modelVar}}Service.find({{=it.modelVar}}.get{{=it.pkField['firstLetterUpperName']}}());
+        {{=it.modelVar}} = {{=it.modelVar}}Service.find({{=it.modelVar}}Dto.get{{=it.pkField['firstLetterUpperName']}}());
       }
       //如果数据库不存在，新建并新增
       if ({{=it.modelVar}} == null) {

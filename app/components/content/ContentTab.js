@@ -28,7 +28,7 @@ export default class ContentTab extends Component {
         <TabPane tab='使用说明' key='usage'>
           <Usage />
         </TabPane>
-        <TabPane tab='字段信息' key='1'>
+        <TabPane tab='数据字典' key='1'>
           <TableColumn />
         </TabPane>
         <TabPane tab='通用代码' key='2'>

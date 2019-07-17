@@ -122,7 +122,7 @@ export default class MysqlModel extends Component {
             >
               <Radio.Button value='execute'>执行语句</Radio.Button>
               <Radio.Button value='formate'>格式化语句</Radio.Button>
-              <Radio.Button value='code'>生存java代码</Radio.Button>
+              <Radio.Button value='code'>java代码</Radio.Button>
             </Radio.Group>
             <Button icon='copy' onClick={this.copyCode.bind(this)} />
           </div>

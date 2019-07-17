@@ -4,6 +4,7 @@ import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
 import {{=it.groupId}}.{{=it.artifactId}}.dao.{{=it.model}}Dao;
 import {{=it.groupId}}.{{=it.artifactId}}.dto.{{=it.model}}Dto;
 import com.mmk.gene.dao.impl.SpringDataQueryDaoImpl;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class {{=it.model}}DaoImpl extends SpringDataQueryDaoImpl<{{=it.model}}> implements {{=it.model}}Dao {
+
+  @Resource
+  private JPAQueryFactory jpaQueryFactory;
 
   public {{=it.model}}DaoImpl() {
     super({{=it.model}}.class);

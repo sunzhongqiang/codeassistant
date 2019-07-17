@@ -7,6 +7,8 @@ import JavaCodeGengerator from './JavaCodeGenerator'
 import PathUtils from '../../utils/PathUtils'
 import AppData from '../../constants/AppData'
 import FileSystemUtils from '../../utils/FileSystemUtils'
+import eventbus from '../../eventbus/EventBus'
+import EventType from '../../eventbus/EventTyp'
 const confirm = Modal.confirm
 
 export class FreeModel extends Component {
@@ -14,6 +16,13 @@ export class FreeModel extends Component {
     layer: '',
     filename: '',
     layerList: CodeData.getLayer('java')
+  }
+
+  componentDidMount () {
+    eventbus.on(
+      EventType.TABLE_DATA_CHANGE,
+      this.generatorCode.bind(this, 'model')
+    )
   }
 
   copyCode () {
@@ -25,6 +34,10 @@ export class FreeModel extends Component {
 
   switchLayer (e) {
     let value = e.target.value
+    this.generatorCode(value)
+  }
+
+  generatorCode (value) {
     let code = ''
     let filename = ''
     if (value == 'model') {
@@ -98,9 +111,9 @@ export class FreeModel extends Component {
     }
 
     this.setState({
-      layer: e.target.value,
+      layer: value,
       code: code,
-      packagename: value,
+      packagename: PathUtils.getPackagePath(value),
       filename
     })
   }
@@ -169,7 +182,6 @@ export class FreeModel extends Component {
               onChange={this.switchLayer.bind(this)}
             >
               <Radio.Button value='copy'>相互赋值</Radio.Button>
-              <Radio.Button value='sql'>复杂查询</Radio.Button>
             </Radio.Group>
             <Button icon='copy' onClick={this.copyCode.bind(this)} />
           </div>

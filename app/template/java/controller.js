@@ -62,14 +62,14 @@ public class {{=it.model}}Controller {
   public ResultData save(@RequestBody {{=it.model}}Dto {{=it.modelVar}}Dto) {
     log.info("{{=it.comment}}保存");
     try {
-      {{=it.model}} {{=it.modelVar}} = null;
+      {{=it.model}} {{=it.modelVar}} = new {{=it.model}}();
       //从数据库中进行加载，以进行修改
       if ({{=it.modelVar}}Dto.get{{=it.pkField['firstLetterUpperName']}}() != null) {
         {{=it.modelVar}} = {{=it.modelVar}}Service.find({{=it.modelVar}}Dto.get{{=it.pkField['firstLetterUpperName']}}());
-      }
-      //如果数据库不存在，新建并新增
-      if ({{=it.modelVar}} == null) {
-        {{=it.modelVar}} = new {{=it.model}}();
+        //如果数据库不存在，新建并新增
+        if ({{=it.modelVar}} == null) {
+          {{=it.modelVar}} = new {{=it.model}}();
+        }
       }
       {{~it.fields: field:index}}
       {{=it.modelVar}}.set{{=field['firstLetterUpperName']}}({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());{{~}}
@@ -93,8 +93,7 @@ public class {{=it.model}}Controller {
   @ResponseBody
   public {{=it.model}} detail(@PathVariable {{=it.pkField['type']}} id) {
     log.info("{{=it.comment}}详细信息");
-    {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Service.find(id);
-    return {{=it.modelVar}};
+    return {{=it.modelVar}}Service.find(id);
   }
   
   /**

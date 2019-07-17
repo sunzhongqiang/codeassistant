@@ -34,21 +34,18 @@ export default class ContentTab extends Component {
         <TabPane tab='通用代码' key='2'>
           <CommonCodeTab />
         </TabPane>
-        <TabPane tab='Java代码' key='3'>
-          <JavaCodeTab />
-        </TabPane>
 
-        <TabPane tab='PC前端代码' key='4'>
-          <AntdCodeTab />
-        </TabPane>
-        <TabPane tab='App端Flutter代码' key='5'>
-          <AntdCodeTab />
-        </TabPane>
         <TabPane tab='自由模式' key='6'>
           <FreeModel />
         </TabPane>
         <TabPane tab='SQL模式' key='sql'>
           <MysqlModel />
+        </TabPane>
+        <TabPane tab='PC前端代码' key='4'>
+          <AntdCodeTab />
+        </TabPane>
+        <TabPane tab='App端Flutter代码' key='5'>
+          <AntdCodeTab />
         </TabPane>
       </Tabs>
     )

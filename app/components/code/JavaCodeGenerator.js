@@ -46,6 +46,7 @@ export default class JavaCodeGengerator {
     keyValue['version'] = AppData.getProjectConfig('version')
     keyValue['author'] = AppData.getProjectConfig('author')
     keyValue['model'] = AppData.getJavaName()
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(AppData.getJavaName())
     keyValue['comment'] = AppData.getTableComment()
     keyValue['table'] = AppData.getTableName()
     keyValue['fields'] = AppData.getJavaFields()

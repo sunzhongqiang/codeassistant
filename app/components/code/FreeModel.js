@@ -177,12 +177,6 @@ export class FreeModel extends Component {
             >
               {this.renderLayer()}
             </Radio.Group>
-            <Radio.Group
-              value={this.state.layer}
-              onChange={this.switchLayer.bind(this)}
-            >
-              <Radio.Button value='copy'>相互赋值</Radio.Button>
-            </Radio.Group>
             <Button icon='copy' onClick={this.copyCode.bind(this)} />
           </div>
           <div

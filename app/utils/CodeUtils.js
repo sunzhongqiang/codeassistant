@@ -80,6 +80,7 @@ export default class CodeUtils {
         return field['type']
       }
     }
+    return 'Long'
   }
 
   static getPkField (fields) {

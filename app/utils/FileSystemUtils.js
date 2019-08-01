@@ -1,3 +1,5 @@
+import { message } from 'antd'
+
 const fs = require('fs')
 
 export default class FileSystemUtils {
@@ -22,7 +24,13 @@ export default class FileSystemUtils {
   }
 
   static saveCode (file, content) {
-    fs.writeFileSync(file, content)
+    try {
+      fs.writeFileSync(file, content)
+    } catch (error) {
+      message.error(error.message)
+      return false
+    }
+    return true
   }
 
   static existFile (filename) {

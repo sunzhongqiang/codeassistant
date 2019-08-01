@@ -3,7 +3,7 @@ import Highlight from 'react-highlight'
 export default class ContentPreview extends Component {
   render () {
     return (
-      <div style={{ height: 580, overflow: 'scroll' }}>
+      <div style={this.props.style}>
         <Highlight languages={['java']} className='java'>
           {this.props.code}
         </Highlight>

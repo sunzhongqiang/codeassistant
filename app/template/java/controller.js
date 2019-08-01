@@ -81,7 +81,7 @@ public class {{=it.model}}Controller {
    */ 
   @GetMapping("/{{=it.modelVar}}/{id}")
   @ResponseBody
-  public {{=it.model}} detail(@PathVariable {{=it.pkField['type']}} id) {
+  public {{=it.model}} detail(@PathVariable {{=it.pkType}} id) {
     log.info("{{=it.comment}}详细信息");
     return {{=it.modelVar}}Service.find(id);
   }
@@ -93,7 +93,7 @@ public class {{=it.model}}Controller {
    * @return 操作结果
    */
   @DeleteMapping("/{{=it.modelVar}}/{id}")
-  public ResultData delete(@PathVariable {{=it.pkField['type']}} id) {
+  public ResultData delete(@PathVariable {{=it.pkType}} id) {
     log.info("{{=it.comment}}删除");
     try {
       {{=it.modelVar}}Service.deleteById(id);

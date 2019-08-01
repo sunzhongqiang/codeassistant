@@ -1,13 +1,3 @@
-let javaLayer = [
-  'model',
-  'dto',
-  'dao',
-  'dao.impl',
-  'repository',
-  'service',
-  'service.impl',
-  'web.controller'
-]
 let jsLayer = ['model', 'component', 'api']
 
 let flutter = ['model']

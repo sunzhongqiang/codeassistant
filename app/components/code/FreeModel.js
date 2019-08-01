@@ -9,13 +9,23 @@ import AppData from '../../constants/AppData'
 import FileSystemUtils from '../../utils/FileSystemUtils'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
+import { file } from '@babel/types'
 const confirm = Modal.confirm
 
 export class FreeModel extends Component {
   state = {
     layer: '',
     filename: '',
-    layerList: CodeData.getLayer('java')
+    layerList: [
+      'model',
+      'dto',
+      'dao',
+      'dao.impl',
+      'repository',
+      'service',
+      'service.impl',
+      'web.controller'
+    ]
   }
 
   componentDidMount () {
@@ -105,11 +115,6 @@ export class FreeModel extends Component {
       )
     }
 
-    if (value == 'copy') {
-      code = JavaCodeGengerator.generatorCopyCode()
-      filename = ''
-    }
-
     this.setState({
       layer: value,
       code: code,
@@ -144,6 +149,149 @@ export class FreeModel extends Component {
     }
   }
 
+  saveModel () {
+    let code = JavaCodeGengerator.generatorModelCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'model',
+      AppData.getJavaName(),
+      '.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存model代码')
+    } else {
+      message.error('保存model代码失败')
+    }
+  }
+
+  saveDto () {
+    let code = JavaCodeGengerator.generatorModelCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'dto',
+      AppData.getJavaName(),
+      'Dto.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存dto代码')
+    } else {
+      message.error('保存dto代码失败')
+    }
+  }
+
+  saveDao () {
+    let code = JavaCodeGengerator.generatorDaoCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'dao',
+      AppData.getJavaName(),
+      'Dao.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存dao代码')
+    } else {
+      message.error('保存dao代码失败')
+    }
+  }
+
+  saveDaoImpl () {
+    let code = JavaCodeGengerator.generatorDaoImplCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'dao.impl',
+      AppData.getJavaName(),
+      'DaoImpl.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存dao.impl代码')
+    } else {
+      message.error('保存dao.impl代码失败')
+    }
+  }
+
+  saveRepository () {
+    let code = JavaCodeGengerator.generatorRepositoryCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'repository',
+      AppData.getJavaName(),
+      'Repository.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存repository代码')
+    } else {
+      message.error('保存repository代码失败')
+    }
+  }
+
+  saveService () {
+    let code = JavaCodeGengerator.generatorServiceCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'service',
+      AppData.getJavaName(),
+      'Service.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存service代码')
+    } else {
+      message.error('保存service代码失败')
+    }
+  }
+
+  saveServiceImpl () {
+    let code = JavaCodeGengerator.generatorServiceImplCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'service.impl',
+      AppData.getJavaName(),
+      'ServiceImpl.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存service.impl代码')
+    } else {
+      message.error('保存service.impl代码失败')
+    }
+  }
+
+  saveWebController () {
+    let code = JavaCodeGengerator.generatorControllerCode()
+    let filename = PathUtils.getCompleteFilePath(
+      'web.controller',
+      AppData.getJavaName(),
+      'Controller.java'
+    )
+    let result = FileSystemUtils.saveCode(filename, code)
+    if (result) {
+      message.success('成功保存WebController代码')
+    } else {
+      message.error('保存WebController代码失败')
+    }
+  }
+
+  saveAllJavaCode () {
+    let self = this
+    confirm({
+      title: '全部保存警告',
+      content: '如果代码已存在对情况下，会被覆盖，请确保代码安全对情况下使用！',
+      onOk () {
+        FileSystemUtils.mkdir('model')
+        // save model
+        self.saveModel()
+        self.saveDto()
+        self.saveDao()
+        self.saveDaoImpl()
+        self.saveRepository()
+        self.saveService()
+        self.saveServiceImpl()
+        self.saveWebController()
+      },
+      onCancel () {
+        message.info('取消批量生成')
+      }
+    })
+  }
+
   renderLayer () {
     let layerList = this.state.layerList
 
@@ -160,7 +308,13 @@ export class FreeModel extends Component {
 
   render () {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          height: '100',
+          flexDirection: 'column'
+        }}
+      >
         <div>
           <div
             style={{
@@ -177,7 +331,24 @@ export class FreeModel extends Component {
             >
               {this.renderLayer()}
             </Radio.Group>
-            <Button icon='copy' onClick={this.copyCode.bind(this)} />
+            <div>
+              <Button
+                icon='copy'
+                title='复制内容'
+                onClick={this.copyCode.bind(this)}
+              />
+              <Button
+                icon='save'
+                title='保存文件'
+                style={{ marginLeft: 8, marginRight: 8 }}
+                onClick={this.saveFile.bind(this)}
+              />
+              <Button
+                icon='code'
+                title='生成所有'
+                onClick={this.saveAllJavaCode.bind(this)}
+              />
+            </div>
           </div>
           <div
             style={{
@@ -189,10 +360,12 @@ export class FreeModel extends Component {
             }}
           >
             路径：{this.state.filename}
-            <Button icon='save' onClick={this.saveFile.bind(this)} />
           </div>
         </div>
-        <ContentPreview code={this.state.code} />
+        <ContentPreview
+          style={{ height: '75vh', overflow: 'scroll' }}
+          code={this.state.code}
+        />
       </div>
     )
   }

@@ -173,7 +173,7 @@ export default class JavaCodeGengerator {
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
     keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
     let fields = AppData.getJavaFields()
-    keyValue['pkField'] = CodeUtils.getPkField(fields)
+    keyValue['pkType'] = CodeUtils.getPkType(fields)
     keyValue['fields'] = fields
 
     return TemplateEngin.generatorCodeByContent(controllerTemplate, keyValue)

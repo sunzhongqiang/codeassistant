@@ -76,7 +76,6 @@ export default class CodeUtils {
    */
   static getPkType (fields) {
     for (let field of fields) {
-      console.log(field['isPK'], field['type'])
       if (field['isPK']) {
         return field['type']
       }
@@ -85,7 +84,6 @@ export default class CodeUtils {
 
   static getPkField (fields) {
     for (let field of fields) {
-      console.log(field['isPK'], field['type'])
       if (field['isPK']) {
         return field
       }

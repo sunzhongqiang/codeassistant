@@ -19,8 +19,7 @@ export default class MysqlModel extends Component {
   state = {
     layer: '',
     filename: '',
-    data: 'no sql result',
-    layerList: CodeData.getLayer('java')
+    data: 'no sql result'
   }
 
   componentDidMount () {
@@ -144,7 +143,7 @@ export default class MysqlModel extends Component {
         >
           <Button icon='copy' onClick={this.copyJavaCode.bind(this)} />
         </div>
-        <ContentPreview code={this.state.data} />
+        <ContentPreview style={{ height: '60vh' }} code={this.state.data} />
       </div>
     )
   }

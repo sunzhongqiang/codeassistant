@@ -150,6 +150,8 @@ export class FreeModel extends Component {
   }
 
   saveModel () {
+    let packagename = PathUtils.getPackagePath('model')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorModelCode()
     let filename = PathUtils.getCompleteFilePath(
       'model',
@@ -165,6 +167,8 @@ export class FreeModel extends Component {
   }
 
   saveDto () {
+    let packagename = PathUtils.getPackagePath('dto')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorModelCode()
     let filename = PathUtils.getCompleteFilePath(
       'dto',
@@ -180,6 +184,8 @@ export class FreeModel extends Component {
   }
 
   saveDao () {
+    let packagename = PathUtils.getPackagePath('dao')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorDaoCode()
     let filename = PathUtils.getCompleteFilePath(
       'dao',
@@ -195,6 +201,8 @@ export class FreeModel extends Component {
   }
 
   saveDaoImpl () {
+    let packagename = PathUtils.getPackagePath('dao.impl')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorDaoImplCode()
     let filename = PathUtils.getCompleteFilePath(
       'dao.impl',
@@ -210,6 +218,8 @@ export class FreeModel extends Component {
   }
 
   saveRepository () {
+    let packagename = PathUtils.getPackagePath('repository')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorRepositoryCode()
     let filename = PathUtils.getCompleteFilePath(
       'repository',
@@ -225,6 +235,8 @@ export class FreeModel extends Component {
   }
 
   saveService () {
+    let packagename = PathUtils.getPackagePath('service')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorServiceCode()
     let filename = PathUtils.getCompleteFilePath(
       'service',
@@ -240,6 +252,8 @@ export class FreeModel extends Component {
   }
 
   saveServiceImpl () {
+    let packagename = PathUtils.getPackagePath('service.impl')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorServiceImplCode()
     let filename = PathUtils.getCompleteFilePath(
       'service.impl',
@@ -255,6 +269,8 @@ export class FreeModel extends Component {
   }
 
   saveWebController () {
+    let packagename = PathUtils.getPackagePath('web.controller')
+    FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorControllerCode()
     let filename = PathUtils.getCompleteFilePath(
       'web.controller',

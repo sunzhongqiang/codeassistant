@@ -6,7 +6,7 @@ import AppData from '../../constants/AppData'
 import PathUtils from '../../utils/PathUtils'
 const dialog = require('electron').remote.dialog
 
-export default class ProjectSettingDailog extends Component {
+export default class JavaProjectSettingDailog extends Component {
   state = { visible: false }
 
   constructor () {

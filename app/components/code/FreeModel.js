@@ -360,7 +360,7 @@ export class FreeModel extends Component {
                 onClick={this.saveFile.bind(this)}
               />
               <Button
-                icon='code'
+                icon='api'
                 title='生成所有'
                 onClick={this.saveAllJavaCode.bind(this)}
               />

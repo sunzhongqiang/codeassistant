@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import DbSetting from '../database/DbSetting'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import ProjectSettingDailog from '../project/ProjectSettingDailog'
+import JavaProjectSettingDailog from '../project/JavaProjectSettingDailog'
 
 export default class TopButtonGroup extends Component {
   constructor (props) {
@@ -20,17 +20,10 @@ export default class TopButtonGroup extends Component {
           icon='database'
           onClick={this.showProjectSetting.bind(this)}
         >
-          项目设置
+          JAVA项目设置
         </Button>
-        <Button style={{ margin: 12 }} icon='database'>
-          全局变量设置
-        </Button>
-        <Button style={{ margin: 12 }} icon='database'>
-          Code
-        </Button>
-
         <DbSetting />
-        <ProjectSettingDailog />
+        <JavaProjectSettingDailog />
       </div>
     )
   }

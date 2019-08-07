@@ -327,6 +327,42 @@ eval("module.exports = react-router-dom;\n\n//# sourceURL=webpack://renderer/ext
 
 /***/ }),
 
+/***/ "remarkable":
+/*!*****************************!*\
+  !*** external "remarkable" ***!
+  \*****************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = remarkable;\n\n//# sourceURL=webpack://renderer/external_%22remarkable%22?");
+
+/***/ }),
+
+/***/ "request":
+/*!**************************!*\
+  !*** external "request" ***!
+  \**************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = request;\n\n//# sourceURL=webpack://renderer/external_%22request%22?");
+
+/***/ }),
+
+/***/ "request-promise":
+/*!**********************************!*\
+  !*** external "request-promise" ***!
+  \**********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = request-promise;\n\n//# sourceURL=webpack://renderer/external_%22request-promise%22?");
+
+/***/ }),
+
 /***/ "source-map-support":
 /*!*************************************!*\
   !*** external "source-map-support" ***!

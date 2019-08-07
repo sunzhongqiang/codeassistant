@@ -41,12 +41,6 @@ export default class ContentTab extends Component {
         <TabPane tab='SQL模式' key='sql'>
           <MysqlModel />
         </TabPane>
-        <TabPane tab='PC前端代码' key='4'>
-          <AntdCodeTab />
-        </TabPane>
-        <TabPane tab='App端Flutter代码' key='5'>
-          <AntdCodeTab />
-        </TabPane>
       </Tabs>
     )
   }

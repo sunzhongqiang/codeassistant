@@ -71,3 +71,6 @@ app/dist/renderer.prod.js
 app/dist/renderer.prod.js.map
 yarn.lock
 package-lock.json
+.DS_Store
+release/.DS_Store
+production/CodeAssistan Setup 1.17.2.exe

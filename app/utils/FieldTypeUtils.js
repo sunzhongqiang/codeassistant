@@ -24,6 +24,7 @@ typeMap['LOGNGBLOB'] = 'String'
 typeMap['LONGTEXT'] = 'String'
 typeMap['VARBINARY'] = 'String'
 typeMap['BINARY'] = 'String'
+typeMap['JSON'] = 'String'
 
 typeMap['DATE'] = 'Date'
 typeMap['TIME'] = 'Date'

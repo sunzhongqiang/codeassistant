@@ -11,7 +11,7 @@ export default class DataLoad {
   static loadDatabase () {
     const mysqldb = new MySqlDriver()
     mysqldb.query(
-      "select SCHEMA_NAME from information_schema.SCHEMATA where SCHEMA_NAME not  in('information_schema','mysql','performance_schema')",
+      "select SCHEMA_NAME from information_schema.SCHEMATA where SCHEMA_NAME not  in('information_schema','mysql','sys','performance_schema')",
       data => {
         AppData.setDatabaseList(data)
       }

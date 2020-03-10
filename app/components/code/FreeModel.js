@@ -169,7 +169,7 @@ export class FreeModel extends Component {
   saveDto () {
     let packagename = PathUtils.getPackagePath('dto')
     FileSystemUtils.mkdir(packagename)
-    let code = JavaCodeGengerator.generatorModelCode()
+    let code = JavaCodeGengerator.generatorDtoCode()
     let filename = PathUtils.getCompleteFilePath(
       'dto',
       AppData.getJavaName(),

@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "{{=it.table}}")
+@GenericGenerator(name = "{{=it.table}}_uuid", strategy = "uuid")
 public class {{=it.model}} {
 
 {{~it.fields: field:index}}
@@ -27,9 +28,9 @@ public class {{=it.model}} {
    * {{=field['comment']}}.
    */
   {{? field['isPK'] }}@Id
-  {{? field['increment']}}
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  {{?}}{{?}}{{? field['type'] == 'Date' }}@Temporal(TemporalType.TIMESTAMP)
+  {{? field['increment']}}@GeneratedValue(strategy = GenerationType.IDENTITY)
+  {{??}}@GeneratedValue(generator = "{{=it.table}}_uuid"){{?}}{{?}}
+  {{? field['type'] == 'Date' }}@Temporal(TemporalType.TIMESTAMP)
   {{?}}@Column(name = "{{=field['column']}}", columnDefinition = "COMMENT '{{=field['comment']}}'")
   private {{=field['type']}} {{=field['name']}};
   {{~}}

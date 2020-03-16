@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
-import eventbus from '../../eventbus/EventBus'
-import EventType from '../../eventbus/EventTyp'
-import CodeGengerator from '../code/CodeGenerator'
 import TableColumn from './TableColumn'
 import Usage from './Usage'
-import JavaCodeTab from '../code/JavaCodeTab'
-import AntdCodeTab from '../code/AntDCode'
 import CommonCodeTab from '../code/CommonCode'
-import { FreeModel } from '../code/FreeModel'
+import { JavaModel } from '../code/JavaModel'
 import MysqlModel from '../code/MysqlModel'
+import FieldModel from '../code/FieldModel'
+import { VueModel } from '../code/VueModel'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -35,8 +32,14 @@ export default class ContentTab extends Component {
           <CommonCodeTab />
         </TabPane>
 
-        <TabPane tab='自由模式' key='6'>
-          <FreeModel />
+        <TabPane tab='JAVA模式' key='java'>
+          <JavaModel />
+        </TabPane>
+        <TabPane tab='VUE模式' key='vue'>
+          <VueModel />
+        </TabPane>
+        <TabPane tab='字段模式' key='field'>
+          <FieldModel/>
         </TabPane>
         <TabPane tab='SQL模式' key='sql'>
           <MysqlModel />

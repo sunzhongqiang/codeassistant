@@ -12,7 +12,7 @@ import EventType from '../../eventbus/EventTyp'
 import { file } from '@babel/types'
 const confirm = Modal.confirm
 
-export class FreeModel extends Component {
+export class JavaModel extends Component {
   state = {
     layer: '',
     filename: '',
@@ -150,6 +150,7 @@ export class FreeModel extends Component {
   }
 
   saveModel () {
+    FileSystemUtils.mkdir('model')
     let packagename = PathUtils.getPackagePath('model')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorModelCode()
@@ -167,6 +168,7 @@ export class FreeModel extends Component {
   }
 
   saveDto () {
+    FileSystemUtils.mkdir('dto')
     let packagename = PathUtils.getPackagePath('dto')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorDtoCode()
@@ -184,6 +186,7 @@ export class FreeModel extends Component {
   }
 
   saveDao () {
+    FileSystemUtils.mkdir('dao')
     let packagename = PathUtils.getPackagePath('dao')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorDaoCode()
@@ -201,6 +204,7 @@ export class FreeModel extends Component {
   }
 
   saveDaoImpl () {
+    FileSystemUtils.mkdir('dao.impl')
     let packagename = PathUtils.getPackagePath('dao.impl')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorDaoImplCode()
@@ -218,6 +222,7 @@ export class FreeModel extends Component {
   }
 
   saveRepository () {
+    FileSystemUtils.mkdir('repository')
     let packagename = PathUtils.getPackagePath('repository')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorRepositoryCode()
@@ -235,6 +240,7 @@ export class FreeModel extends Component {
   }
 
   saveService () {
+    FileSystemUtils.mkdir('service')
     let packagename = PathUtils.getPackagePath('service')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorServiceCode()
@@ -252,6 +258,7 @@ export class FreeModel extends Component {
   }
 
   saveServiceImpl () {
+    FileSystemUtils.mkdir('service.impl')
     let packagename = PathUtils.getPackagePath('service.impl')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorServiceImplCode()
@@ -269,6 +276,7 @@ export class FreeModel extends Component {
   }
 
   saveWebController () {
+    FileSystemUtils.mkdir('web.controller')
     let packagename = PathUtils.getPackagePath('web.controller')
     FileSystemUtils.mkdir(packagename)
     let code = JavaCodeGengerator.generatorControllerCode()
@@ -291,7 +299,7 @@ export class FreeModel extends Component {
       title: '全部保存警告',
       content: '如果代码已存在对情况下，会被覆盖，请确保代码安全对情况下使用！',
       onOk () {
-        FileSystemUtils.mkdir('model')
+        
         // save model
         self.saveModel()
         self.saveDto()

@@ -4,6 +4,7 @@ import DbSetting from '../database/DbSetting'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import JavaProjectSettingDailog from '../project/JavaProjectSettingDailog'
+import VueProjectSettingDailog from '../project/VueProjectSettingDailog'
 
 export default class TopButtonGroup extends Component {
   constructor (props) {
@@ -22,8 +23,16 @@ export default class TopButtonGroup extends Component {
         >
           JAVA项目设置
         </Button>
+        <Button
+          style={{ margin: 12 }}
+          icon='database'
+          onClick={this.showVueProjectSetting.bind(this)}
+        >
+          VUE项目设置
+        </Button>
         <DbSetting />
         <JavaProjectSettingDailog />
+        <VueProjectSettingDailog />
       </div>
     )
   }
@@ -34,5 +43,9 @@ export default class TopButtonGroup extends Component {
 
   showProjectSetting () {
     eventbus.fire(EventType.PROJECT_SETTING_SHOW, true)
+  }
+
+  showVueProjectSetting(){
+    eventbus.fire(EventType.VUE_PROJECT_SETTING_SHOW, true)
   }
 }

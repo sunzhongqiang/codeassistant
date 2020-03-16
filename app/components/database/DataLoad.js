@@ -9,6 +9,7 @@ export default class DataLoad {
    * 加载数据库数据
    */
   static loadDatabase () {
+    AppData.setDatabaseList([])
     const mysqldb = new MySqlDriver()
     mysqldb.query(
       "select SCHEMA_NAME from information_schema.SCHEMATA where SCHEMA_NAME not  in('information_schema','mysql','sys','performance_schema')",

@@ -154,6 +154,15 @@ function getMockData () {
   return JSON.parse(data)
 }
 
+function getSelectedFields () {
+  let data = localStorage.getItem('java.field.selected')
+  return JSON.parse(data)
+}
+function setSelectedFields (row) {
+  let json = JSON.stringify(row)
+  localStorage.setItem('java.field.selected', json)
+}
+
 const AppData = {
   getAllDatabaseConfig: getAllDatabaseConfig,
   setDatabaseConfig: setDatabaseConfig,
@@ -196,7 +205,9 @@ const AppData = {
 
   getJavaName: getJavaName,
 
-  getJavaFields: getJavaFields
+  getJavaFields: getJavaFields,
+  setSelectedFields,
+  getSelectedFields
 }
 
 export default AppData

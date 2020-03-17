@@ -1,17 +1,18 @@
-import AppData from '../../constants/AppData'
-import DateUtils from '../../utils/DateUtils'
-import TemplateEngin from '../template/TemplateEngin'
-import modelTemplateContent from '../../template/java/model'
-import dtoTemplateContent from '../../template/java/dto'
-import CodeUtils from '../../utils/CodeUtils'
-import copyModelTemplateContent from '../../template/java/dto2model'
-import repositoryTemplate from '../../template/java/repository'
-import daoTemplate from '../../template/java/dao'
-import daoImplTemplate from '../../template/java/daoImpl'
-import serviceTemplate from '../../template/java/service'
-import serviceImplTemplate from '../../template/java/serviceImpl'
-import controllerTemplate from '../../template/java/controller'
-import sqlPartCode from '../../template/java/jpapart'
+import AppData from '../constants/AppData'
+import DateUtils from '../utils/DateUtils'
+import TemplateEngin from './TemplateEngin'
+import modelTemplateContent from '../template/java/model'
+import dtoTemplateContent from '../template/java/dto'
+import CodeUtils from '../utils/CodeUtils'
+import copyModelTemplateContent from '../template/java/dto2model'
+import repositoryTemplate from '../template/java/repository'
+import daoTemplate from '../template/java/dao'
+import daoImplTemplate from '../template/java/daoImpl'
+import serviceTemplate from '../template/java/service'
+import serviceImplTemplate from '../template/java/serviceImpl'
+import controllerTemplate from '../template/java/controller'
+import sqlPartCode from '../template/java/jpapart'
+import fieldcode from '../template/java/fieldcode'
 
 export default class JavaCodeGengerator {
   /**
@@ -185,5 +186,19 @@ export default class JavaCodeGengerator {
     keyValue['sqlLines'] = sqlLines
 
     return TemplateEngin.generatorCodeByContent(sqlPartCode, keyValue)
+  }
+
+  static generatorCodeByFieldCode (fields,config) {
+    const javaModel = AppData.getJavaName()
+    let keyValue = {}
+    keyValue['model'] = javaModel
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['comment'] = AppData.getTableComment()
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(javaModel)
+    keyValue['fields'] = fields
+    keyValue['config'] = config
+
+    return TemplateEngin.generatorCodeByContent(fieldcode, keyValue)
   }
 }

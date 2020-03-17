@@ -1,11 +1,11 @@
-import AppData from '../../constants/AppData'
-import DateUtils from '../../utils/DateUtils'
-import TemplateEngin from '../template/TemplateEngin'
-import vueformtemplate from '../../template/vue/vue-form'
-import vueTabletemplate from '../../template/vue/vue-table'
-import vueQueryFormTemplate from '../../template/vue/vue-query-form'
-import vueApiemplate from '../../template/vue/api'
-import CodeUtils from '../../utils/CodeUtils'
+import AppData from '../constants/AppData'
+import DateUtils from '../utils/DateUtils'
+import TemplateEngin from './TemplateEngin'
+import vueformtemplate from '../template/vue/vue-form'
+import vueTabletemplate from '../template/vue/vue-table'
+import vueQueryFormTemplate from '../template/vue/vue-query-form'
+import vueApiemplate from '../template/vue/api'
+import CodeUtils from '../utils/CodeUtils'
 
 export default class VueCodeGengerator {
   /**

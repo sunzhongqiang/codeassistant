@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Tree, Button } from 'antd'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import MySqlDriver from '../../service/mysqlDriver'
 import AppData from '../../constants/AppData'
-import DataLoad from './DataLoad'
+import DataLoad from '../../service/DataLoad'
 
 const { TreeNode } = Tree
 const DirectoryTree = Tree.DirectoryTree

@@ -1,6 +1,6 @@
 import AppData from '../../constants/AppData'
 import DateUtils from '../../utils/DateUtils'
-import TemplateEngin from '../template/TemplateEngin'
+import TemplateEngin from '../../generator/TemplateEngin'
 import modelTemplateContent from '../../template/java/model'
 import variableTemplateContent from '../../template/variable'
 import dtoTemplateContent from '../../template/java/dto'

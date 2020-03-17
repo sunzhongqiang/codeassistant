@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Table,Row, Col } from 'antd';
+import { Table,Row, Col,Radio } from 'antd';
 import ContentPreview from './ContentPreview';
+import JavaCodeGengerator from '../../generator/JavaCodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
@@ -16,7 +17,7 @@ const columns = [
 ];
 
 
-export default class FieldMode extends Component {
+export default class JavaFieldModel extends Component {
 
   state = {
     fields :[]
@@ -28,6 +29,20 @@ export default class FieldMode extends Component {
 
   refreshCode(){
     this.showField()
+  }
+
+  onChange(e) {
+    let value = e.target.value;
+    
+    this.generateCode(value)
+  }
+
+  generateCode(value){
+    let fields = AppData.getSelectedFields();
+    const code = JavaCodeGengerator.generatorCodeByFieldCode(fields,{show:value})
+    this.setState({
+        code
+    })
   }
 
   showField(){
@@ -42,14 +57,15 @@ export default class FieldMode extends Component {
     return (
       <div >
         <Row>
-          <Col span={12}> 
+          <Col span={8}> 
               <Table
             columns={columns}
             dataSource={this.state.fields}
             pagination={false}
             rowSelection={{
               onChange: (selectedRowKeys, selectedRows) => {
-                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                console.log('selectedRows',selectedRows);
+                AppData.setSelectedFields(selectedRows);
               },
               getCheckboxProps: record => ({
                 disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -58,11 +74,21 @@ export default class FieldMode extends Component {
             }}
           />
           </Col>
-          <Col span={12}>
-            <ContentPreview/>
+          <Col span={1}></Col>
+          <Col span={15}>
+            <Row>
+            <span>返回值：</span>
+          <Radio.Group onChange={this.onChange.bind(this)} defaultValue="page">
+            <Radio.Button value="page">分页</Radio.Button>
+            <Radio.Button value="list">列表</Radio.Button>
+            <Radio.Button value="object">对象</Radio.Button>
+          </Radio.Group>
+            </Row>
+            <Row>
+            <ContentPreview code={this.state.code} />
+            </Row>
           </Col>
         </Row>
-       
       </div>
     )
   }

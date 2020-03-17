@@ -5,7 +5,8 @@ import Usage from './Usage'
 import CommonCodeTab from '../code/CommonCode'
 import { JavaModel } from '../code/JavaModel'
 import MysqlModel from '../code/MysqlModel'
-import FieldModel from '../code/FieldModel'
+import JavaFieldModel from '../code/JaveFieldModel'
+import VueFieldModel from '../code/VueFieldModel'
 import { VueModel } from '../code/VueModel'
 const { TabPane } = Tabs
 
@@ -38,8 +39,11 @@ export default class ContentTab extends Component {
         <TabPane tab='VUE模式' key='vue'>
           <VueModel />
         </TabPane>
-        <TabPane tab='字段模式' key='field'>
-          <FieldModel/>
+        <TabPane tab='JAVA字段模式' key='javafield'>
+          <JavaFieldModel/>
+        </TabPane>
+        <TabPane tab='VUE字段模式' key='vuefield'>
+          <VueFieldModel/>
         </TabPane>
         <TabPane tab='SQL模式' key='sql'>
           <MysqlModel />

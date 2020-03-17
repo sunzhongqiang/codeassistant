@@ -1,8 +1,8 @@
-import AppData from '../../constants/AppData'
-import MySqlDriver from '../../service/mysqlDriver'
-import eventbus from '../../eventbus/EventBus'
-import EventType from '../../eventbus/EventTyp'
-import JsonFormatter from '../../utils/JsonFormatter'
+import AppData from '../constants/AppData'
+import MySqlDriver from './mysqlDriver'
+import eventbus from '../eventbus/EventBus'
+import EventType from '../eventbus/EventTyp'
+import JsonFormatter from '../utils/JsonFormatter'
 
 export default class DataLoad {
   /**

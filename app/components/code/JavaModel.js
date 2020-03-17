@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import { Button, Radio, message, Modal } from 'antd'
 import copy from 'copy-to-clipboard'
 import ContentPreview from './ContentPreview'
-import CodeData from '../../constants/CodeData'
-import JavaCodeGengerator from './JavaCodeGenerator'
+import JavaCodeGengerator from '../../generator/JavaCodeGenerator'
 import PathUtils from '../../utils/PathUtils'
 import AppData from '../../constants/AppData'
 import FileSystemUtils from '../../utils/FileSystemUtils'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
-import { file } from '@babel/types'
 const confirm = Modal.confirm
 
 export class JavaModel extends Component {

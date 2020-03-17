@@ -2,18 +2,14 @@ import React, { Component } from 'react'
 import { Input, Button, Radio, message, Modal, Tabs } from 'antd'
 import copy from 'copy-to-clipboard'
 import ContentPreview from './ContentPreview'
-import CodeData from '../../constants/CodeData'
-import JavaCodeGengerator from './JavaCodeGenerator'
-import PathUtils from '../../utils/PathUtils'
+import JavaCodeGengerator from '../../generator/JavaCodeGenerator'
 import AppData from '../../constants/AppData'
-import FileSystemUtils from '../../utils/FileSystemUtils'
-import DataLoad from '../database/DataLoad'
+import DataLoad from '../../service/DataLoad'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import sqlFormatter from 'sql-formatter'
 const confirm = Modal.confirm
 const { TextArea } = Input
-const { TabPane } = Tabs
 
 export default class MysqlModel extends Component {
   state = {

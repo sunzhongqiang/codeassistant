@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
 import JavaCodePreview from './JavaCodePreview'
-import JavaCodeGenerator from './JavaCodeGenerator'
+import JavaCodeGenerator from '../../generator/JavaCodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'

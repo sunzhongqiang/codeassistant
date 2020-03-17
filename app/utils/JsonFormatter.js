@@ -1,4 +1,4 @@
-import TemplateEngin from '../components/template/TemplateEngin'
+import TemplateEngin from '../generator/TemplateEngin'
 
 export default class JsonFormatter {
   static toJson (data) {

@@ -5,6 +5,7 @@ import vueformtemplate from '../template/vue/vue-form'
 import vueTabletemplate from '../template/vue/vue-table'
 import vueQueryFormTemplate from '../template/vue/vue-query-form'
 import vueApiemplate from '../template/vue/api'
+import vueFieldTemplate from '../template/vue/vue-field-form'
 import CodeUtils from '../utils/CodeUtils'
 
 export default class VueCodeGengerator {
@@ -69,6 +70,23 @@ export default class VueCodeGengerator {
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
     return TemplateEngin.generatorCodeByContent(vueQueryFormTemplate, keyValue)
+  }
+  static generatorFieldCode(field,formType,validation,config){
+    console.log('generatorFieldCode',arguments)
+    let keyValue = {}
+
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['comment'] = AppData.getTableComment()
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(AppData.getJavaName())
+    keyValue['table'] = AppData.getTableName()
+    keyValue['field'] = field
+    keyValue['formType'] = formType
+    keyValue['validation'] = validation
+    keyValue['config'] = config
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+
+    return TemplateEngin.generatorCodeByContent(vueFieldTemplate, keyValue)
   }
 
  

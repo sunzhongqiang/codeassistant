@@ -27,7 +27,6 @@ export default {
         {{=field['name']}}:[
           { required: true, trigger: 'blur', message: '请填写{{=field['comment']}}' }
         ],{{~}}
-        
       }
     };
   },

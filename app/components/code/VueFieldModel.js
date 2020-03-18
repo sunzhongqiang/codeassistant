@@ -1,68 +1,28 @@
 import React, { Component } from 'react'
-import { Table,Button, Select } from 'antd';
+import { Row, Col,Switch, Select ,Divider, Radio,InputNumber} from 'antd';
 import ContentPreview from './ContentPreview';
 import JavaCodeGengerator from '../../generator/JavaCodeGenerator'
 import eventbus from '../../eventbus/EventBus'
 import EventType from '../../eventbus/EventTyp'
 import AppData from '../../constants/AppData'
+import VueCodeGengerator from '../../generator/VueCodeGengerator';
 const { Option } = Select;
 
-const columns = [
-  {
-    title: '字段',
-    dataIndex: 'name',
-  },
-  {
-    title: '字段名',
-    dataIndex: 'comment',
-  },
-  {
-    title: '类型',
-    dataIndex: 'inputtype',
-    editable: true,
-    width:'150px',
-    render(text, record, index){
-      return <Select style={{ width: '100%' }} value="text" onChange={(value)=>{record.inputtype = value}}>
-              <Option value="text">text</Option>
-              <Option value="textarea">textarea</Option>
-              <Option value="password">password</Option>
-              <Option value="inputnumber">inputnumber</Option>
-              <Option value="select">select</Option>
-              <Option value="radio">radio</Option>
-              <Option value="checkbox">checkbox</Option>
-              <Option value="cascader">cascader</Option>
-              <Option value="switch">switch</Option>
-              <Option value="slider">slider</Option>
-              <Option value="date">date</Option>
-              <Option value="daterange">daterange</Option>
-              <Option value="upload">upload</Option>
-            </Select>
-    }
-  },
-  {
-    title: '规则',
-    dataIndex: 'rule',
-    width:'500px',
-    render(text, record, index){
-      return <Select style={{ width: '100%' }}  mode="tags" onChange={(value)=>{record.rule = value}}>
-              <Option value="required">required</Option>
-              <Option value="number">number</Option>
-              <Option value="string">string</Option>
-              <Option value="date">date</Option>
-              <Option value="boolean">boolean</Option>
-              <Option value="float">float</Option>
-              <Option value="integer">integer</Option>
-              <Option value="telephone">telephone</Option>
-            </Select>
-    }
-  }
-];
-
+const buttonRadio = {
+  width:'100px',
+  textAlign:'center'
+}
 
 export default class VueFieldMode extends Component {
 
   state = {
-    fields :[]
+    fields :[],
+    field:{},
+    children:[],
+    formType:'text',
+    validation:{},
+    config :{},
+    code:' code'
   }
   componentDidMount () {
     eventbus.on(EventType.TABLE_DATA_CHANGE, this.refreshCode.bind(this))
@@ -75,7 +35,6 @@ export default class VueFieldMode extends Component {
 
   onChange(e) {
     let value = e.target.value;
-    
     this.generateCode(value)
   }
 
@@ -89,33 +48,119 @@ export default class VueFieldMode extends Component {
 
   showField(){
     const fields = AppData.getJavaFields();
-    console.log('fields',fields);
+    const children = [];
+    for (let field of fields) {
+      children.push(<Option key={field.name} value={field.name}>{field.name}:{field.comment}</Option>);
+    }
     this.setState({
+      children,
       fields
     });
+  }
+
+  changeFormInput(e){
+    let formType = e.target.value;
+    this.setState({
+      formType
+    },()=>{
+      this.showCode()
+    })
+    
+  }
+
+  onFieldChange(value,option){
+    console.log('onField change',value,option);
+    for(const field of this.state.fields){
+      if(field.name === value){
+        this.setState({
+          field
+        },()=>{
+          this.showCode();
+        })
+        break;
+      }
+    }
+  }
+
+  showCode(){
+    let code = VueCodeGengerator.generatorFieldCode(this.state.field,this.state.formType,this.state.validation,this.state.config)
+    this.setState({
+      code
+    })
+  }
+
+  changeConfig(name,value){
+    const config = this.state.config;
+    console.log('changeConfig',name,value);
+    config[name] = value
+    this.setState({
+      config
+    },()=>{
+      this.showCode()
+    })
+  }
+
+  changeValidationType(value){
+    let validation = this.state.validation;
+    validation.type = value
+    this.setState({
+      validation
+    },()=>{
+      this.showCode()
+    })
   }
 
   render () {
     return (
       <div >
-          <Button style={{marginRight:10}}>表单代码</Button>
-          <Button style={{marginRight:10}}>列表代码</Button>
-          <Button style={{marginRight:10}}>详情代码</Button>
-         <Table
-            columns={columns}
-            dataSource={this.state.fields}
-            pagination={false}
-            rowSelection={{
-              onChange: (selectedRowKeys, selectedRows) => {
-                console.log('selectedRows',selectedRows);
-                AppData.setSelectedFields(selectedRows);
-              },
-              getCheckboxProps: record => ({
-                disabled: record.name === 'Disabled User', // Column configuration not to be checked
-                name: record.name,
-              })
-            }}
-          />
+         <div style={{display:'flex'}}>
+         <Select defaultActiveFirstOption={true} style={{ width: '220px' }} onChange={this.onFieldChange.bind(this)}>
+            {this.state.children}
+          </Select>
+         </div>
+        <Row>
+          <Col span={16}>
+            <ContentPreview code={this.state.code} ></ContentPreview>
+          </Col>
+          <Col span={8}>
+          <Divider>form input type</Divider>
+          <Radio.Group defaultValue="text" onChange={this.changeFormInput.bind(this)}>
+            <Radio.Button style={buttonRadio} value="text">text</Radio.Button>
+            <Radio.Button style={buttonRadio} value="textarea">textarea</Radio.Button>
+            <Radio.Button style={buttonRadio} value="password">password</Radio.Button>
+            <Radio.Button style={buttonRadio} value="inputnumber">inputnumber</Radio.Button>
+            <Radio.Button style={buttonRadio} value="slider">slider</Radio.Button>
+            <Radio.Button style={buttonRadio} value="date">date</Radio.Button>
+            <Radio.Button style={buttonRadio} value="select">select</Radio.Button>
+            <Radio.Button style={buttonRadio} value="checkbox">checkbox</Radio.Button>
+            <Radio.Button style={buttonRadio} value="radio">radio</Radio.Button>
+            <Radio.Button style={buttonRadio} value="cascader">cascader</Radio.Button>
+            <Radio.Button style={buttonRadio} value="switch">switch</Radio.Button>
+            <Radio.Button style={buttonRadio} value="upload">upload</Radio.Button>
+            <Radio.Button style={buttonRadio} value="search">search</Radio.Button>
+          </Radio.Group>
+
+          <Divider>Config</Divider>
+          <InputNumber  placeholder="最小长度/值" style={{width:'120px'}} onChange={this.changeConfig.bind(this,"min")}/>
+          <span> - </span>
+          <InputNumber  placeholder="最大长度/值" style={{width:'120px'}} onChange={this.changeConfig.bind(this,'max')}/>
+          <Divider>validation</Divider>
+          <div style={{display:'flex',justifyContent:'space-between'}}>
+          <Switch checkedChildren="必填"  unCheckedChildren="可空" defaultChecked />
+          <Switch checkedChildren="blur"  unCheckedChildren="change" defaultChecked />    
+          </div>
+          <Radio.Group defaultValue="text" onChange={this.changeValidationType.bind(this)}>
+            <Radio.Button style={buttonRadio} value="date">date</Radio.Button>
+            <Radio.Button style={buttonRadio} value="number">number</Radio.Button>
+            <Radio.Button style={buttonRadio} value="integer">integer</Radio.Button>
+            <Radio.Button style={buttonRadio} value="float">float</Radio.Button>
+            <Radio.Button style={buttonRadio} value="url">url</Radio.Button>
+            <Radio.Button style={buttonRadio} value="email">email</Radio.Button>
+          </Radio.Group>
+
+          </Col>
+        </Row>
+         
       </div>
     )
   }

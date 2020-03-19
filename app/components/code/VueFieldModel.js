@@ -21,7 +21,10 @@ export default class VueFieldMode extends Component {
     children:[],
     formType:'text',
     validation:{},
-    config :{},
+    config :{
+      required:false,
+      trigger:true
+    },
     code:' code'
   }
   componentDidMount () {
@@ -39,7 +42,7 @@ export default class VueFieldMode extends Component {
   }
 
   generateCode(value){
-    let fields = AppData.getSelectedFields();
+    
     const code = JavaCodeGengerator.generatorCodeByFieldCode(fields,{show:value})
     this.setState({
         code
@@ -69,8 +72,8 @@ export default class VueFieldMode extends Component {
   }
 
   onFieldChange(value,option){
-    console.log('onField change',value,option);
-    for(const field of this.state.fields){
+    const fields = AppData.getJavaFields();
+    for(const field of fields){
       if(field.name === value){
         this.setState({
           field
@@ -83,6 +86,7 @@ export default class VueFieldMode extends Component {
   }
 
   showCode(){
+    console.log('this.state',this.state);
     let code = VueCodeGengerator.generatorFieldCode(this.state.field,this.state.formType,this.state.validation,this.state.config)
     this.setState({
       code
@@ -100,9 +104,9 @@ export default class VueFieldMode extends Component {
     })
   }
 
-  changeValidationType(value){
+  changeValidationType(e){
     let validation = this.state.validation;
-    validation.type = value
+    validation.type = e.target.value
     this.setState({
       validation
     },()=>{
@@ -141,13 +145,14 @@ export default class VueFieldMode extends Component {
           </Radio.Group>
 
           <Divider>Config</Divider>
-          <InputNumber  placeholder="最小长度/值" style={{width:'120px'}} onChange={this.changeConfig.bind(this,"min")}/>
+          <Switch checkedChildren="range" style={{margin:'8px'}}  unCheckedChildren="range"  onChange={this.changeConfig.bind(this,"range")} />
+          <InputNumber  placeholder="最小长度/值" style={{width:'100px'}} onChange={this.changeConfig.bind(this,"min")}/>
           <span> - </span>
-          <InputNumber  placeholder="最大长度/值" style={{width:'120px'}} onChange={this.changeConfig.bind(this,'max')}/>
+          <InputNumber  placeholder="最大长度/值" style={{width:'100px'}} onChange={this.changeConfig.bind(this,'max')}/>
           <Divider>validation</Divider>
-          <div style={{display:'flex',justifyContent:'space-between'}}>
-          <Switch checkedChildren="必填"  unCheckedChildren="可空" defaultChecked />
-          <Switch checkedChildren="blur"  unCheckedChildren="change" defaultChecked />    
+          <div style={{display:'flex',justifyContent:'space-between',padding:'12px 20px'}}>
+          <Switch checkedChildren="必填"  unCheckedChildren="可空"  onChange={this.changeConfig.bind(this,"required")} />
+          <Switch checkedChildren="blur"  unCheckedChildren="change" defaultChecked onChange={this.changeConfig.bind(this,"trigger")}/>    
           </div>
           <Radio.Group defaultValue="text" onChange={this.changeValidationType.bind(this)}>
             <Radio.Button style={buttonRadio} value="date">date</Radio.Button>

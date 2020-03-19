@@ -81,12 +81,15 @@ export default {
   data(){
     return {
       rules: {
-        {{=field['name']}}:[
-          {{?it.validation.required}}
-            { required: true, trigger: 'blur', message: '请填写{{=field['comment']}}' },
+        {{=it.field['name']}}:[
+          {{?it.config.required}}
+            { required: true, trigger: '{{?it.config.trigger}}blur{{??}}change{{?}}', message: '请填写{{=it.field['comment']}}' },
           {{?}}
           {{?it.validation.type}}
-            { type : '{{=it.validation.type}}', trigger: 'blur', message: '请检查数据类型是否为{{=it.validation.type}}' },
+            { type : '{{=it.validation.type}}', trigger: '{{?it.config.trigger}}blur{{??}}change{{?}}', message: '请检查数据类型是否为{{=it.validation.type}}' },
+          {{?}}
+          {{?it.config.range}}
+            { min:'{{=it.config['min']}}',max:'{{=it.config['max']}}' trigger: '{{?it.config.trigger}}blur{{??}}change{{?}}', message: '请控制在{{=it.config['min']}}到{{=it.config['max']}}范围之内' },
           {{?}}
         ]
       }

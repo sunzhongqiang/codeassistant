@@ -44,8 +44,9 @@ export default {
       });
     },
     async saveData(){
-      const result = {{=it.modelVar}}Api.save(this.formData);
+      const result = await {{=it.modelVar}}Api.save(this.formData);
       if (result.success) {
+        // this.drawe = false;
         this.$alert('数据保存成功');
       }else{
         this.$alert(result.msg,'数据保存失败');

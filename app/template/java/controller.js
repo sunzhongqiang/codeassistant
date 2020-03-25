@@ -104,6 +104,30 @@ public class {{=it.model}}Controller {
     return ResultData.SUCCESS("删除成功"); 
   }
 
+  /**
+   * 更改状态.
+   * 
+   * @param id 主键参数
+   * @return 操作结果
+   */
+  @PostMapping("/{{=it.modelVar}}/toggle/{id}")
+  public ResultData toggle(@PathVariable {{=it.pkType}} id) {
+    log.info("{{=it.comment}}变更状态");
+    try {
+      {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Service.find(id);
+      // if ("enable".equals({{=it.modelVar}}.getStatus())) {
+      //   {{=it.modelVar}}.setStatus("disable");
+      // } else {
+      //   {{=it.modelVar}}.setStatus("enable");
+      // }
+      {{=it.modelVar}}Service.save({{=it.modelVar}});
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      return ResultData.ERROR("状态变更失败");
+    }
+    return ResultData.SUCCESS("状态变更成功"); 
+  }
+
 }
 `
 

@@ -16,7 +16,9 @@ export class VueModel extends Component {
       'vue-form',
       'vue-table',
       'vue-query-form',
+      'vue-model',
       'api',
+      'ClassApi'
     ]
   }
 
@@ -50,12 +52,19 @@ export class VueModel extends Component {
       code = VueCodeGengerator.generatorVueApiCode()
     }
 
+    if('ClassApi'===value){
+      code = VueCodeGengerator.generatorClassApiCode()
+    }
+
     if('vue-table'===value){
       code = VueCodeGengerator.generatorVueTableCode()
     }
 
     if('vue-query-form'===value){
       code = VueCodeGengerator.generatorQueryFormCode()
+    }
+    if('vue-model'===value){
+      code = VueCodeGengerator.generatorModelCode()
     }
 
     this.setState({

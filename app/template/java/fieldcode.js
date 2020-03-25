@@ -44,7 +44,7 @@ export default `
   //controller
   public ResultData findAllBy{{~it.fields:field:index}}{{=field.firstLetterUpperName}}{{?index+1<it.fields.length}}And{{?}}{{~}}({{~it.fields:field:index}}{{=field.type}} {{=field.name}}{{?index+1<it.fields.length}}, {{?}}{{~}}) {
     List<{{=it.model}}>  list = {{=it.modelVar}}Service.findAllBy{{~it.fields:field:index}}{{=field.firstLetterUpperName}}{{?index+1<it.fields.length}}And{{?}}{{~}}({{~it.fields:field:index}}{{=field.name}}{{?index+1<it.fields.length}}, {{?}}{{~}});
-    return ResultData.SUCCESS().addData("list",result);
+    return ResultData.SUCCESS().addData("list",list);
   }
 {{??}}
 //repository & service
@@ -66,7 +66,7 @@ export default `
   //controller
   public ResultData findAllBy{{~it.fields:field:index}}{{=field.firstLetterUpperName}}{{?index+1<it.fields.length}}And{{?}}{{~}}({{~it.fields:field:index}}{{=field.type}} {{=field.name}}{{?index+1<it.fields.length}}, {{?}}{{~}}) {
     {{=it.model}}  {{=it.modelVar}} = {{=it.modelVar}}Service.findBy{{~it.fields:field:index}}{{=field.firstLetterUpperName}}{{?index+1<it.fields.length}}And{{?}}{{~}}({{~it.fields:field:index}}{{=field.name}}{{?index+1<it.fields.length}}, {{?}}{{~}});
-    return ResultData.SUCCESS().addData("object",result);
+    return ResultData.SUCCESS().addData("{{=it.modelVar}}",{{=it.modelVar}});
   }
 {{?}}
 `

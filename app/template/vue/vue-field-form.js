@@ -6,7 +6,7 @@ export default `
   <!--当前form field type {{=it.formType}}-->
   <el-form-item label="{{=it.field['comment']}}" prop="{{=it.field['name']}}">
    {{?it.formType==='textarea'}}
-   <el-input type="textarea" :rows="3" placeholder="请输入内容"   v-model="formData.{{=it.field['name']}}" {{?it.config['max']}}maxlength="{{=it.config['max']}}"{{?}} />
+   <el-input type="textarea" :rows="3" placeholder="请输入内容"   v-model="formData.{{=it.field['name']}}" {{?it.config['max']}}maxlength="{{=it.config['max']}}" show-word-limit{{?}} />
    {{??it.formType==='password'}}
    <el-input type="password"  placeholder="请输入内容"   v-model="formData.{{=it.field['name']}}"  />
    {{??it.formType==='search'}}
@@ -16,16 +16,15 @@ export default `
       <el-option label="参数2" value="2"></el-option>
       <el-option label="参数3" value="3"></el-option>
     </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
+    <el-button slot="append" icon="el-icon-search" />
   </el-input>
   {{??it.formType==='inputnumber'}}
-  <el-input-number v-model="formData.{{=it.field['name']}}"  {{?it.config['min']}}:min="{{=it.config['min']}}"{{?}} {{?it.config['max']}}:max="{{=it.config['max']}}"{{?}} placeholder="请输入{{=it.field['comment']}}" ></el-input-number>
+  <el-input-number v-model="formData.{{=it.field['name']}}"  {{?it.config['min']}}:min="{{=it.config['min']}}"{{?}} {{?it.config['max']}}:max="{{=it.config['max']}}"{{?}} placeholder="请输入{{=it.field['comment']}}" />
   {{??it.formType==='date'}}
   <el-date-picker
       v-model="formData.{{=it.field['name']}}"
       type="date"
-      placeholder="选择日期">
-    </el-date-picker> 
+      placeholder="选择日期" />
     {{??it.formType==='slider'}}
     <el-slider v-model="formData.{{=it.field['name']}}"  {{?it.config['min']}}:min="{{=it.config['min']}}"{{?}} {{?it.config['max']}}:max="{{=it.config['max']}}"{{?}}></el-slider>
   {{??it.formType==='select'}}
@@ -39,7 +38,7 @@ export default `
   </el-select>
   {{??it.formType==='checkbox'}}
   <el-checkbox-group v-model="formData.{{=it.field['name']}}" >
-    <el-checkbox v-for="item in dataSource" :label="item.label" :key="item.value"></el-checkbox>
+    <el-checkbox v-for="item in dataSource" :label="item.label" :key="item.value" />
   </el-checkbox-group>
   {{??it.formType==='radio'}}
   <el-radio-group v-model="formData.{{=it.field['name']}}">
@@ -52,9 +51,9 @@ export default `
   v-model="formData.{{=it.field['name']}}" />
   {{??it.formType==='switch'}}
   <el-switch
-    v-model="value"
-    active-color="#13ce66"
-    inactive-color="#ff4949" />
+    v-model="formData.{{=it.field['name']}}"
+    active-value="true"
+    inactive-value="false" />
   {{??it.formType==='upload'}}
   <el-upload
   class="avatar-uploader"
@@ -66,7 +65,7 @@ export default `
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>
     {{??}}
-   <el-input v-model="formData.{{=it.field['name']}}" placeholder="{{=it.field['comment']}}" {{?it.config['max']}}maxlength="{{=it.config['max']}}"{{?}}/>
+   <el-input v-model="formData.{{=it.field['name']}}" placeholder="{{=it.field['comment']}}" {{?it.config['max']}}maxlength="{{=it.config['max']}}" show-word-limit{{?}}/>
    {{?}}
   </el-form-item>
 

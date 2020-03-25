@@ -16,11 +16,12 @@ const vueTemplate = `
       >
         <template v-slot="scop">
           <el-button type="primary" @click="edit(scop.row.id)">编辑</el-button>
-          <el-button :disabled="scop.row.isDefault" @click="toggleDefault(scop.row.id)">状态变更</el-button>
+          <el-button :disabled="scop.row.isDefault" @click="toggle(scop.row.id)">状态变更</el-button>
           <el-button :disabled="scop.row.isDefault" type="danger" @click="delete{{=it.model}}(scop.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
+
   </div>
 </template>
 

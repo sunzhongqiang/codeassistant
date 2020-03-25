@@ -1,15 +1,16 @@
 const vueTemplate = `
-import { get, payload, deleteUrl } from '@/lib/baseapi'
+import { get, payload, deleteUrl,post } from '@/lib/baseapi'
 
 export default {
-  loadData(page) {
-    return get('/{{=it.modelVar}}', { page })
+  query(params) {
+    return get('/{{=it.modelVar}}', params)
   },
-
+  loadData(page) {
+    return this.query({ page })
+  },
   save(data) {
     return payload('/{{=it.modelVar}}', data)
   },
-
   find(id) {
     return get(\`/{{=it.modelVar}}/$\{id}\`)
   },
@@ -17,7 +18,7 @@ export default {
     return deleteUrl(\`/{{=it.modelVar}}/\${id}\`)
   },
   toggle(id) {
-    return get(\`/{{=it.modelVar}}/toggle/\${id}\`)
+    return post(\`/{{=it.modelVar}}/toggle/\${id}\`)
   }
 }
 `

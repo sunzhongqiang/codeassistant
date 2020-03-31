@@ -45,7 +45,7 @@ public class {{=it.model}}Controller {
   public ResultData list({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable) {
     log.info("{{=it.comment}}列表查询");
     Page<{{=it.model}}> {{=it.modelVar}}Page = {{=it.modelVar}}Service.list({{=it.modelVar}}Dto, pageable);
-    return  ResultData.SUCCESS("{{=it.comment}}列表查询").content({{=it.modelVar}}Page);
+    return  ResultData.SUCCESS("{{=it.comment}}列表查询").addData("page",{{=it.modelVar}}Page);
   }
   
   

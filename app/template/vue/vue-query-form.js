@@ -4,7 +4,7 @@ const vueTemplate = `
   <el-form :inline="true" class="demo-form-inline" size="mini">
       {{~it.fields: field:index}}
       <el-form-item label="{{=field['comment']}}">
-        <el-input v-model="queryParams.{{=field['name']}}" placeholder="{{=field['comment']}}" />
+        <el-input v-model="queryParams.{{=field['name']}}" placeholder="{{=field['comment']}}" clearable/>
       </el-form-item>
       {{~}}
       <el-form-item name="button">

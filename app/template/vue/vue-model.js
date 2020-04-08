@@ -25,6 +25,17 @@ const vueTemplate = `
           <el-button :disabled="scop.row.isDefault" type="danger" @click="delete{{=it.model}}(scop.row.id)">删除</el-button>
         </template>
       </el-table-column>
+      <template v-slot:append>
+        <div class="pagination">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            :page-size="20"
+            @current-change="loadPage"
+          />
+        </div>
+      </template>
     </el-table>
 
     <el-drawer
@@ -81,7 +92,10 @@ export default {
 
     async loadData(page) {
       const result = await {{=it.modelVar}}Api.loadData(page);
-      this.tableData = result.data.content.content;
+      this.tableData = result.data.page.content;
+    },
+    loadPage(page) {
+      this.loadData(page - 1);
     },
     async edit(id) {
       const data = await {{=it.modelVar}}Api.find(id);
@@ -114,7 +128,6 @@ export default {
       const result = await {{=it.modelVar}}Api.save(this.formData);
       if (result.success) {
         this.drawer = false
-        this.$alert('数据保存成功');
         this.loadData();
       } else {
         this.$alert(result.msg, '数据保存失败');
@@ -127,6 +140,11 @@ export default {
 <style scoped>
 .form{
   margin: 12px;
+  padding: 12px;
+}
+.pagination{
+  display: flex;
+  justify-content: flex-end;
   padding: 12px;
 }
 </style>

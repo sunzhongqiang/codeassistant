@@ -63,14 +63,18 @@ public class {{=it.model}}DaoImpl extends SpringDataQueryDaoImpl<{{=it.model}}> 
   public Page<Map<String, Object>> listBySql({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable) {
     StringBuilder sb = new StringBuilder("select {{~it.fields:field:index}}{{?index != 0}}, {{?}}{{=field['column']}}{{~}} from {{=it.table}}  where 1=1  ");
     Map<Integer, Object> params = new HashMap<>(16);
+    int index = 0;
     {{~it.fields:field:index}}{{?field['type'] == 'String'}}
     if (StringUtils.isNotBlank({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}())) {
-      sb.append(" and {{=field['column']}} like ?{{=index}} ");
-      params.put({{=index}}, "%" + {{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}() + "%");
+      index++;
+      sb.append(" and {{=field['column']}} like ?").append(index);
+      params.put(index, "%" + {{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}() + "%");
+      
     }
     {{??}}if ({{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}() != null) {
-      sb.append(" and {{=field['column']}} like ?{{=index}} ");
-      params.put({{=index}}, {{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());
+      index++;
+      sb.append(" and {{=field['column']}} = ?").append(index);
+      params.put(index, {{=it.modelVar}}Dto.get{{=field['firstLetterUpperName']}}());
     }
     {{?}}
     {{~}}

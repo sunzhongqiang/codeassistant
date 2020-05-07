@@ -10,31 +10,31 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron'
-import { autoUpdater } from 'electron-updater'
-import log from 'electron-log'
-import MenuBuilder from './menu'
+import { app, BrowserWindow } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
+import MenuBuilder from './menu';
 
 export default class AppUpdater {
-  constructor () {
-    log.transports.file.level = 'info'
-    autoUpdater.logger = log
-    autoUpdater.checkForUpdatesAndNotify()
+  constructor() {
+    log.transports.file.level = 'info';
+    autoUpdater.logger = log;
+    autoUpdater.checkForUpdatesAndNotify();
   }
 }
 
-let mainWindow = null
+let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support')
-  sourceMapSupport.install()
+  const sourceMapSupport = require('source-map-support');
+  sourceMapSupport.install();
 }
 
 if (
   process.env.NODE_ENV === 'development' ||
   process.env.DEBUG_PROD === 'true'
 ) {
-  require('electron-debug')()
+  require('electron-debug')();
 }
 
 // const installExtensions = async () => {
@@ -55,9 +55,9 @@ app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
 app.on('ready', async () => {
   if (
@@ -74,33 +74,33 @@ app.on('ready', async () => {
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
-      enableRemoteModule: true
-    }
-  })
+      enableRemoteModule: true,
+    },
+  });
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`)
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined')
+      throw new Error('"mainWindow" is not defined');
     }
     if (process.env.START_MINIMIZED) {
-      mainWindow.minimize()
+      mainWindow.minimize();
     } else {
-      mainWindow.show()
-      mainWindow.focus()
+      mainWindow.show();
+      mainWindow.focus();
     }
-  })
-  mainWindow.webContents.mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+  });
+  mainWindow.webContents.on('closed', () => {
+    mainWindow = null;
+  });
 
-  const menuBuilder = new MenuBuilder(mainWindow)
-  menuBuilder.buildMenu()
+  const menuBuilder = new MenuBuilder(mainWindow);
+  menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
-  new AppUpdater()
-})
+  new AppUpdater();
+});

@@ -45,17 +45,21 @@ export default class VueProjectSettingDailog extends Component {
   selectWorkDirectory () {
     dialog.showOpenDialog(
       {
-        title: '选择项目的工作目录）',
+        title: '选择项目的工作目录',
         properties: ['openDirectory']
-      },
-      filePaths => {
-        let projectPath = filePaths[0]
-        AppData.setProjectConfig('vuepath', projectPath),
-        this.setState({
-          path:projectPath
-        })
       }
-    )
+    ).then(result => {
+      if(!result.canceled){
+        console.log("filePaths",result.filePaths)
+      let projectPath = result.filePaths[0]
+      AppData.setProjectConfig('vuepath', projectPath)
+      this.setState({
+        path:projectPath,
+        apiPath:projectPath+'/src/api/',
+        viewPath:projectPath+'/src/view/'
+      })
+      }
+    })
   }
 
   render () {
@@ -66,20 +70,51 @@ export default class VueProjectSettingDailog extends Component {
         visible={this.state.visible}
         onCancel={this.closeDailog.bind(this)}
         onOk={this.saveConfig.bind(this)}
+        >
+        <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems:'center'
+        }}
       >
+        <div>
+          <span>项目地址：</span>
+        <Input defaultValue={this.state.path} value={this.state.path} style={{width:'500px'}} />
+        </div>
+        <Button onClick={this.selectWorkDirectory.bind(this)} size='small'>
+          选择工作目录
+        </Button>
+      </div>
+      <div style={{
+          display: 'flex',
+          justifyContent:'flex-start',
+          alignItems:'center'
+        }}>
+        <div>
+        源码路径：<Input defaultValue="/src/"  onChange={this.changeConfig.bind(this, 'vueSrc')} style={{width:'500px'}} />
+        </div>
+      </div>
+
+      <div
+          style={{
+            display: 'flex',
+            marginTop: '16px'
+          }}
+        >
+          <div style={{ width: 150 }}>API路径：</div>
+          <div>{this.state.apiPath}</div>
+        </div>
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between'
+            marginTop: '16px'
           }}
         >
-          <span>项目地址：{this.state.path}</span>
-          <Button onClick={this.selectWorkDirectory.bind(this)} size='small'>
-            选择工作目录
-          </Button>
+          <div style={{ width: 150 }}>View路径：</div>
+          <div>{this.state.viewPath}</div>
         </div>
-        <div>源码路径：/src/</div>
-        
+    
       </Modal>
     )
   }

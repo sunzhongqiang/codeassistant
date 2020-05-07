@@ -27,6 +27,7 @@ export default class JavaProjectSettingDailog extends Component {
     let daoPath = PathUtils.getPackagePath('dao')
     let daoImplPath = PathUtils.getPackagePath('dao.impl')
     this.setState({
+      path:projectConfig['path'],
       modelPath: modelPath,
       dtoPath,
       servicePath,
@@ -65,15 +66,17 @@ export default class JavaProjectSettingDailog extends Component {
   selectWorkDirectory () {
     dialog.showOpenDialog(
       {
-        title: '选择项目的工作目录）',
+        title: '选择项目的工作目录',
         properties: ['openDirectory']
-      },
-      filePaths => {
-        let projectPath = filePaths[0]
-        AppData.setProjectConfig('path', projectPath)
-        this.initValue()
       }
-    )
+    ).then(result => {
+      if(!result.canceled){
+        console.log("filePaths",result.filePaths)
+      let projectPath = result.filePaths[0]
+      AppData.setProjectConfig('path', projectPath)
+      this.initValue()
+      }
+    })
   }
 
   render () {
@@ -88,15 +91,27 @@ export default class JavaProjectSettingDailog extends Component {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            alignItems:'center'
           }}
         >
-          <span>项目地址：{this.state.path}</span>
+          <div>
+            <span>项目地址：</span>
+          <Input defaultValue={this.state.path} value={this.state.path} style={{width:'500px'}} />
+          </div>
           <Button onClick={this.selectWorkDirectory.bind(this)} size='small'>
             选择工作目录
           </Button>
         </div>
-        <div>源码路径：/src/main/java</div>
+        <div style={{
+            display: 'flex',
+            justifyContent:'flex-start',
+            alignItems:'center'
+          }}>
+          <div>
+          源码路径：<Input defaultValue="/src/main/java" style={{width:'500px'}} />
+          </div>
+        </div>
         <div
           style={{
             marginTop: '16px'

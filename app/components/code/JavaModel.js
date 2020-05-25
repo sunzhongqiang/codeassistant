@@ -17,6 +17,7 @@ export class JavaModel extends Component {
     layerList: [
       'model',
       'dto',
+      'vo',
       'dao',
       'dao.impl',
       'repository',
@@ -62,6 +63,14 @@ export class JavaModel extends Component {
         value,
         AppData.getJavaName(),
         'Dto.java'
+      )
+    }
+    if (value == 'vo') {
+      code = JavaCodeGengerator.generatorVoCode()
+      filename = PathUtils.getCompleteFilePath(
+        value,
+        AppData.getJavaName(),
+        'Vo.java'
       )
     }
     if (value == 'dao') {

@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 
 
 /**
- * {{=it.model}}Dao: {{=it.comment}} 数据资源层.{{=it.date}}
+ * {{=it.model}}Dao: {{=it.comment}} 数据资源层
+ * 
+ * <p>{{=it.date}}.
  * 
  * @author {{=it.author}}
  * @version {{=it.version}}

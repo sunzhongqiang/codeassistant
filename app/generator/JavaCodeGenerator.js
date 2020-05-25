@@ -3,6 +3,7 @@ import DateUtils from '../utils/DateUtils'
 import TemplateEngin from './TemplateEngin'
 import modelTemplateContent from '../template/java/model'
 import dtoTemplateContent from '../template/java/dto'
+import voTemplateContent from '../template/java/vo'
 import CodeUtils from '../utils/CodeUtils'
 import copyModelTemplateContent from '../template/java/dto2model'
 import repositoryTemplate from '../template/java/repository'
@@ -54,6 +55,27 @@ export default class JavaCodeGengerator {
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
 
     return TemplateEngin.generatorCodeByContent(dtoTemplateContent, keyValue)
+  }
+
+   /**
+   * 生成java dto 的代码
+   */
+  static generatorVoCode () {
+    console.log('generatorVoCode')
+    let keyValue = {}
+
+    keyValue['groupId'] = AppData.getProjectConfig('groupId')
+    keyValue['artifactId'] = AppData.getProjectConfig('artifactId')
+    keyValue['version'] = AppData.getProjectConfig('version')
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(AppData.getJavaName())
+    keyValue['comment'] = AppData.getTableComment()
+    keyValue['table'] = AppData.getTableName()
+    keyValue['fields'] = AppData.getJavaFields()
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+
+    return TemplateEngin.generatorCodeByContent(voTemplateContent, keyValue)
   }
 
   static generatorCopyCode () {

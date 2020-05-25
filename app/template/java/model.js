@@ -14,7 +14,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 /**
- * {{=it.model}}: {{=it.comment}} 数据领域模型.{{=it.date}}
+ * {{=it.model}}: {{=it.comment}} 数据领域模型.
+ * 
+ * <p>{{=it.date}}.
  * 
  * @author : {{=it.author}}
  * @version {{=it.version}}

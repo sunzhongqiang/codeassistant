@@ -7,8 +7,9 @@ import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 
 /**
- * {{=it.comment}} 传值对象 : {{=it.model}} .{{=it.date}}
+ * {{=it.comment}} 传值对象 : {{=it.model}} 
  * 
+ * <p>{{=it.date}}.
  * @author :{{=it.author}}
  * @version {{=it.version}}
  */

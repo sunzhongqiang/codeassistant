@@ -38,13 +38,14 @@ export default class HomePage extends Component {
               overflow: 'scroll'
             }}
           >
+                 
             <Layout>
               <Sider
                 width={250}
                 style={{
                   background: '#eee',
-                  overflow: 'auto',
-                  height: '100vh',
+                  height:'700px',
+                  overflowY:'scroll',
                   position: 'fixed',
                   left: 0
                 }}

@@ -41,14 +41,20 @@ export default class ContentTab extends Component {
   }
 
   showData (data) {
+    let tableName = AppData.getTableName();
+    let tableComment = AppData.getTableComment();
     this.setState({
-      data: AppData.getColumnFields()
+      data: AppData.getColumnFields(),
+      tableName,
+      tableComment
     })
   }
 
   render () {
     return (
-      <Table
+     <div>
+       <h2 style={{'padding':'12px'}}>{this.state.tableName}({this.state.tableComment})</h2>
+        <Table
         bordered
         columns={columns}
         rowKey={'COLUMN_NAME'}
@@ -56,6 +62,7 @@ export default class ContentTab extends Component {
         pagination={false}
         size={'small'}
       />
+     </div>
     )
   }
 }

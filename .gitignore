@@ -31,6 +31,8 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+dist
+dist/
 release
 !release/CodeAssistan Setup 1.17.2.exe
 !release/CodeAssistan-1.17.2.dmg

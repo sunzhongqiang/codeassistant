@@ -35,7 +35,7 @@ public class {{=it.model}}Controller {
   private {{=it.model}}Service {{=it.modelVar}}Service;
 
   /**
-   * 跳转至列表页面.
+   * 获取{{=it.comment}}列表接口.
    *
    * @param {{=it.modelVar}}Dto 查询参数
    * @param pageable 分页参数
@@ -51,7 +51,7 @@ public class {{=it.model}}Controller {
   
   
   /**
-   * {{=it.comment}}数据保存方法.
+   * {{=it.comment}}数据保存接口.
    * 
    * @param {{=it.modelVar}}Dto 要保存的数据
    * @return {{=it.modelVar}} 保存后的数据
@@ -74,7 +74,7 @@ public class {{=it.model}}Controller {
   
   
   /**
-   * 跳转至详细信息页面.
+   * 获取{{=it.comment}}详情接口.
    * 
    * @param id 参数
    * @return 详情数据
@@ -87,7 +87,7 @@ public class {{=it.model}}Controller {
   }
   
   /**
-   * 删除数据操作组方法.
+   * 删除{{=it.comment}}数据接口.
    * 
    * @param id 主键参数
    * @return 操作结果
@@ -105,7 +105,7 @@ public class {{=it.model}}Controller {
   }
 
   /**
-   * 更改状态.
+   * 更改{{=it.comment}}状态.
    * 
    * @param id 主键参数
    * @return 操作结果

@@ -3,6 +3,7 @@ const dtoTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.dto;
 import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 

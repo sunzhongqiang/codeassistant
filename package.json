@@ -62,8 +62,7 @@
     "appId": "org.develar.ElectronReact",
     "win": {
       "target": [
-        "nsis",
-        "msi"
+        "nsis"
       ]
     }
   },

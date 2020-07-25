@@ -1,5 +1,6 @@
 const modelTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.model;
 
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -21,6 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author : {{=it.author}}
  * @version {{=it.version}}
  */
+@Data
 @Entity
 @Table(name = "{{=it.table}}")
 @GenericGenerator(name = "{{=it.table}}_uuid", strategy = "uuid")
@@ -37,26 +40,6 @@ public class {{=it.model}} {
   {{?}}@Column(name = "{{=field['column']}}", columnDefinition = "COMMENT '{{=field['comment']}}'")
   private {{=field['type']}} {{=field['name']}};
   {{~}}
-
-{{~it.fields: field:index}}
-  /**
-   * 获得{{=field['comment']}}.
-   * 
-   * @return {{=field['name']}} {{=field['comment']}}
-   */
-  public {{=field['type']}} get{{=field['firstLetterUpperName']}}() {
-    return this.{{=field['name']}};
-  }
-
-  /**
-   * 设置{{=field['comment']}}.
-   * 
-   * @param {{=field['name']}} {{=field['comment']}}
-   */
-  public void set{{=field['firstLetterUpperName']}}({{=field['type']}} {{=field['name']}}) {
-    this.{{=field['name']}} = {{=field['name']}};
-  }
-{{~}}
 }
 `
 

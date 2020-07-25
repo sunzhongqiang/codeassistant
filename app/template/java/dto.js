@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Data;
 import org.apache.commons.collections4.MapUtils;
 
 /**
@@ -14,6 +15,7 @@ import org.apache.commons.collections4.MapUtils;
  * @author :{{=it.author}}
  * @version {{=it.version}}
  */
+@Data
 public class {{=it.model}}Dto extends {{=it.model}} {
   /**
    * 由Dto转变成Entity.

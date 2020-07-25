@@ -27,23 +27,7 @@ public interface {{=it.model}}Service extends BaseService<{{=it.model}}, {{=it.p
    */
   Page<{{=it.model}}> list({{=it.model}}Dto {{=it.modelVar}}Dto, Pageable pageable);
 
-  /**
-   * 根据给定的字段和属性值，获得符合条件的第一个结果.
-   * 
-   * @param field {{=it.model}} 中的某个字段
-   * @param value 字段的值
-   * @return {{=it.model}} 返回符合条件的结果，如果没有返回null
-   */
-  {{=it.model}} findBy(String field, Object value);
-  
-  /**
-   * 根据给定的字段和属性值，获得符合条件的所有结果.
-   * 
-   * @param field {{=it.model}}中的某个字段
-   * @param value 字段的值
-   * @return 返回符合条件的所有结果
-   */
-  List<{{=it.model}}> findAllBy(String field, Object value);
+
 }
 `
 

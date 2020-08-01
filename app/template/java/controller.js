@@ -61,13 +61,8 @@ public class {{=it.model}}Controller {
   @ResponseBody
   public ResultData save(@RequestBody {{=it.model}}Dto {{=it.modelVar}}Dto) {
     log.info("{{=it.comment}}保存");
-    try {
-      {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Dto.toEntity();
-      {{=it.modelVar}}Service.save({{=it.modelVar}});
-    } catch (Exception e) {
-      log.error(e.getMessage(),e);
-      return ResultData.ERROR("{{=it.comment}}保存失败");
-    }
+    {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Dto.toEntity();
+    {{=it.modelVar}}Service.save({{=it.modelVar}});
     return ResultData.SUCCESS("{{=it.comment}}保存成功");
   }
   
@@ -95,12 +90,7 @@ public class {{=it.model}}Controller {
   @DeleteMapping("/{{=it.modelVar}}/{id}")
   public ResultData delete(@PathVariable {{=it.pkType}} id) {
     log.info("{{=it.comment}}删除");
-    try {
-      {{=it.modelVar}}Service.deleteById(id);
-    } catch (Exception e) {
-      log.error(e.getMessage(), e);
-      return ResultData.ERROR("删除失败");
-    }
+    {{=it.modelVar}}Service.deleteById(id);
     return ResultData.SUCCESS("删除成功"); 
   }
 
@@ -113,18 +103,13 @@ public class {{=it.model}}Controller {
   @PostMapping("/{{=it.modelVar}}/toggle/{id}")
   public ResultData toggle(@PathVariable {{=it.pkType}} id) {
     log.info("{{=it.comment}}变更状态");
-    try {
-      {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Service.find(id);
-      // if ("enable".equals({{=it.modelVar}}.getStatus())) {
-      //   {{=it.modelVar}}.setStatus("disable");
-      // } else {
-      //   {{=it.modelVar}}.setStatus("enable");
-      // }
-      {{=it.modelVar}}Service.save({{=it.modelVar}});
-    } catch (Exception e) {
-      log.error(e.getMessage(), e);
-      return ResultData.ERROR("状态变更失败");
-    }
+    {{=it.model}} {{=it.modelVar}} = {{=it.modelVar}}Service.find(id);
+    // if ("enable".equals({{=it.modelVar}}.getStatus())) {
+    //   {{=it.modelVar}}.setStatus("disable");
+    // } else {
+    //   {{=it.modelVar}}.setStatus("enable");
+    // }
+    {{=it.modelVar}}Service.save({{=it.modelVar}});
     return ResultData.SUCCESS("状态变更成功"); 
   }
 

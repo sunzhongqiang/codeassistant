@@ -1,4 +1,5 @@
-import FieldTypeUtils from './FieldTypeUtils'
+import JavaTypeUtils from './JavaFieldTypeUtils'
+import TsTypeUtils from './TsFieldTypeUtils'
 
 export default class CodeUtils {
   /**
@@ -62,10 +63,22 @@ export default class CodeUtils {
    * 将数据库的数据类型翻译为java的数据类型
    * @param {数据库数据类型} datatype
    */
-  static tableType2ModelType (datatype) {
+  static tableType2JavaModelType (datatype) {
     let modelType = 'String'
     if (datatype) {
-      modelType = FieldTypeUtils.getModelTypeFromDataType(datatype)
+      modelType = JavaTypeUtils.getModelTypeFromDataType(datatype)
+    }
+    return modelType
+  }
+
+  /**
+   * 将数据库的数据类型翻译为java的数据类型
+   * @param {数据库数据类型} datatype
+   */
+  static tableType2TsModelType (datatype) {
+    let modelType = 'string'
+    if (datatype) {
+      modelType = TsTypeUtils.getModelTypeFromDataType(datatype)
     }
     return modelType
   }

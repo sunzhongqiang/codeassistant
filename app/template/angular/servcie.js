@@ -25,7 +25,7 @@ export class {{=it.model}}Service extends BaseService{
    * 删除{{=it.comment}}信息.
    * @param id 主键
    */
-  public delete(id:any): any{
+  public delete(id: any): any{
     return this.http.delete(\`/{{=it.modelVar}}/\${id}\`).toPromise();
   }
 
@@ -33,7 +33,7 @@ export class {{=it.model}}Service extends BaseService{
    * 加载{{=it.comment}}信息.
    * @param id 主键
    */
-  public load(id:any): any{
+  public load(id: any): any{
     return this.http.get(\`/{{=it.modelVar}}/\${id}\`).toPromise();
   }
 }

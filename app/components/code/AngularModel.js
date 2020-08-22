@@ -17,6 +17,7 @@ export class AngularModel extends Component {
       'model',
       'service',
       'table-component',
+      'table-component-template',
       'form-component',
      
     ]
@@ -50,6 +51,14 @@ export class AngularModel extends Component {
 
     if('service' === value){
       code = AngularCodeGengerator.generateServiceCode()
+    }
+
+    if('table-component' === value){
+      code = AngularCodeGengerator.generateTableCopmonent();
+    }
+
+    if('table-component-template' === value){
+      code = AngularCodeGengerator.generateTableTemplate();
     }
 
    

@@ -3,6 +3,8 @@ import DateUtils from '../utils/DateUtils'
 import TemplateEngin from './TemplateEngin'
 import angualarModelTemplate from '../template/angular/model'
 import angualarServiceTemplate from '../template/angular/servcie'
+import tableTemplate from '../template/angular/table'
+import tableComponentTemplate from '../template/angular/table-compoonent'
 import CodeUtils from '../utils/CodeUtils'
 
 export default class AngularCodeGengerator {
@@ -34,6 +36,33 @@ export default class AngularCodeGengerator {
     keyValue['fields'] = this.getTsFields();
     keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
     return TemplateEngin.generatorCodeByContent(angualarServiceTemplate, keyValue)
+  }
+
+  static generateTableTemplate(){
+    console.log('generator angular Model Code')
+    let keyValue = {}
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(AppData.getJavaName())
+    keyValue['comment'] = AppData.getTableComment()
+    keyValue['table'] = AppData.getTableName()
+    keyValue['fields'] = this.getTsFields();
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    let result = TemplateEngin.generatorCodeByContent(tableTemplate, keyValue);
+    return result.replace(/{~{/g,'{{').replace(/}~}/g,'}}');
+  }
+
+  static generateTableCopmonent(){
+    console.log('generator angular Model Code')
+    let keyValue = {}
+    keyValue['author'] = AppData.getProjectConfig('author')
+    keyValue['model'] = AppData.getJavaName()
+    keyValue['modelVar'] = CodeUtils.littleCamelCase(AppData.getJavaName())
+    keyValue['comment'] = AppData.getTableComment()
+    keyValue['table'] = AppData.getTableName()
+    keyValue['fields'] = this.getTsFields();
+    keyValue['date'] = DateUtils.format(new Date(), 'yyyy-MM-dd h:mm:ss')
+    return  TemplateEngin.generatorCodeByContent(tableComponentTemplate, keyValue);;
   }
 
 

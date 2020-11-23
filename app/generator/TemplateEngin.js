@@ -17,9 +17,8 @@ doT.templateSettings = {
 export default class TemplateEngin {
   /**
    * 生成代码对核心方法
-   * @param {*} templateContent
-   * @param {*} keyValue
-   * @param {*} noticeEvent
+   * @param {string} templateContent
+   * @param {jsonobject} keyValue
    */
   static generatorCodeByContent (templateContent, keyValue) {
     if (!keyValue) {

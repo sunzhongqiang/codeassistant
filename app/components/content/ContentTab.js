@@ -8,6 +8,7 @@ import MysqlModel from '../code/MysqlModel'
 import JavaFieldModel from '../code/JaveFieldModel'
 import VueFieldModel from '../code/VueFieldModel'
 import { VueModel } from '../code/VueModel'
+import { AngularModel } from '../code/AngularModel'
 const { TabPane } = Tabs
 
 export default class ContentTab extends Component {
@@ -38,6 +39,9 @@ export default class ContentTab extends Component {
         </TabPane>
         <TabPane tab='VUE模式' key='vue'>
           <VueModel />
+        </TabPane>
+        <TabPane tab='angular' key='angular'>
+          <AngularModel />
         </TabPane>
         <TabPane tab='JAVA字段模式' key='javafield'>
           <JavaFieldModel/>

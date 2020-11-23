@@ -45,17 +45,6 @@ public class {{=it.model}}ServiceImpl extends BaseServiceImpl<{{=it.model}}, {{=
     return {{=it.modelVar}}Repository.list({{=it.modelVar}}Dto, pageable);
   }
 
-  @Override 
-  public {{=it.model}} findBy(String field,Object value) {
-    log.info("{{=it.comment}}根据字[" + field + "=" + value + "] 进行查询符合条件的唯一值");
-    return {{=it.modelVar}}Repository.findBy(field,value);
-  }
-  
-  @Override 
-  public List<{{=it.model}}> findAllBy(String field,Object value) {
-    log.info("{{=it.comment}}根据字[" + field + "=" + value + "] 进行查询符合条件的所有记录");
-    return {{=it.modelVar}}Repository.findAllBy(field,value);
-  }
 }
 `
 

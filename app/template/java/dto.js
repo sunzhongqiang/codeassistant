@@ -3,7 +3,9 @@ const dtoTemplateContent = `package {{=it.groupId}}.{{=it.artifactId}}.dto;
 import {{=it.groupId}}.{{=it.artifactId}}.model.{{=it.model}};
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+import lombok.Data;
 import org.apache.commons.collections4.MapUtils;
 
 /**
@@ -13,6 +15,7 @@ import org.apache.commons.collections4.MapUtils;
  * @author :{{=it.author}}
  * @version {{=it.version}}
  */
+@Data
 public class {{=it.model}}Dto extends {{=it.model}} {
   /**
    * 由Dto转变成Entity.
@@ -80,6 +83,46 @@ public class {{=it.model}}Dto extends {{=it.model}} {
 
     return {{=it.modelVar}}Dto;
   }
+
+  /**
+     * 从实体到dto的转变
+     * @param entity 实体
+     * @return dto数据
+     */
+    public static {{=it.model}}Dto from({{=it.model}} entity) {
+        return toDto(entity);
+    }
+
+    /**
+     * 从map中获取对应的值
+     * @param map 零散值
+     * @return 对象
+     */
+    public static {{=it.model}}Dto from(Map<String, Object> map) {
+        return mapping(map);
+    }
+    
+    /**
+     * 拆解成map
+     * @return map对象
+     */
+    public static Map<String,Object> toMap({{=it.model}} entity){
+        Map<String, Object> map = new HashMap<>(12);
+        {{~it.fields: field:index}}
+        map.put("{{=field['name']}}",entity.get{{=field['firstLetterUpperName']}}());{{~}}
+        return map;
+    }
+
+    /**
+     * 拆解成map
+     * @return map对象
+     */
+    public Map<String,Object> toMap(){
+        Map<String, Object> map = new HashMap<>(12);
+        {{~it.fields: field:index}}
+        map.put("{{=field['name']}}",this.get{{=field['firstLetterUpperName']}}());{{~}}
+        return map;
+    }
 }
 `
 

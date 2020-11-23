@@ -20,7 +20,7 @@ typeMap['BLOB'] = 'String'
 typeMap['TEXT'] = 'String'
 typeMap['MEDIUMBLOB'] = 'String'
 typeMap['MEDIUMTEXT'] = 'String'
-typeMap['LOGNGBLOB'] = 'String'
+typeMap['LONGBLOB'] = 'String'
 typeMap['LONGTEXT'] = 'String'
 typeMap['VARBINARY'] = 'String'
 typeMap['BINARY'] = 'String'
@@ -32,7 +32,7 @@ typeMap['DATETIME'] = 'Date'
 typeMap['TIMESTAMP'] = 'Date'
 typeMap['YEAR'] = 'Date'
 
-export default class FieldTypeUtils {
+export default class JavaTypeUtils {
   static getModelTypeFromDataType (dataType) {
     let result = typeMap[dataType.toUpperCase()]
     return result

@@ -122,7 +122,7 @@ function setJavaFields () {
       modelField['firstLetterUpperName'] = CodeUtils.bigCamelCase(columnName)
       // 类型
       const dataType = tableField['DATA_TYPE']
-      modelField['type'] = CodeUtils.tableType2ModelType(dataType)
+      modelField['type'] = CodeUtils.tableType2JavaModelType(dataType)
       // 特殊表示
       modelField['isPK'] = tableField['COLUMN_KEY'] == 'PRI'
       modelField['increment'] = tableField['EXTRA'] == 'auto_increment'
